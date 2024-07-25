@@ -9,8 +9,9 @@ module org.example.onesteponestamp {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
-  requires java.sql;
+    requires java.sql;
+    requires static lombok;
 
-  opens org.example.onesteponestamp to javafx.fxml;
+    opens org.example.onesteponestamp to javafx.fxml;
     exports org.example.onesteponestamp;
 }
