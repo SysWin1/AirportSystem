@@ -54,6 +54,10 @@ dependencies {
 
   implementation ('com.oracle.database.jdbc:ojdbc6')
 
+  // lombok
+  compileOnly 'org.projectlombok:lombok'
+  annotationProcessor 'org.projectlombok:lombok'
+
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 

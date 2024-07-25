@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d6f3c4e-e7e5-470e-9fe1-cc3c12913ec9" name="변경" comment="chore : java fx 프로젝트 생성, java 17 version">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ojdbc6.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/onesteponestamp/autoapply/PretestTrigger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="9d6f3c4e-e7e5-470e-9fe1-cc3c12913ec9" name="변경" comment="chore : DB연결 세팅">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/onesteponestamp/autoapply/PretestTrigger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/onesteponestamp/DBConnect.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,14 +96,17 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\OneStepOneStamp" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.example.onesteponestamp" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration name="PretestTrigger" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.onesteponestamp.autoapply.PretestTrigger" />
+    <configuration name="DBConnect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.onesteponestamp.DBConnect" />
       <module name="OneStep-OneStamp.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.onesteponestamp.autoapply.*" />
+          <option name="PATTERN" value="org.example.onesteponestamp.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -118,7 +116,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.PretestTrigger" />
+        <item itemvalue="Application.DBConnect" />
       </list>
     </recent_temporary>
   </component>
@@ -140,8 +138,17 @@
       <updated>1721809455465</updated>
       <workItem from="1721809457744" duration="408000" />
       <workItem from="1721818994944" duration="3852000" />
-      <workItem from="1721868818732" duration="3605000" />
+      <workItem from="1721868818732" duration="3914000" />
     </task>
+    <task id="LOCAL-00001" summary="chore : DB연결 세팅">
+      <option name="closed" value="true" />
+      <created>1721872590746</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1721872590746</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,6 +179,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore : java fx 프로젝트 생성, java 17 version" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore : java fx 프로젝트 생성, java 17 version" />
+    <MESSAGE value="chore : DB연결 세팅" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore : DB연결 세팅" />
   </component>
 </project>

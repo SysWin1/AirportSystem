@@ -1,11 +1,11 @@
-package org.example.onesteponestamp.autoapply;
+package org.example.onesteponestamp;
 
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class PretestTrigger {
+public class DBConnect {
 
   public static void main(String[] args) {
     Connection conn = null;
