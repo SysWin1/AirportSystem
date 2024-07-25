@@ -1,24 +1,16 @@
 package org.example.onesteponestamp;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.example.onesteponestamp.autoapply.AutoApplyService;
-import org.example.onesteponestamp.common.Country;
-import org.example.onesteponestamp.common.DBConnectionManager;
-import org.example.onesteponestamp.common.VisaType;
 
 
 public class HelloApplication extends Application {
-    private static Connection conn;
-    private static AutoApplyService autoApplyService = new AutoApplyService();
-    
+    private static final AutoApplyService autoApplyService = new AutoApplyService();
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
@@ -30,9 +22,6 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
 //        launch();
-
-        // 예시 코드 (connection)
-        conn = DBConnectionManager.getInstance().getConnection();
 
         /**
          *  신청서 작성 insert

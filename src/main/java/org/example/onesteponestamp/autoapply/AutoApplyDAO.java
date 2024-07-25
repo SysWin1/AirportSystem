@@ -15,7 +15,8 @@ import org.example.onesteponestamp.common.VisaType;
  * 자동 출입국 신청서 form 데이터 저장
  */
 public class AutoApplyDAO {
-  private Connection conn;
+
+  private final Connection conn;
 
   public AutoApplyDAO() {
     conn = DBConnectionManager.getInstance().getConnection();
@@ -35,7 +36,7 @@ public class AutoApplyDAO {
       Country inoutCountry,
       LocalDate expectedInOutDate,
       LocalDateTime createdAt
-  ){
+  ) {
 
     String sql = "{call autoapplyinsert(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 
@@ -46,7 +47,7 @@ public class AutoApplyDAO {
       cstmt.setString(2, passportNo);
       cstmt.setString(3, countryCode.getCountryCode());
       cstmt.setString(4, englishName);
-      cstmt.setString(5,gender);
+      cstmt.setString(5, gender);
       cstmt.setDate(6, Date.valueOf(issueDate));
       cstmt.setDate(7, Date.valueOf(expiryDate));
       cstmt.setDate(8, Date.valueOf(birth));
@@ -55,13 +56,11 @@ public class AutoApplyDAO {
       cstmt.setString(11, inoutCountry.getCountryCode());
       cstmt.setDate(12, Date.valueOf(expectedInOutDate));
       cstmt.setTimestamp(13, Timestamp.valueOf(createdAt));
-      
+
       cstmt.execute(); // 실행
 
     } catch (SQLException e) {
       e.printStackTrace();
-    } finally {
-
     }
   }
 }

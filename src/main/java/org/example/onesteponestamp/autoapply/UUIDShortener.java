@@ -1,10 +1,8 @@
 package org.example.onesteponestamp.autoapply;
 
-import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.UUID;
 
 public class UUIDShortener {
@@ -12,10 +10,10 @@ public class UUIDShortener {
   public static String generateShortUUID() {
     UUID uuid = UUID.randomUUID();
     byte[] hash = hashUUID(uuid);
-    return encodeBase62(hash,8); // 길이 8자리의 신청서번호.
+    return encodeBase62(hash, 8); // 길이 8자리의 신청서번호.
   }
 
-  private static byte[] hashUUID(UUID uuid){
+  private static byte[] hashUUID(UUID uuid) {
     try {
       MessageDigest digest = MessageDigest.getInstance("SHA-256");
       String uuidString = uuid.toString();
@@ -33,6 +31,6 @@ public class UUIDShortener {
       int unsignedByte = b & 0xFF;
       base62.append(base62Chars.charAt(unsignedByte % 62));
     }
-    return base62.toString().substring(0, length); // 원하는 길이로 잘라내기
+    return base62.substring(0, length); // 원하는 길이로 잘라내기
   }
 }
