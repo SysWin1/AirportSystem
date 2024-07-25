@@ -11,6 +11,10 @@ version '1.0-SNAPSHOT'
 
 repositories {
   mavenCentral()
+  flatDir {
+    dirs 'lib'
+  }
+
 }
 
 ext {
@@ -48,8 +52,17 @@ dependencies {
     exclude(group: 'org.openjfx')
   }
 
+  implementation ('com.oracle.database.jdbc:ojdbc6')
+
+  // lombok
+  compileOnly 'org.projectlombok:lombok:1.18.34'
+  annotationProcessor 'org.projectlombok:lombok:1.18.34'
+  testCompileOnly 'org.projectlombok:lombok:1.18.34'
+  testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
 }
 
 test {
