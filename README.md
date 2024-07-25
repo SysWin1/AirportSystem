@@ -2,7 +2,17 @@
 
 공항 출입국 시스템 관리
 
-## Git commit message Template
+<br>
+
+-------
+
+## Git Branch Create Template
+
+* feature/[issue번호]-기능명
+
+-------
+
+## Git Commit message Template
 
 * type(영어) : subject(한글)
 
@@ -22,3 +32,4 @@
 * comment: 주석 추가 및 변경
 * remove: 파일, 폴더 삭제
 * rename: 파일, 폴더명 수정
+
