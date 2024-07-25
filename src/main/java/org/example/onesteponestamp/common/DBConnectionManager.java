@@ -5,10 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * DB Connection을 싱글톤으로 관리
- * 사용할 때는 DBConnectionManager.getInstance.getConnection으로 가져와서 사용.
+ * DB Connection을 싱글톤으로 관리 사용할 때는 DBConnectionManager.getInstance.getConnection으로 가져와서 사용.
  */
 public class DBConnectionManager {
+
   private static DBConnectionManager instance;
   private static Connection connection;
 
