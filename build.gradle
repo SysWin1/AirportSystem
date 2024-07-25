@@ -11,6 +11,10 @@ version '1.0-SNAPSHOT'
 
 repositories {
   mavenCentral()
+  flatDir {
+    dirs 'lib'
+  }
+
 }
 
 ext {
@@ -48,8 +52,11 @@ dependencies {
     exclude(group: 'org.openjfx')
   }
 
+  implementation ('com.oracle.database.jdbc:ojdbc6')
+
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
 }
 
 test {
