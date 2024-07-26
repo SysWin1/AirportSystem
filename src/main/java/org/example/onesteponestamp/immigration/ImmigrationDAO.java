@@ -43,7 +43,7 @@ public class ImmigrationDAO implements ImmigrationService {
 
   /*
   조건에 따른 입출국인 목록 확인
-  1. 전체 = ALL, 내국인 = KOR, 외국인 = OTHERS / selectDate의 default값은 sysdate / ALL, IN, OUT 필터
+  1. 전체 = ALL, 내국인 = KOR, 외국인 = FOREIGNER / selectDate의 default값은 sysdate / ALL, IN, OUT 필터
    */
   @Override
   public List<ImmigrationDTO> ImmigrationListSearch(String countryCode, LocalDate date, String inOut) {
@@ -56,7 +56,7 @@ public class ImmigrationDAO implements ImmigrationService {
 
     if ("KOR".equals(countryCode)) {
       sql.append(" AND country_code = 'KOR'");
-    } else if ("FOR".equals(countryCode)) {
+    } else if ("FOREIGNER".equals(countryCode)) {
       sql.append(" AND country_code != 'KOR'");
     }
 
