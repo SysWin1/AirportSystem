@@ -13,7 +13,11 @@ public class AutoApplyService {
     this.autoApplyDAO = new AutoApplyDAO();
   }
 
-  public void createAutoApply(String passportNo, Country countryCode, String englishName,
+  /**
+   * 자동 입출국 신청서 생성 DAO 호출
+   * @return 신청 번호 uuid -> 팝업창에 넣기
+   */
+  public String createAutoApply(String passportNo, Country countryCode, String englishName,
       String gender, LocalDate issueDate, LocalDate expiryDate, LocalDate birth, VisaType visaType,
       String inout, Country inoutCountry, LocalDate expectedInOutDate) {
 
@@ -25,8 +29,6 @@ public class AutoApplyService {
     autoApplyDAO.insertAutoApply(applyNo, passportNo, countryCode, englishName, gender, issueDate,
         expiryDate, birth, visaType, inout, inoutCountry, expectedInOutDate, createdAt);
 
-    // todo : 제출된 신청서 보여주기.
-    // 이거 없으면 사용자는 신청번호를 알 수 없어서 조회할 수 없음.
-
+    return applyNo;
   }
 }
