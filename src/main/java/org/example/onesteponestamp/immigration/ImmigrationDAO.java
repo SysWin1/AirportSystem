@@ -32,13 +32,10 @@ public class ImmigrationDAO implements ImmigrationService {
       //사전 신청번호만 입력
       CallableStatement cs = conn.prepareCall(sql);
       cs.setString(1, applyNo);
-      System.out.println(sql);
       cs.execute();
-      System.out.println("test2");
 
     } catch (SQLException e) {
       // 신청정보 x, 거절자, 입국일이 다른 승객 대면심사이동
-      System.out.println("f");
       return Boolean.FALSE;
     }
     return Boolean.TRUE;

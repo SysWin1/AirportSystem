@@ -43,6 +43,5 @@ public class SelectionMain {
   private void showAdminMenu() {
     AdminMain adminMenu = new AdminMain(mainLayout);
     adminMenu.show();
-
   }
 }
