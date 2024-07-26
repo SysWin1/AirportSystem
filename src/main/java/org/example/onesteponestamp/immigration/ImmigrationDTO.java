@@ -2,9 +2,10 @@ package org.example.onesteponestamp.immigration;
 
 import java.sql.Date;
 import lombok.Builder;
+import lombok.Getter;
 
 @Builder
-
+@Getter
 public class ImmigrationDTO {
 
   private String applyNo;
