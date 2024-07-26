@@ -32,6 +32,7 @@ public class UserMain {
 
     entryApplicationButton = new Button("출입국 신청");
     entryApplicationButton.setMaxWidth(Double.MAX_VALUE);
+    entryApplicationButton.setOnAction(e -> showImmigrationGateForm(entryApplicationButton));
 
     menu.getChildren()
         .addAll(autoEntryFormButton, viewApplicationListButton, entryApplicationButton);
@@ -72,5 +73,11 @@ public class UserMain {
 
     container.getChildren().addAll(listView.getForm(), listView.getTableView());
     mainLayout.setCenter(container);
+  }
+
+  private void showImmigrationGateForm(Button entryApplicationButton) {
+    entryApplicationButton.setStyle("-fx-background-color: #808080;"); //클릭시 색상 변경
+    EntryApplyForm entryApplyForm = new EntryApplyForm();
+    mainLayout.setCenter(entryApplyForm.getForm());
   }
 }
