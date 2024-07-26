@@ -8,17 +8,16 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Country {
-  USA("USA", "United States", "SAFETY"),
-  GBR("GBR", "United Kingdom", "SAFETY"),
-  JPN("JPN", "Japan", "SAFETY"),
-  FRA("FRA", "France", "SAFETY"),
-  VNM("VNM", "Vietnam", "SAFETY"),
-  KOR("KOR", "South Korea", "SAFETY"),
-  PRK("PRK", "North Korea", "DANGER"),
-  IRQ("IRQ", "Iraq", "DANGER"),
-  RUS("RUS", "Russia", "DANGER");
+  USA("United States", "SAFETY"),
+  GBR("United Kingdom", "SAFETY"),
+  JPN("Japan", "SAFETY"),
+  FRA("France", "SAFETY"),
+  VNM("Vietnam", "SAFETY"),
+  KOR("South Korea", "SAFETY"),
+  PRK("North Korea", "DANGER"),
+  IRQ("Iraq", "DANGER"),
+  RUS("Russia", "DANGER");
 
-  private final String countryCode;
   private final String countryName;
   private final String isDanger;
 
