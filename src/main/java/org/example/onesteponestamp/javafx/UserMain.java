@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 
 public class UserMain {
 
-  private BorderPane mainLayout;
+  private final BorderPane mainLayout;
 
   public UserMain(BorderPane mainLayout) {
     this.mainLayout = mainLayout;
