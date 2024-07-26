@@ -2,6 +2,7 @@ package org.example.onesteponestamp.autoapply;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import org.example.onesteponestamp.common.Country;
 import org.example.onesteponestamp.common.VisaType;
 
@@ -31,5 +32,9 @@ public class AutoApplyService {
         expiryDate, birth, visaType, inout, inoutCountry, expectedInOutDate, createdAt);
 
     return applyNo;
+  }
+
+  public List<AutoApplyDTO> getAutoApplications(String passportNo, String countryName) {
+    return autoApplyDAO.selectAutoApply(passportNo, Country.getCountry(countryName));
   }
 }
