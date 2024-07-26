@@ -29,7 +29,7 @@ public class Foreigner {
   // 1. 외국인 목록 조회
   // Get all Foreigner records
   public static List<Foreigner> getAllForeigners() throws SQLException {
-    String sql = "select * from foreignvisitor where departure_status='STAY' and visa_expiry_date>=trunc(sysdate) order by visa_expiry_date";
+    String sql = "select * from foreignvisitor where departure_status='STAY'";
     List<Foreigner> foreigners = new ArrayList<>();
     try {
       Connection conn = DBConnectionManager.getInstance().getConnection();
