@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import org.example.onesteponestamp.autoapply.AutoApplyService;
 import org.example.onesteponestamp.immigration.ImmigrationDAO;
 
-
 public class HelloApplication extends Application {
 
   private static final AutoApplyService autoApplyService = new AutoApplyService();
@@ -43,5 +42,12 @@ public class HelloApplication extends Application {
 //    입출국 게이트 통과 테스트
 //    String test = immigrationDAO.Immigration("A012");
 //    System.out.println(test);
+
+//    목록조회 테스트
+//    LocalDate today = LocalDate.now();
+//    List<ImmigrationDTO> dto = immigrationDAO.ImmigrationListSearch("ALL", today, "IN");
+//    for (ImmigrationDTO dto1 : dto) {
+//      System.out.println(dto1.getInOut());
+//    }
   }
 }
