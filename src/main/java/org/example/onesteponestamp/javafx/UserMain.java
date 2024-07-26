@@ -9,6 +9,9 @@ import javafx.scene.layout.VBox;
 public class UserMain {
 
   private final BorderPane mainLayout;
+  Button autoEntryFormButton;
+  Button viewApplicationListButton;
+  Button entryApplicationButton;
 
   public UserMain(BorderPane mainLayout) {
     this.mainLayout = mainLayout;
@@ -19,22 +22,35 @@ public class UserMain {
     menu.setPadding(new Insets(10));
     menu.setAlignment(Pos.CENTER_LEFT);
 
-    Button autoEntryFormButton = new Button("자동 출입국 신청서 작성");
+    autoEntryFormButton = new Button("자동 출입국 신청서 작성");
     autoEntryFormButton.setMaxWidth(Double.MAX_VALUE);
     autoEntryFormButton.setOnAction(e -> showAutoEntryForm(autoEntryFormButton));
 
-    Button checkFormButton = new Button("출입국 신청서 확인");
-    checkFormButton.setMaxWidth(Double.MAX_VALUE);
+    viewApplicationListButton = new Button("출입국 신청 결과 목록 확인");
+    viewApplicationListButton.setMaxWidth(Double.MAX_VALUE);
+    viewApplicationListButton.setOnAction(e -> showAutoApplyList(viewApplicationListButton));
 
-    Button entryApplicationButton = new Button("출입국 신청");
+    entryApplicationButton = new Button("출입국 신청");
     entryApplicationButton.setMaxWidth(Double.MAX_VALUE);
 
-    menu.getChildren().addAll(autoEntryFormButton, checkFormButton, entryApplicationButton);
+    menu.getChildren()
+        .addAll(autoEntryFormButton, viewApplicationListButton, entryApplicationButton);
     mainLayout.setLeft(menu);
     mainLayout.setCenter(new VBox());  // 가운데를 빈 상태로 초기화
   }
 
+  //버튼 색상 초기화
+  private void resetButtonStyles() {
+    autoEntryFormButton.setStyle("");
+    viewApplicationListButton.setStyle("");
+    entryApplicationButton.setStyle("");
+  }
+
+  /**
+   * 자동 출입국 신청서 작성 form UI로 연결
+   */
   private void showAutoEntryForm(Button autoEntryFormButton) {
+    resetButtonStyles();
     autoEntryFormButton.setStyle("-fx-background-color: #808080;"); // 회색으로 처리
 
     // AutoApplyForm을 생성하고 중앙에 추가
@@ -42,4 +58,19 @@ public class UserMain {
     mainLayout.setCenter(autoApplyForm.getForm());
   }
 
+  /**
+   * 자동 출입국 신청서 결과 목록 UI로 연결
+   */
+  private void showAutoApplyList(Button viewApplicationListButton) {
+    resetButtonStyles();
+    viewApplicationListButton.setStyle("-fx-background-color: #808080;"); // 회색으로 처리
+
+    AutoApplyListView listView = new AutoApplyListView();
+    VBox container = new VBox(10);
+    container.setPadding(new Insets(10));
+    container.setAlignment(Pos.CENTER);
+
+    container.getChildren().addAll(listView.getForm(), listView.getTableView());
+    mainLayout.setCenter(container);
+  }
 }
