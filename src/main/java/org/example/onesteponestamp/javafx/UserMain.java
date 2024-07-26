@@ -1,6 +1,5 @@
 package org.example.onesteponestamp.javafx;
 
-import java.util.Map.Entry;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -50,5 +49,4 @@ public class UserMain {
     mainLayout.setCenter(entryApplyForm.getForm());
     //
   }
-
 }
