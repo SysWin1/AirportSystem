@@ -59,6 +59,9 @@ public class AutoApplyDAO {
 
       cstmt.execute(); // 실행
 
+      cstmt.close();
+      conn.close();
+
     } catch (SQLException e) {
       e.printStackTrace();
     }
