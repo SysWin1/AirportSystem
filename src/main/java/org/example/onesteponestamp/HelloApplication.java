@@ -6,28 +6,31 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.example.onesteponestamp.autoapply.AutoApplyService;
+import org.example.onesteponestamp.immigration.ImmigrationDAO;
 
 
 public class HelloApplication extends Application {
-    private static final AutoApplyService autoApplyService = new AutoApplyService();
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
-    }
+  private static final AutoApplyService autoApplyService = new AutoApplyService();
+  private static final ImmigrationDAO immigrationDAO = new ImmigrationDAO();
 
-    public static void main(String[] args) {
+  @Override
+  public void start(Stage stage) throws IOException {
+    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+    Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+    stage.setTitle("Hello!");
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  public static void main(String[] args) {
 //        launch();
 
-        /**
-         *  신청서 작성 insert
-         *  todo 1 : insert 할 때 trigger 넣어서, 심사 승인 trigger 연결 시켜야 함 (-> db에서 수행)
-         *  todo 2 : 이후 JavaFX로 로직 연결
-         */
+    /**
+     *  신청서 작성 insert
+     *  todo 1 : insert 할 때 trigger 넣어서, 심사 승인 trigger 연결 시켜야 함 (-> db에서 수행)
+     *  todo 2 : 이후 JavaFX로 로직 연결
+     */
 //        autoApplyService.createAutoApply(
 //            "P0001", Country.GBR, "Emma Watsob", "F",
 //            LocalDate.parse("2020/01/02", DateTimeFormatter.ofPattern("yyyy/MM/dd")),
@@ -37,5 +40,8 @@ public class HelloApplication extends Application {
 //            LocalDate.now()
 //            );
 
-    }
+//    입출국 게이트 통과 테스트
+//    String test = immigrationDAO.Immigration("A012");
+//    System.out.println(test);
+  }
 }
