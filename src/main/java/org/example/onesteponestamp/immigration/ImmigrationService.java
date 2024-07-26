@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ImmigrationService {
 
-  String Immigration(String applyNo);
+  Boolean Immigration(String applyNo);
 
   List<ImmigrationDTO> ImmigrationListSearch(String countryCode, LocalDate date, String applyNo);
 }
