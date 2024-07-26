@@ -1,5 +1,6 @@
 package org.example.onesteponestamp.javafx;
 
+import java.util.Map.Entry;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -28,6 +29,7 @@ public class UserMain {
 
     Button entryApplicationButton = new Button("출입국 신청");
     entryApplicationButton.setMaxWidth(Double.MAX_VALUE);
+    entryApplicationButton.setOnAction(e -> showImmigrationGateForm(entryApplicationButton));
 
     menu.getChildren().addAll(autoEntryFormButton, checkFormButton, entryApplicationButton);
     mainLayout.setLeft(menu);
@@ -40,6 +42,13 @@ public class UserMain {
     // AutoApplyForm을 생성하고 중앙에 추가
     AutoApplyForm autoApplyForm = new AutoApplyForm();
     mainLayout.setCenter(autoApplyForm.getForm());
+  }
+
+  private void showImmigrationGateForm(Button entryApplicationButton) {
+    entryApplicationButton.setStyle("-fx-background-color: #808080;"); //클릭시 색상 변경
+    EntryApplyForm entryApplyForm = new EntryApplyForm();
+    mainLayout.setCenter(entryApplyForm.getForm());
+    //
   }
 
 }
