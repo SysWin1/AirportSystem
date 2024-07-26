@@ -5,8 +5,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import org.example.onesteponestamp.javafx.SelectionMain;
 import org.example.onesteponestamp.immigration.ImmigrationDAO;
+import org.example.onesteponestamp.javafx.SelectionMain;
 
 
 public class HelloApplication extends Application {
