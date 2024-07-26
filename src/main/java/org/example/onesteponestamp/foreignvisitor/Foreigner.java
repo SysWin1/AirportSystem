@@ -19,10 +19,8 @@ public class Foreigner {
   private String departureStatus;
   private String illegalStay;
 
-  public Foreigner(){
+  public Foreigner() {
   }
-
- 
 
 // 외국인 관리 - 기본 정보를 DB에서 받아와야함. -> 메서드 별 정보, 생성자는..
 // priavte 한 field 값
@@ -31,9 +29,9 @@ public class Foreigner {
   // 1. 외국인 목록 조회
   // Get all Foreigner records
   public static List<Foreigner> getAllForeigners() throws SQLException {
-    String sql = "select * from foreignvisitor where departure_status='0' and visa_expiry_date>=trunc(sysdate) order by visa_expiry_date";
+    String sql = "select * from foreignvisitor where departure_status='STAY' and visa_expiry_date>=trunc(sysdate) order by visa_expiry_date";
     List<Foreigner> foreigners = new ArrayList<>();
-    try  {
+    try {
       Connection conn = DBConnectionManager.getInstance().getConnection();
       PreparedStatement pstmt = conn.prepareStatement(sql);
       ResultSet rs = pstmt.executeQuery();
@@ -48,8 +46,8 @@ public class Foreigner {
         foreigners.add(foreigner);
       }
       conn.close();
+    } catch (Exception e) {
     }
-    catch (Exception e) {}
 
     return foreigners;
   }
@@ -57,9 +55,9 @@ public class Foreigner {
   // 2. 불법 체류 외국인 목록 조회.
   //  우선 connection을 받아서 조회 쿼리 실행 => return 값을 리스트 형식으로 받기.
   public static List<Foreigner> getIllegalForeigners() throws SQLException {
-    String sql = "select * from foreignvisitor where illegal_stay='1'";
+    String sql = "select * from foreignvisitor where illegal_stay='ILLEGAL'";
     List<Foreigner> foreigners = new ArrayList<>();
-    try  {
+    try {
       Connection conn = DBConnectionManager.getInstance().getConnection();
       PreparedStatement pstmt = conn.prepareStatement(sql);
       ResultSet rs = pstmt.executeQuery();
@@ -74,8 +72,8 @@ public class Foreigner {
         foreigners.add(foreigner);
       }
       conn.close();
+    } catch (Exception e) {
     }
-    catch (Exception e) {}
     return foreigners;
   }
 
