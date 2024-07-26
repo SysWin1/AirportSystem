@@ -15,6 +15,7 @@ public class AutoApplyService {
 
   /**
    * 자동 입출국 신청서 생성 DAO 호출
+   *
    * @return 신청 번호 uuid -> 팝업창에 넣기
    */
   public String createAutoApply(String passportNo, Country countryCode, String englishName,
