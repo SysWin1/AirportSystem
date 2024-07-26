@@ -6,5 +6,5 @@ public interface ImmigrationService {
 
   String Immigration(String applyNo);
 
-  List<ImmigrationDTO> ImmigrationListSearch(RequestImmigrationList requestImmigrationList);
+  List<ImmigrationDTO> ImmigrationListSearch(String countryCode,String selectDate);
 }

@@ -2,7 +2,10 @@ package org.example.onesteponestamp.immigration;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 import org.example.onesteponestamp.common.DBConnectionManager;
 
@@ -31,7 +34,7 @@ public class ImmigrationDAO implements ImmigrationService {
   }
 
   @Override
-  public List<ImmigrationDTO> ImmigrationListSearch(RequestImmigrationList requestImmigrationList) {
+  public List<ImmigrationDTO> ImmigrationListSearch(String countryCode, String selectDate) {
     return List.of();
   }
 }
