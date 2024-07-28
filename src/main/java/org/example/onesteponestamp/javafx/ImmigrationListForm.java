@@ -3,7 +3,6 @@ package org.example.onesteponestamp.javafx;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.collections.FXCollections;
@@ -11,8 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.beans.value.ObservableValue;
 import javafx.beans.value.ChangeListener;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import org.example.onesteponestamp.immigration.ImmigrationDAO;
@@ -25,15 +22,10 @@ public class ImmigrationListForm {
   private ObservableList<ImmigrationDTO> data = FXCollections.observableArrayList();
   private ImmigrationDAO immigrationDAO = new ImmigrationDAO();
 
-  private Button previousButton;
-  private Button nextButton;
-  private Label pageInfoLabel;
-  private int currentPage = 1; // 현재페이지
-  private int dataPerPage = 20;
-
   private ToggleGroup nationalGroup;
   private ToggleGroup entryExitGroup;
   private DatePicker datePicker;
+  private Label totalLabel;
 
   public ImmigrationListForm() {
     createForm();
@@ -77,17 +69,6 @@ public class ImmigrationListForm {
     form.add(out, 2, 1);
     form.add(datePicker, 3, 1);
 
-    previousButton = new Button("이전");
-    nextButton = new Button("다음");
-    pageInfoLabel = new Label("1 페이지");
-
-    previousButton.setOnAction(e -> changePage(-1));
-    nextButton.setOnAction(e -> changePage(1));
-
-    HBox pagingBox = new HBox(10);
-    pagingBox.setPadding(new Insets(10, 10, 10, 10));
-    pagingBox.getChildren().addAll(previousButton, pageInfoLabel, nextButton);
-
     listView = new ListView<>();
     listView.setItems(data);
     listView.setCellFactory(param -> new ListCell<>() {
@@ -110,7 +91,9 @@ public class ImmigrationListForm {
 
     GridPane.setVgrow(listView, Priority.ALWAYS);
     form.add(listView, 0, 2, 7, 1);
-    form.add(pagingBox, 0, 3, 7, 1);
+
+    totalLabel = new Label("총 건수: 0");
+    form.add(totalLabel, 0, 3, 7, 1);
   }
 
   // 필터 리스너 설정
@@ -130,25 +113,16 @@ public class ImmigrationListForm {
     RadioButton selectedEntryExit = (RadioButton) entryExitGroup.getSelectedToggle();
     LocalDate selectedDate = datePicker.getValue();
 
-    String countryCode = selectedNationality.getText().equals("내국인") ? "KOR" : selectedNationality.getText().equals("외국인") ? "FOREIGNER" : "";
-    String inOut = selectedEntryExit.getText().equals("입국") ? "IN" : selectedEntryExit.getText().equals("출국") ? "OUT" : "";
+    String countryCode = selectedNationality.getText().equals("내국인") ? "KOR"
+        : selectedNationality.getText().equals("외국인") ? "FOREIGNER" : "";
+    String inOut = selectedEntryExit.getText().equals("입국") ? "IN"
+        : selectedEntryExit.getText().equals("출국") ? "OUT" : "";
 
-    List<ImmigrationDTO> results = immigrationDAO.ImmigrationListSearch(countryCode, selectedDate, inOut);
+    List<ImmigrationDTO> results = immigrationDAO.ImmigrationListSearch(countryCode, selectedDate,
+        inOut);
     data.setAll(results);
-  }
 
-  // 페이지 변경 메서드
-  private void changePage(int delta) {
-    currentPage += delta;
-    if (currentPage < 1) {
-      currentPage = 1;
-    }
-    updatePageInfo();
-    filterData();
-  }
-
-  private void updatePageInfo() {
-    pageInfoLabel.setText("페이지 " + currentPage);
+    totalLabel.setText("총 건수: " + results.size());
   }
 
   public GridPane getForm() {
