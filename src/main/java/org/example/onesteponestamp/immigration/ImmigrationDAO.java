@@ -79,11 +79,10 @@ public class ImmigrationDAO implements ImmigrationService {
             .passportNo(rs.getString("PASSPORT_NO"))
             .countryCode(rs.getString("COUNTRY_CODE"))
             .inOut(rs.getString("INOUT"))
-            .inOutDate(rs.getDate("INOUT_DATE"))
+            .inOutDate(rs.getDate("INOUT_DATE").toLocalDate())
             .visaType(rs.getString("VISA_TYPE"))
             .inOutCountry(rs.getString("INOUT_COUNTRY"))
             .build();
-        System.out.println(dto.getApplyNo());
         result.add(dto);
       }
     } catch (SQLException e) {
