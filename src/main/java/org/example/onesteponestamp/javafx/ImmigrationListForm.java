@@ -2,8 +2,8 @@ package org.example.onesteponestamp.javafx;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +18,7 @@ import org.example.onesteponestamp.immigration.ImmigrationDTO;
 public class ImmigrationListForm {
 
   private GridPane form;
-  private ListView<ImmigrationDTO> listView;
+  private TableView<ImmigrationDTO> view;
   private ObservableList<ImmigrationDTO> data = FXCollections.observableArrayList();
   private ImmigrationDAO immigrationDAO = new ImmigrationDAO();
 
@@ -30,7 +30,7 @@ public class ImmigrationListForm {
   public ImmigrationListForm() {
     createForm();
     addFilters();
-    filterData(); // Initialize data
+    filterData();
   }
 
   private void createForm() {
@@ -47,7 +47,7 @@ public class ImmigrationListForm {
     allNational.setToggleGroup(nationalGroup);
     korean.setToggleGroup(nationalGroup);
     foreign.setToggleGroup(nationalGroup);
-    allNational.setSelected(true); //디폴트값 설정
+    allNational.setSelected(true); // 디폴트값 설정
 
     entryExitGroup = new ToggleGroup();
     RadioButton all = new RadioButton("전체");
@@ -57,9 +57,9 @@ public class ImmigrationListForm {
     all.setToggleGroup(entryExitGroup);
     in.setToggleGroup(entryExitGroup);
     out.setToggleGroup(entryExitGroup);
-    all.setSelected(true);//디폴트값 설정
+    all.setSelected(true); // 디폴트값 설정
 
-    datePicker = new DatePicker(LocalDate.now()); //기본값 시스템 날짜 기준
+    datePicker = new DatePicker(LocalDate.now()); // 기본값 시스템 날짜 기준
 
     form.add(allNational, 0, 0);
     form.add(korean, 1, 0);
@@ -69,34 +69,40 @@ public class ImmigrationListForm {
     form.add(out, 2, 1);
     form.add(datePicker, 3, 1);
 
-    listView = new ListView<>();
-    listView.setItems(data);
-    listView.setCellFactory(param -> new ListCell<>() {
-      @Override
-      protected void updateItem(ImmigrationDTO item, boolean empty) {
-        super.updateItem(item, empty);
-        if (empty || item == null) {
-          setText(null);
-        } else {
-          setText("신청 번호: " + item.getApplyNo() +
-              ", 여권 번호: " + item.getPassportNo() +
-              ", 국가 코드: " + item.getCountryCode() +
-              ", 입/출국: " + item.getInOut() +
-              ", 입/출국일: " + item.getInOutDate() +
-              ", 비자 유형: " + item.getVisaType() +
-              ", 입출국 국가: " + item.getInOutCountry());
-        }
-      }
-    });
+    view = new TableView<>();
+    view.setItems(data);
 
-    GridPane.setVgrow(listView, Priority.ALWAYS);
-    form.add(listView, 0, 2, 7, 1);
+    TableColumn<ImmigrationDTO, String> applyNo = new TableColumn<>("신청 번호");
+    applyNo.setCellValueFactory(new PropertyValueFactory<>("applyNo"));
+
+    TableColumn<ImmigrationDTO, String> passportNo = new TableColumn<>("여권 번호");
+    passportNo.setCellValueFactory(new PropertyValueFactory<>("passportNo"));
+
+    TableColumn<ImmigrationDTO, String> countryCode = new TableColumn<>("국가 코드");
+    countryCode.setCellValueFactory(new PropertyValueFactory<>("countryCode"));
+
+    TableColumn<ImmigrationDTO, String> inOut = new TableColumn<>("입/출국");
+    inOut.setCellValueFactory(new PropertyValueFactory<>("inOut"));
+
+    TableColumn<ImmigrationDTO, LocalDate> inOutDate = new TableColumn<>("입/출국일");
+    inOutDate.setCellValueFactory(new PropertyValueFactory<>("inOutDate"));
+
+    TableColumn<ImmigrationDTO, String> visaType = new TableColumn<>("비자 유형");
+    visaType.setCellValueFactory(new PropertyValueFactory<>("visaType"));
+
+    TableColumn<ImmigrationDTO, String> inOutCountry = new TableColumn<>("입출국 국가");
+    inOutCountry.setCellValueFactory(new PropertyValueFactory<>("inOutCountry"));
+
+    view.getColumns()
+        .addAll(applyNo, passportNo, countryCode, inOut, inOutDate, visaType, inOutCountry);
+
+    GridPane.setVgrow(view, Priority.ALWAYS);
+    form.add(view, 0, 2, 7, 1);
 
     totalLabel = new Label("총 건수: 0");
     form.add(totalLabel, 0, 3, 7, 1);
   }
 
-  // 필터 리스너 설정
   private void addFilters() {
     ChangeListener<Object> filterChangeListener = (ObservableValue<?> observable, Object oldValue, Object newValue) -> {
       filterData(); // 필터 변경 시 필터 데이터 메서드 호출
@@ -107,7 +113,6 @@ public class ImmigrationListForm {
     datePicker.valueProperty().addListener(filterChangeListener);
   }
 
-  // 필터 데이터 메서드
   private void filterData() {
     RadioButton selectedNationality = (RadioButton) nationalGroup.getSelectedToggle();
     RadioButton selectedEntryExit = (RadioButton) entryExitGroup.getSelectedToggle();
@@ -120,8 +125,8 @@ public class ImmigrationListForm {
 
     List<ImmigrationDTO> results = immigrationDAO.ImmigrationListSearch(countryCode, selectedDate,
         inOut);
-    data.setAll(results);
 
+    data.setAll(results);
     totalLabel.setText("총 건수: " + results.size());
   }
 
