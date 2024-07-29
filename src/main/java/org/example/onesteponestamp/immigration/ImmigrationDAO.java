@@ -38,8 +38,6 @@ public class ImmigrationDAO implements ImmigrationService {
 
       String countryCode = cs.getString(2);
       String inOut = cs.getString(3);
-      System.out.println(countryCode);
-      System.out.println(inOut);
 
       if ("KOR".equals(countryCode) && "IN".equals(inOut)) {
         return "통과하세요";
