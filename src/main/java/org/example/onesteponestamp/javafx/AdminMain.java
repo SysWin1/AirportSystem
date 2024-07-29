@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import org.example.onesteponestamp.admin.AuthManager;
 
 public class AdminMain {
 
@@ -67,7 +68,7 @@ public class AdminMain {
   private void showHomeForm(Button homeButton) {
     mainLayOut.setLeft(null);
     SelectionMain main = new SelectionMain(mainLayOut);
+    AuthManager.getInstance().logout();
     main.show();
   }
-
 }

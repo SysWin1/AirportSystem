@@ -26,7 +26,7 @@ public class SelectionMain {
 
     Button adminButton = new Button("관리자");
     adminButton.setPrefSize(200, 200);
-    adminButton.setOnAction(e -> showAdminMenu());
+    adminButton.setOnAction(e -> showAdminLogin());
 
     HBox buttonBox = new HBox(20, userButton, adminButton);
     buttonBox.setAlignment(Pos.CENTER);
@@ -40,8 +40,8 @@ public class SelectionMain {
     userMenu.show();
   }
 
-  private void showAdminMenu() {
-    AdminMain adminMenu = new AdminMain(mainLayout);
-    adminMenu.show();
+  private void showAdminLogin() {
+    AdminLoginPage adminLogin = new AdminLoginPage(mainLayout);
+    adminLogin.show();
   }
 }
