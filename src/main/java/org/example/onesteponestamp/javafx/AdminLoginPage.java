@@ -56,8 +56,6 @@ public class AdminLoginPage {
     homeButton.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
     homeButton.setOnAction(e -> goHome());
 
-
-
     // Layout setup
     GridPane gridPane = new GridPane();
     gridPane.setPadding(new Insets(10));
