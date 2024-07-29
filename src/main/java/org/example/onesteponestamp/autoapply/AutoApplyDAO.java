@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.example.onesteponestamp.common.Country;
@@ -77,10 +78,10 @@ public class AutoApplyDAO {
    * @param country    나라 enum
    * @return 신청 결과 List.
    */
-  public List<AutoApplyDTO> selectAutoApply(String passportNo, Country country) {
+  public List<UserAutoApplyDTO> selectAutoApply(String passportNo, Country country) {
 
     String sql = "select * from autoapply where passport_no = ? and country_code = ?";
-    List<AutoApplyDTO> list = new ArrayList<>();
+    List<UserAutoApplyDTO> list = new ArrayList<>();
 
     try {
       PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -89,21 +90,7 @@ public class AutoApplyDAO {
       pstmt.setString(2, country.toString());
 
       ResultSet rs = pstmt.executeQuery();
-      while (rs.next()) {
-        list.add(AutoApplyDTO.builder()
-            .applyNo(rs.getString("APPLY_NO"))
-            .englishName(rs.getString("ENGLISH_NAME"))
-            .gender(rs.getString("GENDER"))
-            .visaType(VisaType.valueOf(rs.getString("VISA_TYPE")))
-            .inout(rs.getString("INOUT"))
-            .inoutCountry(Country.valueOf(rs.getString("INOUT_COUNTRY")))
-            .expectedInOutDate(rs.getDate("EXPECTED_INOUT_DATE").toLocalDate())
-            .approvalStatus(rs.getString("APPROVAL_STATUS"))
-            .rejectReason(rs.getString("REJECT_REASON"))
-            .createdAt(rs.getTimestamp("CREATED_AT").toLocalDateTime())
-            .build()
-        );
-      }
+      getResults(rs, list);
 
       rs.close();
       pstmt.close();
@@ -113,5 +100,74 @@ public class AutoApplyDAO {
     }
 
     return list;
+  }
+
+  public List<UserAutoApplyDTO> adminSelectAutoApply(String countryCode, String inout, LocalDate date,
+      String searchKeyword) {
+
+    List<UserAutoApplyDTO> list;
+
+    StringBuilder sql = new StringBuilder();
+    sql.append("select * from autoapply where created_at between ? and ?");
+
+    // 전체 vs 내국인 vs 외국인
+    if (countryCode.equals("KOR")) {
+      sql.append(" and country_code = 'KOR' and country_code is not null");
+    } else if (countryCode != null) {
+      sql.append(" and country_code != 'KOR' and country_code is not null");
+    }
+
+    // 전체 vs 입국 vs 출국
+    if (inout.equals("IN")) {
+      sql.append(" and inout = 'IN'");
+    } else if (inout.equals("OUT")) {
+      sql.append(" and inout = 'OUT'");
+    }
+
+    // 신청명 + 여권번호 + 영문명 or 조회
+    if (searchKeyword != null) {
+      sql.append(" and (apply_no like ? OR passport_no LIKE ? OR english_name LIKE ?) ");
+    }
+
+    try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+      System.out.println(sql.toString());
+
+      // 신청일자에 의해 조회 됨.
+      pstmt.setTimestamp(1, Timestamp.valueOf(date.atStartOfDay()));
+      pstmt.setTimestamp(2, Timestamp.valueOf(date.atTime(LocalTime.MAX)));
+      pstmt.setString(3, "%" + searchKeyword + "%");
+      pstmt.setString(4, "%" + searchKeyword + "%");
+      pstmt.setString(5, "%" + searchKeyword + "%");
+
+      ResultSet rs = pstmt.executeQuery();
+      list = new ArrayList<>();
+      getResults(rs, list);
+
+      rs.close();
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
+    return list;
+  }
+
+  private void getResults(ResultSet rs, List<UserAutoApplyDTO> list) throws SQLException {
+    while (rs.next()) {
+      list.add(
+          UserAutoApplyDTO.builder()
+              .applyNo(rs.getString("APPLY_NO"))
+              .englishName(rs.getString("ENGLISH_NAME"))
+              .gender(rs.getString("GENDER"))
+              .visaType(VisaType.valueOf(rs.getString("VISA_TYPE")))
+              .inout(rs.getString("INOUT"))
+              .inoutCountry(Country.valueOf(rs.getString("INOUT_COUNTRY")))
+              .expectedInOutDate(rs.getDate("EXPECTED_INOUT_DATE").toLocalDate())
+              .approvalStatus(rs.getString("APPROVAL_STATUS"))
+              .rejectReason(rs.getString("REJECT_REASON"))
+              .createdAt(rs.getTimestamp("CREATED_AT").toLocalDateTime())
+              .build()
+      );
+    }
   }
 }
