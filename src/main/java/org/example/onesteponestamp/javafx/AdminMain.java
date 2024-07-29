@@ -10,6 +10,10 @@ public class AdminMain {
 
   private final BorderPane mainLayOut;
 
+  Button autoApplyButton;
+  Button immigrationButton;
+  Button illegalButton;
+
   public AdminMain(BorderPane mainLayOut) {
     this.mainLayOut = mainLayOut;
   }
@@ -19,17 +23,30 @@ public class AdminMain {
     menu.setPadding(new Insets(10));
     menu.setAlignment(Pos.CENTER_LEFT);
 
-    Button autoApplyButton = new Button("자동 입출국 심사 목록 조회");
+    autoApplyButton = new Button("자동 입출국 심사 목록 조회");
     autoApplyButton.setMaxWidth(Double.MAX_VALUE);
 
-    Button immigrationButton = new Button("입출국 목록 조회");
+    immigrationButton = new Button("입출국 목록 조회");
     immigrationButton.setMaxWidth(Double.MAX_VALUE);
+    immigrationButton.setOnAction(e -> showImmigrationList(immigrationButton));
 
-    Button illegalButton = new Button("불법체류자 목록 조회");
+    illegalButton = new Button("불법체류자 목록 조회");
     illegalButton.setMaxWidth(Double.MAX_VALUE);
 
     menu.getChildren().addAll(autoApplyButton, immigrationButton, illegalButton);
     mainLayOut.setLeft(menu);
     mainLayOut.setCenter(new VBox());
+  }
+
+  private void resetButton() {
+    autoApplyButton.setStyle("");
+    immigrationButton.setStyle("");
+    illegalButton.setStyle("");
+  }
+
+  private void showImmigrationList(Button immigrationButton) {
+    immigrationButton.setStyle("-fx-background-color: #808080;");
+    ImmigrationListForm immigrationForm = new ImmigrationListForm();
+    mainLayOut.setCenter(immigrationForm.getForm());
   }
 }

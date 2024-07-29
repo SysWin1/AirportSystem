@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,20 +26,30 @@ public class ImmigrationDAO implements ImmigrationService {
   출입국 테이블 등록 및 외국인일시 외국인 테이블 기록 프로시저 실행
    */
   @Override
-  public Boolean Immigration(String applyNo) {
-    String sql = "{call ImmigrationProcess(?)}";
-    System.out.println("test");
+  public String Immigration(String applyNo) {
+    String sql = "{call ImmigrationProcess(?, ?, ?)}";
     try {
       //사전 신청번호만 입력
       CallableStatement cs = conn.prepareCall(sql);
       cs.setString(1, applyNo);
+      cs.registerOutParameter(2, Types.VARCHAR);
+      cs.registerOutParameter(3, Types.VARCHAR);
       cs.execute();
 
+      String countryCode = cs.getString(2);
+      String inOut = cs.getString(3);
+
+      if ("KOR".equals(countryCode) && "IN".equals(inOut)) {
+        return "통과하세요";
+      } else if ("KOR".equals(countryCode) && "OUT".equals(inOut) || "IN".equals(inOut)) {
+        return "즐거운 여행되세요";
+      } else {
+        return "통과하세요";
+      }
     } catch (SQLException e) {
       // 신청정보 x, 거절자, 입국일이 다른 승객 대면심사이동
-      return Boolean.FALSE;
+      return null;
     }
-    return Boolean.TRUE;
   }
 
   /*
@@ -79,11 +90,10 @@ public class ImmigrationDAO implements ImmigrationService {
             .passportNo(rs.getString("PASSPORT_NO"))
             .countryCode(rs.getString("COUNTRY_CODE"))
             .inOut(rs.getString("INOUT"))
-            .inOutDate(rs.getDate("INOUT_DATE"))
+            .inOutDate(rs.getDate("INOUT_DATE").toLocalDate())
             .visaType(rs.getString("VISA_TYPE"))
             .inOutCountry(rs.getString("INOUT_COUNTRY"))
             .build();
-        System.out.println(dto.getApplyNo());
         result.add(dto);
       }
     } catch (SQLException e) {

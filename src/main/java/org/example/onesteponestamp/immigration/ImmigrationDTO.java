@@ -1,6 +1,7 @@
 package org.example.onesteponestamp.immigration;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,7 +13,7 @@ public class ImmigrationDTO {
   private String passportNo;
   private String countryCode;
   private String inOut;
-  private Date inOutDate;
+  private LocalDate inOutDate;
   private String visaType;
   private String inOutCountry;
 }
