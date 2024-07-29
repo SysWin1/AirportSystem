@@ -4,6 +4,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class AdminMain {
@@ -36,6 +38,18 @@ public class AdminMain {
     menu.getChildren().addAll(autoApplyButton, immigrationButton, illegalButton);
     mainLayOut.setLeft(menu);
     mainLayOut.setCenter(new VBox());
+
+    Region space = new Region();
+    space.setMaxHeight(350);
+    VBox.setVgrow(space, Priority.ALWAYS);
+
+    Button homeButton = new Button("홈으로");
+    homeButton.setMaxWidth(Double.MAX_VALUE);
+    homeButton.setOnAction(e -> showHomeForm(homeButton));
+
+    menu.getChildren().addAll(space, homeButton);
+    mainLayOut.setLeft(menu);
+    mainLayOut.setCenter(new VBox());
   }
 
   private void resetButton() {
@@ -49,4 +63,11 @@ public class AdminMain {
     ImmigrationListForm immigrationForm = new ImmigrationListForm();
     mainLayOut.setCenter(immigrationForm.getForm());
   }
+
+  private void showHomeForm(Button homeButton) {
+    mainLayOut.setLeft(null);
+    SelectionMain main = new SelectionMain(mainLayOut);
+    main.show();
+  }
+
 }

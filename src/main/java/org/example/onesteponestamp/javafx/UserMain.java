@@ -4,6 +4,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class UserMain {
@@ -38,6 +40,18 @@ public class UserMain {
         .addAll(autoEntryFormButton, viewApplicationListButton, entryApplicationButton);
     mainLayout.setLeft(menu);
     mainLayout.setCenter(new VBox());  // 가운데를 빈 상태로 초기화
+
+    Region space = new Region();
+    space.setMaxHeight(350);
+    VBox.setVgrow(space, Priority.ALWAYS);
+
+    Button homeButton = new Button("홈으로");
+    homeButton.setMaxWidth(Double.MAX_VALUE);
+    homeButton.setOnAction(e -> showHomeForm(homeButton));
+
+    menu.getChildren().addAll(space, homeButton);
+    mainLayout.setLeft(menu);
+    mainLayout.setCenter(new VBox());
   }
 
   //버튼 색상 초기화
@@ -80,5 +94,11 @@ public class UserMain {
     entryApplicationButton.setStyle("-fx-background-color: #808080;"); //클릭시 색상 변경
     EntryApplyForm entryApplyForm = new EntryApplyForm();
     mainLayout.setCenter(entryApplyForm.getForm());
+  }
+
+  private void showHomeForm(Button homeButton) {
+    mainLayout.setLeft(null);
+    SelectionMain main = new SelectionMain(mainLayout);
+    main.show();
   }
 }
