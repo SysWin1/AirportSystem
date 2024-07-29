@@ -14,11 +14,11 @@ public class LoginController {
 
   private final AuthManager authManager;
 
-  private final AdminLoginDAO adminLoginDAO;
+  private final LoginService loginService;
 
   public LoginController(BorderPane pane) {
     this.pane = pane;
-    adminLoginDAO = new AdminLoginDAO();
+    loginService = new LoginService();
     authManager = AuthManager.getInstance();
   }
 
@@ -31,10 +31,9 @@ public class LoginController {
     String id = idField.getText();
     String password = passwordField.getText();
 
-    boolean success = adminLoginDAO.login(id, password);
+    boolean success = loginService.login(id, password);
     if (success) {
       showAlert("로그인 성공!!", "환영하니다, " + id + "님 !");
-      authManager.login(AdminDTO.builder().id(id).build());
       showAdminMenu();
     } else {
       showAlert("로그인 실패", "ID나 비밀번호를 틀렸습니다.");
