@@ -90,7 +90,22 @@ public class AutoApplyDAO {
       pstmt.setString(2, country.toString());
 
       ResultSet rs = pstmt.executeQuery();
-      getResults(rs, list);
+      while (rs.next()) {
+        list.add(
+            UserAutoApplyDTO.builder()
+                .applyNo(rs.getString("APPLY_NO"))
+                .englishName(rs.getString("ENGLISH_NAME"))
+                .gender(rs.getString("GENDER"))
+                .visaType(VisaType.valueOf(rs.getString("VISA_TYPE")))
+                .inout(rs.getString("INOUT"))
+                .inoutCountry(Country.valueOf(rs.getString("INOUT_COUNTRY")))
+                .expectedInOutDate(rs.getDate("EXPECTED_INOUT_DATE").toLocalDate())
+                .approvalStatus(rs.getString("APPROVAL_STATUS"))
+                .rejectReason(rs.getString("REJECT_REASON"))
+                .createdAt(rs.getTimestamp("CREATED_AT").toLocalDateTime())
+                .build()
+        );
+      }
 
       rs.close();
       pstmt.close();
@@ -102,10 +117,19 @@ public class AutoApplyDAO {
     return list;
   }
 
-  public List<UserAutoApplyDTO> adminSelectAutoApply(String countryCode, String inout, LocalDate date,
-      String searchKeyword) {
+  /**
+   * 관리자 검색 : 자동 출입국 결과 목록 조회
+   *
+   * @param countryCode   (전체 / 내국인 / 외국인)
+   * @param inout         (전체 / 입국 / 출국)
+   * @param date          자동 출입국 신청서를 낸 날짜
+   * @param searchKeyword (신청번호 or 여권번호 or 영문명) 하나라도 맞으면 검색.
+   * @return
+   */
+  public List<AutoApply> adminSelectAutoApply(String countryCode, String inout,
+      LocalDate date, String searchKeyword) {
 
-    List<UserAutoApplyDTO> list;
+    List<AutoApply> list;
 
     StringBuilder sql = new StringBuilder();
     sql.append("select * from autoapply where created_at between ? and ?");
@@ -141,7 +165,28 @@ public class AutoApplyDAO {
 
       ResultSet rs = pstmt.executeQuery();
       list = new ArrayList<>();
-      getResults(rs, list);
+
+      while (rs.next()) {
+        list.add(
+            AutoApply.builder()
+                .applyNo(rs.getString("APPLY_NO"))
+                .passportNo(rs.getString("PASSPORT_NO"))
+                .countryCode(Country.valueOf(rs.getString("COUNTRY_CODE")))
+                .englishName(rs.getString("ENGLISH_NAME"))
+                .gender(rs.getString("GENDER"))
+                .issueDate(rs.getDate("ISSUE_DATE").toLocalDate())
+                .expiryDate(rs.getDate("EXPIRY_DATE").toLocalDate())
+                .birth(rs.getDate("BIRTH").toLocalDate())
+                .visaType(VisaType.valueOf(rs.getString("VISA_TYPE")))
+                .inout(rs.getString("INOUT"))
+                .inoutCountry(Country.valueOf(rs.getString("INOUT_COUNTRY")))
+                .expectedInOutDate(rs.getDate("EXPECTED_INOUT_DATE").toLocalDate())
+                .approvalStatus(rs.getString("APPROVAL_STATUS"))
+                .rejectReason(rs.getString("REJECT_REASON"))
+                .createdAt(rs.getTimestamp("CREATED_AT").toLocalDateTime())
+                .build()
+        );
+      }
 
       rs.close();
 
