@@ -6,8 +6,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import org.example.onesteponestamp.admin.LoginController;
 
 public class AdminLoginPage {
@@ -41,6 +45,19 @@ public class AdminLoginPage {
     loginController.initialize(idField, passwordField);
     loginButton.setOnAction(e -> loginController.handleLoginButtonAction());
 
+    // Home button - image
+    Image homeButtonImage = new Image(
+        getClass().getResourceAsStream("/org/example/onesteponestamp/images/back-button.png"));
+    ImageView homeButtonImageView = new ImageView(homeButtonImage);
+    homeButtonImageView.setFitHeight(30);
+    homeButtonImageView.setFitWidth(30);
+    homeButtonImageView.setOnMouseClicked(e -> goHome());
+    Button homeButton = new Button("", homeButtonImageView);
+    homeButton.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+    homeButton.setOnAction(e -> goHome());
+
+
+
     // Layout setup
     GridPane gridPane = new GridPane();
     gridPane.setPadding(new Insets(10));
@@ -48,14 +65,29 @@ public class AdminLoginPage {
     gridPane.setVgap(10);
     gridPane.setAlignment(Pos.CENTER);
 
-    GridPane.setConstraints(titleLabel, 0, 0, 2, 1);
     GridPane.setConstraints(idField, 0, 1, 2, 1);
     GridPane.setConstraints(passwordField, 0, 2, 2, 1);
     GridPane.setConstraints(loginButton, 0, 3, 2, 1);
 
     gridPane.getChildren().addAll(titleLabel, idField, passwordField, loginButton);
 
+    // 홈버튼 박스
+    HBox topLayout = new HBox(10);
+    topLayout.setAlignment(Pos.CENTER_LEFT);
+    topLayout.setPadding(new Insets(0, 0, 0, 100));
+    topLayout.getChildren().addAll(homeButton);
+
+    VBox vBox = new VBox(20);
+    vBox.setAlignment(Pos.CENTER);
+    vBox.getChildren().addAll(topLayout, gridPane);
+
     // Set up the BorderPane
-    pane.setCenter(gridPane);
+    pane.setCenter(vBox);
+    idField.requestFocus();
+  }
+
+  private void goHome() {
+    SelectionMain mainPage = new SelectionMain(pane);
+    mainPage.show();
   }
 }
