@@ -50,24 +50,20 @@ public class EntryApplyForm {
 
   private void verificationForm(Button submit) {
     //출입국 심사 진행
-    Boolean result = immigrationDAO.Immigration(applyNoField.getText());
+    String result = immigrationDAO.Immigration(applyNoField.getText());
 
-    if (result) {
-      System.out.println(result);
-      System.out.println(applyNoField.getText());
-      successPopUp();
+    if (result != null) {
+      successPopUp(result);
     } else {
-      System.out.println(result);
-      System.out.println(applyNoField.getText());
       errorPopUp();
     }
   }
 
-  private void successPopUp() {
+  private void successPopUp(String result) {
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setTitle("Success");
     alert.setHeaderText(null);
-    alert.setContentText("통과하세요.");
+    alert.setContentText(result);
     alert.showAndWait();
   }
 

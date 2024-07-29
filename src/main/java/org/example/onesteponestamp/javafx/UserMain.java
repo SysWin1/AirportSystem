@@ -76,6 +76,7 @@ public class UserMain {
   }
 
   private void showImmigrationGateForm(Button entryApplicationButton) {
+    resetButtonStyles();
     entryApplicationButton.setStyle("-fx-background-color: #808080;"); //클릭시 색상 변경
     EntryApplyForm entryApplyForm = new EntryApplyForm();
     mainLayout.setCenter(entryApplyForm.getForm());
