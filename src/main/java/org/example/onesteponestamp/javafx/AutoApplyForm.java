@@ -180,11 +180,11 @@ public class AutoApplyForm {
     if (passportNo == null || passportNo.trim().isEmpty()) {
       throw new Exception("여권번호를 입력해주세요.");
     }
-    if (passportNo.length()<8 || passportNo.length() > 10) {
+    if (passportNo.length() < 8 || passportNo.length() > 10) {
       throw new Exception("여권번호는 8-10자만 입력 가능합니다.");
     }
     if (!passportNo.matches("^[A-Z][0-9A-Z]{7,9}$")) {
-      throw new Exception("여권번호 형식이 올바르지 않습니다. (대문자 알파벳 1자 + 숫자 8자)");
+      throw new Exception("여권번호 형식이 올바르지 않습니다. (대문자 알파벳로 시작");
     }
 
     if (country == null || country.trim().isEmpty()) {

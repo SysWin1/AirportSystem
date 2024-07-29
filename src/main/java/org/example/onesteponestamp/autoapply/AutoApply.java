@@ -5,20 +5,24 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 import org.example.onesteponestamp.common.Country;
 import org.example.onesteponestamp.common.VisaType;
 
-/**
- * 자동 입출국 신청서 목록 조회 시 dto.
- */
 @Getter
+@ToString
 @Builder
 @AllArgsConstructor
-public class AutoApplyDTO {
+public class AutoApply {
 
   private String applyNo;
+  private String passportNo;
+  private Country countryCode;
   private String englishName;
   private String gender;
+  private LocalDate issueDate;
+  private LocalDate expiryDate;
+  private LocalDate birth;
   private VisaType visaType;
   private String inout;
   private Country inoutCountry;

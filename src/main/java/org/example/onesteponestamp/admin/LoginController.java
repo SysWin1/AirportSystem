@@ -33,7 +33,7 @@ public class LoginController {
 
     boolean success = loginService.login(id, password);
     if (success) {
-      showAlert("로그인 성공!!", "환영하니다, " + id + "님 !");
+      showAlert("로그인 성공!!", "환영합니다, " + id + "님 !");
       showAdminMenu();
     } else {
       showAlert("로그인 실패", "ID나 비밀번호를 틀렸습니다.");

@@ -34,7 +34,12 @@ public class AutoApplyService {
     return applyNo;
   }
 
-  public List<AutoApplyDTO> getAutoApplications(String passportNo, String countryName) {
+  public List<UserAutoApplyDTO> getAutoApplications(String passportNo, String countryName) {
     return autoApplyDAO.selectAutoApply(passportNo, Country.getCountry(countryName));
+  }
+
+  public List<AutoApply> getAutoApplicationsForAdmin(Country country, String inout, LocalDate date,
+      String searchKeyword) {
+    return autoApplyDAO.adminSelectAutoApply(country.toString(), inout, date, searchKeyword);
   }
 }
