@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 import org.example.onesteponestamp.common.Country;
 import org.example.onesteponestamp.common.VisaType;
 
@@ -13,8 +14,9 @@ import org.example.onesteponestamp.common.VisaType;
  */
 @Getter
 @Builder
+@ToString
 @AllArgsConstructor
-public class AutoApplyDTO {
+public class UserAutoApplyDTO {
 
   private String applyNo;
   private String englishName;
