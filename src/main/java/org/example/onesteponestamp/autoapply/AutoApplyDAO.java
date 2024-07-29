@@ -17,7 +17,7 @@ import org.example.onesteponestamp.common.DBConnectionManager;
 import org.example.onesteponestamp.common.VisaType;
 
 /**
- * 자동 출입국 신청서 form 데이터 저장
+ * 자동 출입국 신청서 저장 및 조회
  */
 public class AutoApplyDAO {
 
@@ -118,13 +118,13 @@ public class AutoApplyDAO {
   }
 
   /**
-   * 관리자 검색 : 자동 출입국 결과 목록 조회
+   * 관리자 검색 : 자동 출입국 결과 목록 조회 (*최신순)
    *
    * @param countryCode   (전체 / 내국인 / 외국인)
    * @param inout         (전체 / 입국 / 출국)
    * @param date          자동 출입국 신청서를 낸 날짜
    * @param searchKeyword (신청번호 or 여권번호 or 영문명) 하나라도 맞으면 검색.
-   * @return
+   * @return AutoApply 목록 조회.
    */
   public List<AutoApply> adminSelectAutoApply(String countryCode, String inout,
       LocalDate date, String searchKeyword) {
@@ -150,8 +150,10 @@ public class AutoApplyDAO {
 
     // 신청명 + 여권번호 + 영문명 or 조회
     if (searchKeyword != null) {
-      sql.append(" and (apply_no like ? OR passport_no LIKE ? OR english_name LIKE ?) ");
+      sql.append(" and (apply_no like ? OR passport_no LIKE ? OR english_name LIKE ?)");
     }
+
+    sql.append(" order by created_at desc");
 
     try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
       System.out.println(sql.toString());
@@ -195,24 +197,5 @@ public class AutoApplyDAO {
     }
 
     return list;
-  }
-
-  private void getResults(ResultSet rs, List<UserAutoApplyDTO> list) throws SQLException {
-    while (rs.next()) {
-      list.add(
-          UserAutoApplyDTO.builder()
-              .applyNo(rs.getString("APPLY_NO"))
-              .englishName(rs.getString("ENGLISH_NAME"))
-              .gender(rs.getString("GENDER"))
-              .visaType(VisaType.valueOf(rs.getString("VISA_TYPE")))
-              .inout(rs.getString("INOUT"))
-              .inoutCountry(Country.valueOf(rs.getString("INOUT_COUNTRY")))
-              .expectedInOutDate(rs.getDate("EXPECTED_INOUT_DATE").toLocalDate())
-              .approvalStatus(rs.getString("APPROVAL_STATUS"))
-              .rejectReason(rs.getString("REJECT_REASON"))
-              .createdAt(rs.getTimestamp("CREATED_AT").toLocalDateTime())
-              .build()
-      );
-    }
   }
 }
