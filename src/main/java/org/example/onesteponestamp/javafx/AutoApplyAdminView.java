@@ -16,6 +16,9 @@ import javafx.scene.layout.Priority;
 import lombok.Getter;
 import org.example.onesteponestamp.autoapply.AutoApply;
 
+/**
+ * 관리자 - "자동 출입국 결과 목록" 조회 table view
+ */
 @Getter
 public class AutoApplyAdminView {
 
@@ -27,25 +30,13 @@ public class AutoApplyAdminView {
   private ToggleGroup entryExitGroup;
   private TableView<AutoApply> tableView;
   private Button searchButton;
-//  private AutoApplyService autoApplyService;
 
   private String personToggle;
   private String entryExitToggle;
 
   public AutoApplyAdminView() {
-//    autoApplyService = new AutoApplyService();
     createPane();
   }
-
-//  private void loadListData(String personToggle, String entryExitToggle, LocalDate searchDate,
-//      String searchKeyword) {
-//
-//    // 검색 조건을 사용하여 데이터를 가져옵니다.
-//    List<AutoApply> applyList = autoApplyService.getAutoApplicationsForAdmin(
-//        personToggle, entryExitToggle, searchDate, searchKeyword
-//    );
-//    tableView.setItems(FXCollections.observableArrayList(applyList));
-//  }
 
   public GridPane createPane() {
     mainGrid = new GridPane();
@@ -67,10 +58,6 @@ public class AutoApplyAdminView {
     allPersons.setSelected(true);
     personToggle = null; //기본값 설정
 
-//    // 토글이 선택되면 personToggle 변경
-//    locals.setOnAction(e -> personToggle = "LOCAL");
-//    foreigners.setOnAction(e -> personToggle = "FOREIGNER");
-
     /**
      * 전체 vs 출국 vs 입국
      */
@@ -85,20 +72,12 @@ public class AutoApplyAdminView {
     allEntries.setSelected(true);
     entryExitToggle = null; // 기본값 설정
 
-//    // 토글이 선택되면 entryExitToggle 변경됨.
-//    exits.setOnAction(e -> entryExitToggle = "OUT");
-//    entries.setOnAction(e -> entryExitToggle = "IN");
-
     datePicker = new DatePicker();
     datePicker.setValue(LocalDate.now());
 
     searchField = new TextField();
     searchField.setPromptText("검색어");
-
     searchButton = new Button("조회");
-//    searchButton.setOnAction(e -> loadListData(
-//        personToggle, entryExitToggle, datePicker.getValue(), searchField.getText()
-//    ));
 
     mainGrid.add(allPersons, 0, 0);
     mainGrid.add(locals, 1, 0);
