@@ -24,7 +24,7 @@ public class HelloApplication extends Application {
     SelectionMain selectionMain = new SelectionMain(mainLayout);
     authManager = new AuthManager();
 
-    Scene scene = new Scene(mainLayout, 800, 600);
+    Scene scene = new Scene(mainLayout, 1200, 700);
     stage.setScene(scene);
     stage.show();
 

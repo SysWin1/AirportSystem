@@ -8,6 +8,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import org.example.onesteponestamp.admin.AuthManager;
+import org.example.onesteponestamp.autoapply.AutoApplyAdminController;
 
 public class AdminMain {
 
@@ -28,6 +29,7 @@ public class AdminMain {
 
     autoApplyButton = new Button("자동 입출국 심사 목록 조회");
     autoApplyButton.setMaxWidth(Double.MAX_VALUE);
+    autoApplyButton.setOnAction(e -> showAutoApplyList(autoApplyButton));
 
     immigrationButton = new Button("입출국 목록 조회");
     immigrationButton.setMaxWidth(Double.MAX_VALUE);
@@ -58,6 +60,15 @@ public class AdminMain {
     autoApplyButton.setStyle("");
     immigrationButton.setStyle("");
     foreignerButton.setStyle("");
+  }
+
+  private void showAutoApplyList(Button autoApplyButton) {
+    resetButton();
+    autoApplyButton.setStyle("-fx-background-color: #808080;");
+
+    AutoApplyAdminView view = new AutoApplyAdminView();
+    new AutoApplyAdminController(view);
+    mainLayOut.setCenter(view.getMainGrid());
   }
 
   private void showImmigrationList(Button immigrationButton) {
