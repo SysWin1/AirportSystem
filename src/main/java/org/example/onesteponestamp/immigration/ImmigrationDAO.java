@@ -79,22 +79,16 @@ public class ImmigrationDAO implements ImmigrationService {
     }
 
     System.out.println(date.toString());
+    Integer idx = 1;
     try {
       PreparedStatement ps = conn.prepareStatement(sql.toString());
       ps.setDate(1, Date.valueOf(date));
       ResultSet rs = ps.executeQuery();
       while (rs.next()) {
         //승객 한명씩 받아와서 리스트에 담기
-        ImmigrationDTO dto = ImmigrationDTO.builder()
-            .applyNo(rs.getString("APPLY_NO"))
-            .passportNo(rs.getString("PASSPORT_NO"))
-            .countryCode(rs.getString("COUNTRY_CODE"))
-            .inOut(rs.getString("INOUT"))
-            .inOutDate(rs.getDate("INOUT_DATE").toLocalDate())
-            .visaType(rs.getString("VISA_TYPE"))
-            .inOutCountry(rs.getString("INOUT_COUNTRY"))
-            .build();
+        ImmigrationDTO dto = ImmigrationDTO.fromResultSet(idx, rs);
         result.add(dto);
+        idx++;
       }
     } catch (SQLException e) {
       e.printStackTrace();
