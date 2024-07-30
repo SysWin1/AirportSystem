@@ -15,7 +15,7 @@ public class AdminMain {
 
   Button autoApplyButton;
   Button immigrationButton;
-  Button illegalButton;
+  Button foreignerButton;
 
   public AdminMain(BorderPane mainLayOut) {
     this.mainLayOut = mainLayOut;
@@ -33,10 +33,11 @@ public class AdminMain {
     immigrationButton.setMaxWidth(Double.MAX_VALUE);
     immigrationButton.setOnAction(e -> showImmigrationList(immigrationButton));
 
-    illegalButton = new Button("불법체류자 목록 조회");
-    illegalButton.setMaxWidth(Double.MAX_VALUE);
+    foreignerButton = new Button("외국인 목록 조회");
+    foreignerButton.setMaxWidth(Double.MAX_VALUE);
+    foreignerButton.setOnAction(e -> showForeignerList(foreignerButton));
 
-    menu.getChildren().addAll(autoApplyButton, immigrationButton, illegalButton);
+    menu.getChildren().addAll(autoApplyButton, immigrationButton, foreignerButton);
     mainLayOut.setLeft(menu);
     mainLayOut.setCenter(new VBox());
 
@@ -56,13 +57,21 @@ public class AdminMain {
   private void resetButton() {
     autoApplyButton.setStyle("");
     immigrationButton.setStyle("");
-    illegalButton.setStyle("");
+    foreignerButton.setStyle("");
   }
 
   private void showImmigrationList(Button immigrationButton) {
+    resetButton();
     immigrationButton.setStyle("-fx-background-color: #808080;");
     ImmigrationListForm immigrationForm = new ImmigrationListForm();
     mainLayOut.setCenter(immigrationForm.getForm());
+  }
+
+  private void showForeignerList(Button foreignerButton) {
+    resetButton();
+    foreignerButton.setStyle("-fx-background-color: #808080;");
+    ForeignerForm foreignerForm = new ForeignerForm();
+    mainLayOut.setCenter(foreignerForm.getForm());
   }
 
   private void showHomeForm(Button homeButton) {
