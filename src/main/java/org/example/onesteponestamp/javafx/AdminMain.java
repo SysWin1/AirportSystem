@@ -65,7 +65,7 @@ public class AdminMain {
     autoApplyButton.setStyle("-fx-background-color: #808080;");
 
     // 여기서 AutoApplyController 불러와야 함.
-    AutoApplyView listView = new AutoApplyView();
+    AutoApplyAdminView listView = new AutoApplyAdminView();
     mainLayOut.setCenter(listView.createPane());
   }
 
