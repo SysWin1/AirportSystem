@@ -2,8 +2,6 @@ package org.example.onesteponestamp.javafx;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
-import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -17,37 +15,37 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import lombok.Getter;
 import org.example.onesteponestamp.autoapply.AutoApply;
-import org.example.onesteponestamp.autoapply.AutoApplyService;
 
 @Getter
 public class AutoApplyAdminView {
 
-  GridPane mainGrid;
+  private GridPane mainGrid;
 
   private TextField searchField;
   private DatePicker datePicker;
   private ToggleGroup personGroup;
   private ToggleGroup entryExitGroup;
   private TableView<AutoApply> tableView;
-  private AutoApplyService autoApplyService;
+  private Button searchButton;
+//  private AutoApplyService autoApplyService;
 
   private String personToggle;
   private String entryExitToggle;
 
   public AutoApplyAdminView() {
-    autoApplyService = new AutoApplyService();
+//    autoApplyService = new AutoApplyService();
     createPane();
   }
 
-  private void loadListData(String personToggle, String entryExitToggle, LocalDate searchDate,
-      String searchKeyword) {
-
-    // 검색 조건을 사용하여 데이터를 가져옵니다.
-    List<AutoApply> applyList = autoApplyService.getAutoApplicationsForAdmin(
-        personToggle, entryExitToggle, searchDate, searchKeyword
-    );
-    tableView.setItems(FXCollections.observableArrayList(applyList));
-  }
+//  private void loadListData(String personToggle, String entryExitToggle, LocalDate searchDate,
+//      String searchKeyword) {
+//
+//    // 검색 조건을 사용하여 데이터를 가져옵니다.
+//    List<AutoApply> applyList = autoApplyService.getAutoApplicationsForAdmin(
+//        personToggle, entryExitToggle, searchDate, searchKeyword
+//    );
+//    tableView.setItems(FXCollections.observableArrayList(applyList));
+//  }
 
   public GridPane createPane() {
     mainGrid = new GridPane();
@@ -69,16 +67,16 @@ public class AutoApplyAdminView {
     allPersons.setSelected(true);
     personToggle = null; //기본값 설정
 
-    // 토글이 선택되면 personToggle 변경
-    locals.setOnAction(e -> personToggle = "LOCAL");
-    foreigners.setOnAction(e -> personToggle = "FOREIGNER");
+//    // 토글이 선택되면 personToggle 변경
+//    locals.setOnAction(e -> personToggle = "LOCAL");
+//    foreigners.setOnAction(e -> personToggle = "FOREIGNER");
 
     /**
      * 전체 vs 출국 vs 입국
      */
     RadioButton allEntries = new RadioButton("전체");
-    RadioButton exits = new RadioButton("출국   ");
-    RadioButton entries = new RadioButton("입국   ");
+    RadioButton exits = new RadioButton("출국");
+    RadioButton entries = new RadioButton("입국");
     entryExitGroup = new ToggleGroup();
     allEntries.setToggleGroup(entryExitGroup);
     exits.setToggleGroup(entryExitGroup);
@@ -87,9 +85,9 @@ public class AutoApplyAdminView {
     allEntries.setSelected(true);
     entryExitToggle = null; // 기본값 설정
 
-    // 토글이 선택되면 entryExitToggle 변경됨.
-    exits.setOnAction(e -> entryExitToggle = "OUT");
-    entries.setOnAction(e -> entryExitToggle = "IN");
+//    // 토글이 선택되면 entryExitToggle 변경됨.
+//    exits.setOnAction(e -> entryExitToggle = "OUT");
+//    entries.setOnAction(e -> entryExitToggle = "IN");
 
     datePicker = new DatePicker();
     datePicker.setValue(LocalDate.now());
@@ -97,10 +95,10 @@ public class AutoApplyAdminView {
     searchField = new TextField();
     searchField.setPromptText("검색어");
 
-    Button searchButton = new Button("조회");
-    searchButton.setOnAction(e -> loadListData(
-        personToggle, entryExitToggle, datePicker.getValue(), searchField.getText()
-    ));
+    searchButton = new Button("조회");
+//    searchButton.setOnAction(e -> loadListData(
+//        personToggle, entryExitToggle, datePicker.getValue(), searchField.getText()
+//    ));
 
     mainGrid.add(allPersons, 0, 0);
     mainGrid.add(locals, 1, 0);
