@@ -38,8 +38,8 @@ public class AutoApplyService {
     return autoApplyDAO.selectAutoApply(passportNo, Country.getCountry(countryName));
   }
 
-  public List<AutoApply> getAutoApplicationsForAdmin(String personType, String inout, LocalDate date,
-      String searchKeyword) {
+  public List<AutoApply> getAutoApplicationsForAdmin(String personType, String inout,
+      LocalDate date, String searchKeyword) {
     return autoApplyDAO.adminSelectAutoApply(personType, inout, date, searchKeyword);
   }
 }

@@ -37,7 +37,7 @@ public class AutoApplyAdminController {
         "외국인".equals(personToggle) ? "FOREIGNER" : null;
   }
 
-  private String getInOutToggle(){
+  private String getInOutToggle() {
     String inoutToggle = getSelectedToggleText(view.getEntryExitGroup());
     return "출국".equals(inoutToggle) ? "OUT" :
         "입국".equals(inoutToggle) ? "IN" : null;
