@@ -120,13 +120,13 @@ public class AutoApplyDAO {
   /**
    * 관리자 검색 : 자동 출입국 결과 목록 조회 (*최신순)
    *
-   * @param countryCode   (전체 / 내국인 / 외국인)
+   * @param personType    (전체 / 내국인 / 외국인)
    * @param inout         (전체 / 입국 / 출국)
    * @param date          자동 출입국 신청서를 낸 날짜
    * @param searchKeyword (신청번호 or 여권번호 or 영문명) 하나라도 맞으면 검색.
    * @return AutoApply 목록 조회.
    */
-  public List<AutoApply> adminSelectAutoApply(String countryCode, String inout,
+  public List<AutoApply> adminSelectAutoApply(String personType, String inout,
       LocalDate date, String searchKeyword) {
 
     List<AutoApply> list;
@@ -135,17 +135,21 @@ public class AutoApplyDAO {
     sql.append("select * from autoapply where created_at between ? and ?");
 
     // 전체 vs 내국인 vs 외국인
-    if (countryCode.equals("KOR")) {
-      sql.append(" and country_code = 'KOR' and country_code is not null");
-    } else if (countryCode != null) {
-      sql.append(" and country_code != 'KOR' and country_code is not null");
+    if (personType != null) {
+      if (personType.equals("LOCAL")) {
+        sql.append(" and country_code = 'KOR' and country_code is not null");
+      } else if (personType.equals("FOREIGNER")) {
+        sql.append(" and country_code != 'KOR' and country_code is not null");
+      }
     }
 
     // 전체 vs 입국 vs 출국
-    if (inout.equals("IN")) {
-      sql.append(" and inout = 'IN'");
-    } else if (inout.equals("OUT")) {
-      sql.append(" and inout = 'OUT'");
+    if (inout != null) {
+      if (inout.equals("IN")) {
+        sql.append(" and inout = 'IN'");
+      } else if (inout.equals("OUT")) {
+        sql.append(" and inout = 'OUT'");
+      }
     }
 
     // 신청명 + 여권번호 + 영문명 or 조회
