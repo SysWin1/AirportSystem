@@ -3,6 +3,8 @@ package org.example.onesteponestamp.javafx;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -45,7 +47,14 @@ public class UserMain {
     space.setMaxHeight(350);
     VBox.setVgrow(space, Priority.ALWAYS);
 
+    ImageView homeIcon = new ImageView(
+        new Image(
+            "file:src/main/resources/org/example/onesteponestamp/images/home.png")); //content부분 아이콘 셋팅
+    homeIcon.setFitHeight(30);
+    homeIcon.setFitWidth(30);
+
     Button homeButton = new Button("홈으로");
+    homeButton.setGraphic(homeIcon);
     homeButton.setMaxWidth(Double.MAX_VALUE);
     homeButton.setOnAction(e -> showHomeForm(homeButton));
 
@@ -92,8 +101,8 @@ public class UserMain {
   private void showImmigrationGateForm(Button entryApplicationButton) {
     resetButtonStyles();
     entryApplicationButton.setStyle("-fx-background-color: #808080;"); //클릭시 색상 변경
-    EntryApplyForm entryApplyForm = new EntryApplyForm();
-    mainLayout.setCenter(entryApplyForm.getForm());
+    ImmigrationForm immigrationForm = new ImmigrationForm();
+    mainLayout.setCenter(immigrationForm.getForm());
   }
 
   private void showHomeForm(Button homeButton) {

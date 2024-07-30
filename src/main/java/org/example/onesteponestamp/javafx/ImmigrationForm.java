@@ -14,14 +14,14 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import org.example.onesteponestamp.immigration.ImmigrationDAO;
 
-public class EntryApplyForm {
+public class ImmigrationForm {
 
   private static final ImmigrationDAO immigrationDAO = new ImmigrationDAO();
   @Getter
   private GridPane form;
   private TextField applyNoField;
 
-  public EntryApplyForm() {
+  public ImmigrationForm() {
     createForm();
   }
 
