@@ -160,7 +160,6 @@ public class AutoApplyDAO {
     sql.append(" order by created_at desc");
 
     try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
-      System.out.println(sql.toString());
 
       // 신청일자에 의해 조회 됨.
       pstmt.setTimestamp(1, Timestamp.valueOf(date.atStartOfDay()));
