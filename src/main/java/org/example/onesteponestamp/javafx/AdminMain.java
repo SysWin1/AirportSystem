@@ -8,6 +8,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import org.example.onesteponestamp.admin.AuthManager;
+import org.example.onesteponestamp.autoapply.AutoApplyAdminController;
 
 public class AdminMain {
 
@@ -64,9 +65,9 @@ public class AdminMain {
     resetButton();
     autoApplyButton.setStyle("-fx-background-color: #808080;");
 
-    // 여기서 AutoApplyController 불러와야 함.
-    AutoApplyAdminView listView = new AutoApplyAdminView();
-    mainLayOut.setCenter(listView.createPane());
+    AutoApplyAdminView view = new AutoApplyAdminView();
+    new AutoApplyAdminController(view);
+    mainLayOut.setCenter(view.getMainGrid());
   }
 
   private void showImmigrationList(Button immigrationButton) {
