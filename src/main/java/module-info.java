@@ -15,7 +15,7 @@ module org.example.onesteponestamp {
   requires java.desktop;
 
   opens org.example.onesteponestamp to javafx.fxml;
-  opens org.example.onesteponestamp.autoapply to javafx.base; // JavaFX Base 모듈이 org.example.onesteponestamp.autoapply 패키지에 있는 클래스를 리플렉션을 통해 접근할 수 있도록 허용
+  opens org.example.onesteponestamp.autoapply to javafx.fxml, javafx.base; // JavaFX Base 모듈이 org.example.onesteponestamp.autoapply 패키지에 있는 클래스를 리플렉션을 통해 접근할 수 있도록 허용
   opens org.example.onesteponestamp.immigration to javafx.base;
   opens org.example.onesteponestamp.foreigner to javafx.base;
   exports org.example.onesteponestamp;

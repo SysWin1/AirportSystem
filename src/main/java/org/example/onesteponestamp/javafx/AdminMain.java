@@ -1,14 +1,17 @@
 package org.example.onesteponestamp.javafx;
 
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import org.example.onesteponestamp.admin.AuthManager;
-import org.example.onesteponestamp.autoapply.AutoApplyAdminController;
+import org.example.onesteponestamp.autoapply.AutoApplyAdminViewController;
 
 public class AdminMain {
 
@@ -66,9 +69,20 @@ public class AdminMain {
     resetButton();
     autoApplyButton.setStyle("-fx-background-color: #808080;");
 
-    AutoApplyAdminView view = new AutoApplyAdminView();
-    new AutoApplyAdminController(view);
-    mainLayOut.setCenter(view.getMainGrid());
+//    AutoApplyAdminView view = new AutoApplyAdminView();
+//    new AutoApplyAdminController(view);
+//    mainLayOut.setCenter(view.getMainGrid());
+
+    FXMLLoader loader = new FXMLLoader(
+        getClass().getResource("/org/example/onesteponestamp/AutoApplyAdminView.fxml"));
+    Parent root = null;
+    try {
+      root = loader.load();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    AutoApplyAdminViewController controller = loader.getController();
+    mainLayOut.setCenter(root);
   }
 
   private void showImmigrationList(Button immigrationButton) {

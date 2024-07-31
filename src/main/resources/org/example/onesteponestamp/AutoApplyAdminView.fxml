@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<GridPane hgap="10" vgap="10" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS"
+  xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+  fx:controller="org.example.onesteponestamp.autoapply.AutoApplyAdminViewController">
+  <Button fx:id="searchButton" text="조회" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+
+  <!-- 전체 or 내국인 or 외국인 -->
+  <DatePicker fx:id="datePicker" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+  <RadioButton fx:id="allPersons" text="전체" GridPane.columnIndex="0" GridPane.rowIndex="0">
+    <toggleGroup>
+      <ToggleGroup fx:id="personGroup"/>
+    </toggleGroup>
+  </RadioButton>
+  <RadioButton fx:id="locals" text="내국인" toggleGroup="$personGroup" GridPane.columnIndex="1"
+    GridPane.rowIndex="0"/>
+
+  <!-- 전체 vs 출국 vs 입국 -->
+  <RadioButton fx:id="foreigners" text="외국인" toggleGroup="$personGroup" GridPane.columnIndex="2"
+    GridPane.rowIndex="0"/>
+  <RadioButton fx:id="allEntries" text="전체" GridPane.columnIndex="0" GridPane.rowIndex="1">
+    <toggleGroup>
+      <ToggleGroup fx:id="entryExitGroup"/>
+    </toggleGroup>
+  </RadioButton>
+  <RadioButton fx:id="exits" text="출국" toggleGroup="$entryExitGroup" GridPane.columnIndex="1"
+    GridPane.rowIndex="1"/>
+
+  <RadioButton fx:id="entries" text="입국" toggleGroup="$entryExitGroup" GridPane.columnIndex="2"
+    GridPane.rowIndex="1"/>
+  <TableView fx:id="tableView" prefHeight="463.0" prefWidth="986.0" GridPane.columnIndex="0"
+    GridPane.columnSpan="5" GridPane.rowIndex="2">
+    <columns>
+      <TableColumn fx:id="applyNo" prefWidth="66.6666841506958" text="신청 번호"/>
+      <TableColumn fx:id="passportNo" prefWidth="76.00000762939453" text="여권 번호"/>
+      <TableColumn fx:id="countryCode" prefWidth="40.333343505859375" text="국적"/>
+      <TableColumn fx:id="englishName" prefWidth="90.99995422363281" text="영문 이름"/>
+      <TableColumn fx:id="approvalStatus" prefWidth="30.0" text="승인"/>
+      <TableColumn fx:id="rejectReason" prefWidth="112.0" text="거부 사유"/>
+      <TableColumn fx:id="gender" prefWidth="31.0" text="성별"/>
+      <TableColumn fx:id="visaType" prefWidth="76.3333740234375" text="비자 유형"/>
+      <TableColumn fx:id="inout" prefWidth="45.33331298828125" text="입/출국"/>
+      <TableColumn fx:id="inoutCountry" prefWidth="53.33331298828125" text="출입국가"/>
+      <TableColumn fx:id="expectedInOutDate" prefWidth="65.33331298828125" text="입/출국일"/>
+      <TableColumn fx:id="issueDate" prefWidth="71.66668701171875" text="여권 발급일"/>
+      <TableColumn fx:id="expiryDate" prefWidth="69.0" text="여권 만료일"/>
+      <TableColumn fx:id="birth" prefWidth="69.33331298828125" text="생년월일"/>
+      <TableColumn fx:id="createdAt" prefWidth="81.333251953125" text="신청 일자"/>
+    </columns>
+  </TableView>
+  <TextField fx:id="searchField" promptText="검색어" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+  <columnConstraints>
+    <ColumnConstraints/>
+    <ColumnConstraints/>
+    <ColumnConstraints/>
+    <ColumnConstraints/>
+    <ColumnConstraints/>
+    <ColumnConstraints/>
+    <ColumnConstraints/>
+  </columnConstraints>
+  <padding>
+    <Insets bottom="10" left="10" right="10" top="10"/>
+  </padding>
+  <rowConstraints>
+    <RowConstraints/>
+    <RowConstraints/>
+    <RowConstraints/>
+  </rowConstraints>
+</GridPane>
