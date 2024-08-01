@@ -1,0 +1,57 @@
+#background {
+  -fx-background-color: #C68484, radial-gradient(center 75% 50%, radius 80%, #EEEEEE, #C68484, transparent);
+  /*-fx-background-color: #9B4444, linear-gradient(to left top , #A3C9AA, #EEEE);*/
+  -fx-background-repeat: no-repeat;
+}
+
+#title-foreigner {
+  -fx-font-family: "D2Coding Bold";
+  -fx-text-fill: #EEEEEE;
+  -fx-font-weight: bold;
+  -fx-font-size: 32px;
+}
+
+/*.v-box {*/
+/*  -fx-background-color: transparent;*/
+/*  -fx-effect: drop-shadow(10px 10px 10px #191a1e);*/
+/*  -fx-background-radius: 5;*/
+/*}*/
+
+/*.button {*/
+/*  !*-fx-background-color: transparent 50%;*!*/
+/*  -fx-background-color: #9B4444;*/
+/*  -fx-border-color: #e8615a;*/
+/*  -fx-border-width: 2;*/
+/*  -fx-border-radius: 5;*/
+/*  -fx-text-fill: #2be4ea;*/
+/*  -fx-font-family: "Rajdhani", sans-serif;*/
+/*  !*-fx-font-size: 14px;*!*/
+/*}*/
+
+/*.button:hover {*/
+/*  -fx-background-color: #451717;*/
+/*}*/
+
+.radio-button {
+  -fx-border-width: 1;
+  -fx-border-radius: 5;
+  -fx-text-fill: #EEEEEE;;
+  -fx-font-family: "Rajdhani", sans-serif;
+  -fx-font-size: 14px;
+}
+
+/*.table-view {*/
+/*  !*-fx-background-color: #191a1e;*!*/
+/*  -fx-border-color: #e8615a transparent;*/
+/*  -fx-border-width: 2;*/
+/*  -fx-border-radius: 5;*/
+/*}*/
+
+.table-column-header {
+  -fx-background-color: #EEEEEE;
+}
+
+.table-row-cell {
+  -fx-background-color: #EEEEEE;
+}
+
