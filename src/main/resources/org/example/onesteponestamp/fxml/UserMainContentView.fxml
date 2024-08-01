@@ -9,12 +9,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<VBox stylesheets="@../css/UserMain.css" xmlns="http://javafx.com/javafx/17"
-  xmlns:fx="http://javafx.com/fxml/1"
+<VBox prefHeight="435.0" prefWidth="950.0" stylesheets="@../css/UserMain.css"
+  xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
   fx:controller="org.example.onesteponestamp.javafx.UserMainViewController">
   <children>
-    <Pane prefHeight="60.0" prefWidth="950.0"/>
-    <HBox alignment="CENTER" prefHeight="386.0" prefWidth="847.0" spacing="20"
+    <Pane prefHeight="138.0" prefWidth="950.0"/>
+    <HBox alignment="CENTER" prefHeight="351.0" prefWidth="950.0" spacing="20"
       style="-fx-padding: 40;">
       <VBox prefHeight="244.0" prefWidth="349.0">
         <children>
@@ -22,13 +22,11 @@
             style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-font-family: 'MangoByeolbyeol'"
             text="One Step - Walk Through" textAlignment="CENTER"/>
           <Label prefHeight="195.0" prefWidth="355.0" style="-fx-font-size: 18px;"
-            text="자동 출입국 시스템 신청을 통해      대면검사 없이 바로 여행하세요" textAlignment="CENTER"
-            wrapText="true"/>
+            text="자동 출입국 시스템 신청을 통해      대면검사 없이 바로 여행하세요" textAlignment="CENTER" wrapText="true"/>
           <HBox alignment="CENTER" spacing="20">
             <Button onAction="#showAutoApplyForm" style="-fx-pref-width: 150;"
               styleClass="user-main-button" text="바로 등록하러 가기"/>
-            <Button style="-fx-pref-width: 150;" styleClass="user-main-button"
-              text="신청 가이드 문서"/>
+            <Button style="-fx-pref-width: 150;" styleClass="user-main-button" text="신청 가이드 문서"/>
           </HBox>
         </children>
       </VBox>
@@ -39,5 +37,6 @@
         </image>
       </ImageView>
     </HBox>
+    <Pane prefHeight="59.0" prefWidth="950.0"/>
   </children>
 </VBox>
