@@ -3,6 +3,8 @@ package org.example.onesteponestamp.javafx;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -47,7 +49,14 @@ public class AdminMain {
     space.setMaxHeight(350);
     VBox.setVgrow(space, Priority.ALWAYS);
 
+    ImageView homeIcon = new ImageView(
+        new Image(
+            "file:src/main/resources/org/example/onesteponestamp/images/home.png")); //content부분 아이콘 셋팅
+    homeIcon.setFitHeight(30);
+    homeIcon.setFitWidth(30);
+
     Button homeButton = new Button("홈으로");
+    homeButton.setGraphic(homeIcon);
     homeButton.setMaxWidth(Double.MAX_VALUE);
     homeButton.setOnAction(e -> showHomeForm(homeButton));
 

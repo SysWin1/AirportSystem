@@ -14,14 +14,14 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import org.example.onesteponestamp.immigration.ImmigrationDAO;
 
-public class EntryApplyForm {
+public class ImmigrationForm {
 
   private static final ImmigrationDAO immigrationDAO = new ImmigrationDAO();
   @Getter
   private GridPane form;
   private TextField applyNoField;
 
-  public EntryApplyForm() {
+  public ImmigrationForm() {
     createForm();
   }
 
@@ -71,7 +71,7 @@ public class EntryApplyForm {
 
     ImageView icon = new ImageView(
         new Image(
-            "file:src/main/resources/org/example/onesteponestamp/airplaneIcon.png")); //content부분 아이콘 셋팅
+            "file:src/main/resources/org/example/onesteponestamp/images/airplaneIcon.png")); //content부분 아이콘 셋팅
     icon.setFitHeight(50); //아이콘 사이즈 조정
     icon.setFitWidth(50);
     alert.setGraphic(icon);
@@ -79,8 +79,7 @@ public class EntryApplyForm {
     Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
     alertStage.getIcons()
         .add(new Image(
-            "file:src/main/resources/org/example/onesteponestamp/airplaneIcon.png")); //타이틀 부분 아이콘 셋팅
-
+            "file:src/main/resources/org/example/onesteponestamp/images/airplaneIcon.png")); //타이틀 부분 아이콘 셋팅
     alert.showAndWait();
   }
 
