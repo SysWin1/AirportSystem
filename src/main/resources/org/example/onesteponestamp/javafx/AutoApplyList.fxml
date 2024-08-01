@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="650.0" prefWidth="950.0"
+  stylesheets="@/org/example/onesteponestamp/css/autoApplyList.css"
+  xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+  fx:controller="org.example.onesteponestamp.javafx.AutoApplyListController">
+
+
+  <center>
+    <VBox>
+      <children>
+        <HBox>
+          <children>
+            <VBox>
+              <children>
+                <RadioButton fx:id="foreigners" text="외국인">
+                  <padding>
+                    <Insets left="10.0" top="10.0"/>
+                  </padding>
+                </RadioButton>
+                <RadioButton fx:id="exits" text="출국">
+                  <padding>
+                    <Insets left="10.0" top="10.0"/>
+                  </padding>
+                </RadioButton>
+              </children>
+            </VBox>
+            <VBox>
+              <children>
+                <RadioButton fx:id="locals" text="내국인">
+                  <padding>
+                    <Insets left="10.0" top="10.0"/>
+                  </padding>
+                </RadioButton>
+                <RadioButton fx:id="entries" text="입국">
+                  <padding>
+                    <Insets left="10.0" top="10.0"/>
+                  </padding>
+                </RadioButton>
+              </children>
+            </VBox>
+            <VBox>
+              <children>
+
+                <!-- Radio Buttons for Entry/Exit Group -->
+                <RadioButton fx:id="allEntries" text="전체">
+                  <padding>
+                    <Insets left="10.0" top="10.0"/>
+                  </padding>
+                </RadioButton>
+                <!-- Radio Buttons for Person Group -->
+                <RadioButton fx:id="allPersons" text="전체">
+                  <padding>
+                    <Insets left="10.0" top="10.0"/>
+                  </padding>
+                </RadioButton>
+              </children>
+            </VBox>
+            <VBox>
+              <children>
+
+                <!-- Date Picker -->
+                <DatePicker fx:id="datePicker" prefHeight="18.0" prefWidth="187.0"/>
+
+                <!-- Search Field and Button -->
+                <TextField fx:id="searchField" promptText="검색어">
+                  <VBox.margin>
+                    <Insets top="5.0"/>
+                  </VBox.margin>
+                </TextField>
+              </children>
+              <padding>
+                <Insets left="10.0" top="5.0"/>
+              </padding>
+            </VBox>
+            <VBox prefHeight="55.0" prefWidth="94.0">
+              <children>
+                <Button fx:id="searchButton" text="조회">
+                  <VBox.margin>
+                    <Insets/>
+                  </VBox.margin>
+                </Button>
+              </children>
+              <padding>
+                <Insets left="15.0" top="15.0"/>
+              </padding>
+            </VBox>
+          </children>
+        </HBox>
+        <VBox BorderPane.alignment="CENTER">
+          <children>
+
+            <TableView fx:id="tableView" prefHeight="477.0" prefWidth="950.0">
+              <columns>
+                <TableColumn fx:id="applyNo" text="신청 번호"/>
+                <TableColumn fx:id="passportNo" text="여권 번호"/>
+                <TableColumn fx:id="countryCode" text="국가 코드"/>
+                <TableColumn fx:id="englishName" text="영문 이름"/>
+                <TableColumn fx:id="gender" text="성별"/>
+                <TableColumn fx:id="issueDate" text="여권 발급일"/>
+                <TableColumn fx:id="expiryDate" text="여권 만료일"/>
+                <TableColumn fx:id="birth" text="생년월일"/>
+                <TableColumn fx:id="visaType" text="비자 유형"/>
+                <TableColumn fx:id="inout" text="입/출국"/>
+                <TableColumn fx:id="inoutCountry" text="입/출국 국가"/>
+                <TableColumn fx:id="expectedInOutDate" text="입/출국 예상일"/>
+                <TableColumn fx:id="approvalStatus" text="승인/거부"/>
+                <TableColumn fx:id="rejectReason" text="거부 사유"/>
+                <TableColumn fx:id="createdAt" text="신청 일자"/>
+              </columns>
+            </TableView>
+          </children>
+          <padding>
+            <Insets top="15.0"/>
+          </padding>
+        </VBox>
+
+      </children>
+    </VBox>
+
+  </center>
+</BorderPane>

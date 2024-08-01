@@ -75,7 +75,7 @@ public class UserMainViewController {
 
   public void showAdminLogin(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/org/example/onesteponestamp/javafx/adminLogIn.fxml"));
+        getClass().getResource("/org/example/onesteponestamp/javafx/AdminLogIn.fxml"));
     BorderPane adminLoginPain = loader.load();
     mainLayout.getChildren().setAll(adminLoginPain);
   }

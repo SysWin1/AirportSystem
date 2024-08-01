@@ -1,0 +1,15 @@
+.date-picker {
+  -fx-background-color: #C68484; /* 기본 배경색 */
+  -fx-border-color: #CCCCCC; /* 기본 테두리 색 */
+  -fx-border-width: 1px; /* 테두리 두께 */
+}
+
+.date-picker .arrow {
+  -fx-background-color: #9B4444;
+}
+
+.date-picker .text-field {
+  -fx-background-color: #EEEEEE;
+  -fx-border-color: #9B4444;
+  -fx-border-width: 1px;
+}
