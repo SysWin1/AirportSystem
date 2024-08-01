@@ -16,6 +16,7 @@ import org.example.onesteponestamp.common.Country;
 import org.example.onesteponestamp.common.VisaType;
 
 public class AutoApplyFormViewController {
+
   @FXML
   private GridPane form;
   @FXML
@@ -57,7 +58,8 @@ public class AutoApplyFormViewController {
     outButton.setSelected(true);
 
     // ComboBox 초기화
-    countryCodeInput.getItems().addAll(Arrays.stream(Country.values()).map(Country::getCountryName).toList());
+    countryCodeInput.getItems()
+        .addAll(Arrays.stream(Country.values()).map(Country::getCountryName).toList());
     countryCodeInput.setValue(Country.KOR.getCountryName()); // 기본값 설정
 
     genderInput.getItems().addAll("남자", "여자");
@@ -65,8 +67,8 @@ public class AutoApplyFormViewController {
     visaTypeInput.getItems().addAll("비자없음", "여행 비자", "취업 비자", "학생 비자");
     visaTypeInput.setValue("비자없음");
 
-    inoutCountryInput.getItems().addAll(Arrays.stream(Country.values()).map(Country::getCountryName).toList());
-
+    inoutCountryInput.getItems()
+        .addAll(Arrays.stream(Country.values()).map(Country::getCountryName).toList());
     expectedInoutDateInput.setValue(LocalDate.now());
 
     // 제출 버튼 이벤트 핸들러
