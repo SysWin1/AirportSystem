@@ -99,7 +99,7 @@ public class AdminMainController {
 
   private void showHome() throws IOException {
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/org/example/onesteponestamp/javafx/UserMainView.fxml"));
+        getClass().getResource("/org/example/onesteponestamp/fxml/UserMainView.fxml"));
     BorderPane mainView = loader.load();
     // 현재 씬의 루트 노드를 mainView로 변경합니다.
     mainLayOut.getScene().setRoot(mainView);
