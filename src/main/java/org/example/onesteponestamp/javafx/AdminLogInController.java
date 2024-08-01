@@ -1,7 +1,8 @@
 package org.example.onesteponestamp.javafx;
 
-
+import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -12,48 +13,70 @@ import org.example.onesteponestamp.admin.LoginController;
 
 public class AdminLogInController {
 
-    @FXML
-    private BorderPane pane;
+  @FXML
+  private BorderPane pane;
 
-    @FXML
-    private TextField idField;
+  @FXML
+  private TextField idField;
 
-    @FXML
-    private PasswordField passwordField;
+  @FXML
+  private PasswordField passwordField;
 
-    @FXML
-    private Button loginButton;
+  @FXML
+  private Button loginButton;
 
-    @FXML
-    private Button homeButton;
+  @FXML
+  private Button homeButton;
 
-    @FXML
-    private ImageView homeButtonImageView;
+  @FXML
+  private ImageView homeIcon;
 
-    private LoginController loginController;
-    @FXML
-    private ImageView imageView;
+  @FXML
+  private ImageView logoView;
 
-    @FXML
-    public void initialize() {
-        if (pane == null) {
-            throw new IllegalStateException("Pane is not initialized.");
-        }
-        System.out.println(pane.getStylesheets());
-        loginController = new LoginController(pane);
-        loginController.initialize(idField, passwordField);
-        if(imageView != null){
-            Image image = new Image(getClass().getResourceAsStream("/org/example/onesteponestamp/images/back-button.png"));
-            imageView.setImage(image);
-        }
-        loginButton.setOnAction(e -> loginController.handleLoginButtonAction());
-        homeButton.setOnAction(e -> goHome());
-        homeButtonImageView.setOnMouseClicked(e -> goHome());
+  private LoginController loginController;
+
+  @FXML
+  public void initialize() {
+    if (pane == null) {
+      throw new IllegalStateException("Pane is not initialized.");
+    }
+    System.out.println(pane.getStylesheets());
+    loginController = new LoginController(pane);
+    loginController.initialize(idField, passwordField);
+
+    Image homeImage = new Image(
+        getClass().getResourceAsStream("/org/example/onesteponestamp/images/home.png"));
+    homeIcon.setImage(homeImage);
+
+    if (logoView != null) {
+      Image logoImage = new Image(
+          getClass().getResourceAsStream("/org/example/onesteponestamp/images/teamlogo.png"));
+      logoView.setImage(logoImage);
     }
 
-    private void goHome() {
-        SelectionMain mainPage = new SelectionMain(pane);
-        mainPage.show();
-    }
+    loginButton.setOnAction(e -> {
+      try {
+        loginController.handleLoginButtonAction();
+      } catch (IOException ex) {
+        throw new RuntimeException(ex);
+      }
+    });
+    homeButton.setOnAction(e -> {
+      try {
+        goHome();
+      } catch (IOException ex) {
+        throw new RuntimeException(ex);
+      }
+    });
+  }
 
+  private void goHome() throws IOException {
+    FXMLLoader loader = new FXMLLoader(
+        getClass().getResource("/org/example/onesteponestamp/javafx/UserMainView.fxml"));
+    BorderPane mainView = loader.load();
+
+    // 첫화면으로 돌아가기
+    pane.getScene().setRoot(mainView);
+  }
 }
