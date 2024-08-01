@@ -43,6 +43,16 @@ public class UserMainViewController {
    */
   public void showAutoApplyList(ActionEvent event) {
 
+    try {
+      FXMLLoader loader = new FXMLLoader(
+          getClass().getResource("/org/example/onesteponestamp/fxml/UserAutoApplyListView.fxml"));
+      Parent autoApplyList = loader.load();
+      loader.getController();
+
+      this.mainLayout.setCenter(autoApplyList);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     AutoApplyListView listView = new AutoApplyListView();
     VBox container = new VBox(10);
     container.setPadding(new Insets(10));
