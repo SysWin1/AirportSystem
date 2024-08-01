@@ -1,4 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gasoek+One&display=swap');
+
 #loginButton, #homeButton, #titleBox, #homeButtonBox, #topBox {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-font-size: 15px;
   -fx-background-color: #C68484;
   -fx-text-fill: white;
+}
+
+#idField, #passwordField {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-prompt-text-fill: #6e6e6e;
 }
