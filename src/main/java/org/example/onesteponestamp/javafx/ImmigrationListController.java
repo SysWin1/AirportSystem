@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import java.time.LocalDate;
 import java.util.List;
@@ -17,6 +18,8 @@ import org.example.onesteponestamp.immigration.ImmigrationDTO;
 
 public class ImmigrationListController {
 
+  @FXML
+  public BorderPane backgroud;
   @FXML
   private TableView<ImmigrationDTO> view;
   @FXML
@@ -68,7 +71,6 @@ public class ImmigrationListController {
 
   @FXML
   public void initialize() {
-    System.out.println("초기화");
 
     // ToggleGroup 설정
     nationalGroup = new ToggleGroup();
