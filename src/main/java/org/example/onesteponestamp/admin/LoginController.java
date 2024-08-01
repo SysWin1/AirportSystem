@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import org.example.onesteponestamp.javafx.AdminMain;
 
 public class LoginController {
 
@@ -52,8 +51,9 @@ public class LoginController {
 
   private void showAdminMenu() throws IOException {
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/org/example/onesteponestamp/javafx/adminMain.fxml"));
+        getClass().getResource("/org/example/onesteponestamp/javafx/AdminMain.fxml"));
     BorderPane adminMainpain = loader.load();
     pane.setTop(adminMainpain);
+    pane.setCenter(null);
   }
 }
