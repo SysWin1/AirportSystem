@@ -1,12 +1,5 @@
-@font-face {
-  font-family: 'MangoDdobak-B';
-  src: url('/org/example/onesteponestamp/fonts/MangoByeolbyeol.ttf') format('truetype');
-  font-weight: normal;
-}
-
 .menu-bar, .menu-item {
   -fx-background-color: #C68484;
-  -fx-font-family: MangoDdobak-B;
 }
 
 .menu:hover, .menu:showing, .menu-item:hover, .user-main-button:hover {
@@ -16,7 +9,6 @@
 
 .user-main-button {
   -fx-background-color: #C68484;
-  -fx-font-family: MangoDdobak-B;
 }
 
 .admin-button {
