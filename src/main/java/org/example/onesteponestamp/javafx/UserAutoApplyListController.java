@@ -18,7 +18,6 @@ import lombok.Getter;
 import org.example.onesteponestamp.autoapply.AutoApplyService;
 import org.example.onesteponestamp.autoapply.UserAutoApplyDTO;
 import org.example.onesteponestamp.common.Country;
-import org.example.onesteponestamp.common.VisaType;
 
 public class UserAutoApplyListController {
 
@@ -60,13 +59,13 @@ public class UserAutoApplyListController {
     TableColumn<UserAutoApplyDTO, String> genderColumn = new TableColumn<>("성별");
     genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
 
-    TableColumn<UserAutoApplyDTO, VisaType> visaTypeColumn = new TableColumn<>("비자 종류");
+    TableColumn<UserAutoApplyDTO, String> visaTypeColumn = new TableColumn<>("비자 종류");
     visaTypeColumn.setCellValueFactory(new PropertyValueFactory<>("visaType"));
 
-    TableColumn<UserAutoApplyDTO, String> inoutColumn = new TableColumn<>("입출국 구분");
+    TableColumn<UserAutoApplyDTO, String> inoutColumn = new TableColumn<>("입출국");
     inoutColumn.setCellValueFactory(new PropertyValueFactory<>("inout"));
 
-    TableColumn<UserAutoApplyDTO, Country> inoutCountryColumn = new TableColumn<>("입출국 국가");
+    TableColumn<UserAutoApplyDTO, String> inoutCountryColumn = new TableColumn<>("입출국 국가");
     inoutCountryColumn.setCellValueFactory(new PropertyValueFactory<>("inoutCountry"));
 
     TableColumn<UserAutoApplyDTO, LocalDate> expectedInOutDateColumn = new TableColumn<>(

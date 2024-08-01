@@ -7,14 +7,15 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<VBox xmlns:fx="http://javafx.com/fxml/1"
-  xmlns:fx="http://javafx.com/fxml"
-  fx:controller="org.example.onesteponestamp.javafx.UserAutoApplyListController"
-  prefHeight="400.0" prefWidth="600.0">
+<VBox prefHeight="400.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1"
+  xmlns="http://javafx.com/javafx/17"
+  fx:controller="org.example.onesteponestamp.javafx.UserAutoApplyListController">
   <padding>
-    <Insets top="10" right="10" bottom="10" left="10"/>
+    <Insets bottom="10" left="10" right="10" top="10"/>
   </padding>
 
   <!-- Form for Input -->
@@ -25,23 +26,33 @@
     <Label text="국적" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
     <ComboBox fx:id="countryNameInput" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
 
-    <Button fx:id="searchButton" text="조회" onAction="#searchTableData" GridPane.columnIndex="4"
+    <Button fx:id="searchButton" onAction="#searchTableData" text="조회" GridPane.columnIndex="4"
       GridPane.rowIndex="0"/>
+    <columnConstraints>
+      <ColumnConstraints/>
+      <ColumnConstraints/>
+      <ColumnConstraints/>
+      <ColumnConstraints/>
+      <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+      <RowConstraints/>
+    </rowConstraints>
   </GridPane>
 
   <!-- TableView for Displaying Results -->
   <TableView fx:id="tableView" VBox.vgrow="always">
     <columns>
-      <TableColumn fx:id="applyNoColumn" text="신청번호"/>
-      <TableColumn fx:id="englishNameColumn" text="영문명"/>
-      <TableColumn fx:id="genderColumn" text="성별"/>
-      <TableColumn fx:id="visaTypeColumn" text="비자 종류"/>
-      <TableColumn fx:id="inoutColumn" text="입출국 구분"/>
-      <TableColumn fx:id="inoutCountryColumn" text="입출국 국가"/>
-      <TableColumn fx:id="expectedInOutDateColumn" text="입출국 예상 일자"/>
-      <TableColumn fx:id="approvalStatusColumn" text="승인 상태"/>
-      <TableColumn fx:id="rejectReasonColumn" text="거부 사유"/>
-      <TableColumn fx:id="createdAtColumn" text="신청일자"/>
+      <TableColumn fx:id="applyNo" prefWidth="63.3333101272583" text="신청번호"/>
+      <TableColumn fx:id="englishName" prefWidth="84.66663360595703" text="영문명"/>
+      <TableColumn fx:id="gender" prefWidth="41.33331298828125" text="성별"/>
+      <TableColumn fx:id="visaType" prefWidth="84.66667175292969" text="비자 종류"/>
+      <TableColumn fx:id="inout" prefWidth="50.66668701171875" text="입출국"/>
+      <TableColumn fx:id="inoutCountry" prefWidth="79.33331298828125" text="입출국 국가"/>
+      <TableColumn fx:id="expectedInOutDate" prefWidth="97.333251953125" text="입출국 예상 일자"/>
+      <TableColumn fx:id="approvalStatus" prefWidth="34.6666259765625" text="승인"/>
+      <TableColumn fx:id="rejectReason" prefWidth="130.6666259765625" text="거부 사유"/>
+      <TableColumn fx:id="createdAt" prefWidth="137.3333740234375" text="신청일자"/>
     </columns>
   </TableView>
 </VBox>
