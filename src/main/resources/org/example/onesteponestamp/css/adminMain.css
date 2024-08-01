@@ -1,0 +1,8 @@
+#space {
+  -fx-fill: #EEEEEE;
+}
+
+#autoApplyButton, #immigrationButton, #foreignerButton, #homeButton, #menu {
+  -fx-background-color: #C68484;
+  -fx-text-fill: white;
+}
