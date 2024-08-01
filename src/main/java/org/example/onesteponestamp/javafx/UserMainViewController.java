@@ -29,7 +29,7 @@ public class UserMainViewController {
 
     try {
       FXMLLoader loader = new FXMLLoader(
-          getClass().getResource("/org/example/onesteponestamp/AutoApplyFormView.fxml"));
+          getClass().getResource("/org/example/onesteponestamp/fxml/AutoApplyFormView.fxml"));
       Parent autoApplyForm = loader.load();
       loader.getController();
 
@@ -61,7 +61,7 @@ public class UserMainViewController {
   public void showUserMainView(MouseEvent event) {
     try {
       FXMLLoader loader = new FXMLLoader(
-          getClass().getResource("/org/example/onesteponestamp/UserMainContentView.fxml"));
+          getClass().getResource("/org/example/onesteponestamp/fxml/UserMainContentView.fxml"));
       Parent homeView = loader.load();
 
       UserMainViewController controller = loader.getController();
