@@ -26,10 +26,9 @@ public class UserMainViewController {
    * 자동 출입국 신청서 작성 form UI로 연결
    */
   public void showAutoApplyForm(ActionEvent event) {
-
     try {
       FXMLLoader loader = new FXMLLoader(
-          getClass().getResource("/org/example/onesteponestamp/javafx/AutoApplyFormView.fxml"));
+          getClass().getResource("/org/example/onesteponestamp/fxml/AutoApplyFormView.fxml"));
       Parent autoApplyForm = loader.load();
       loader.getController();
 
@@ -61,7 +60,7 @@ public class UserMainViewController {
   public void showUserMainView(MouseEvent event) {
     try {
       FXMLLoader loader = new FXMLLoader(
-          getClass().getResource("/org/example/onesteponestamp/javafx/UserMainContentView.fxml"));
+          getClass().getResource("/org/example/onesteponestamp/fxml/UserMainContentView.fxml"));
       Parent homeView = loader.load();
 
       UserMainViewController controller = loader.getController();
