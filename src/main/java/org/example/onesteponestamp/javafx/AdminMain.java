@@ -13,7 +13,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import org.example.onesteponestamp.admin.AuthManager;
-import org.example.onesteponestamp.autoapply.AutoApplyAdminViewController;
 
 public class AdminMain {
 
@@ -96,7 +95,7 @@ public class AdminMain {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    AutoApplyAdminViewController controller = loader.getController();
+    AutoApplyListView controller = loader.getController();
     mainLayOut.setCenter(root);
   }
 
