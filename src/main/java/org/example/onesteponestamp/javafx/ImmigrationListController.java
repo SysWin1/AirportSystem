@@ -5,7 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Region;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.VBox;
@@ -56,8 +57,10 @@ public class ImmigrationListController {
   private RadioButton in;
   @FXML
   private RadioButton out;
+
   @FXML
-  private Region space;
+  private ImageView logoView;
+
 
   private final ObservableList<ImmigrationDTO> data = FXCollections.observableArrayList();
   private final ImmigrationDAO immigrationDAO = new ImmigrationDAO();
@@ -80,6 +83,12 @@ public class ImmigrationListController {
     out.setToggleGroup(entryExitGroup);
 
     datePicker.setValue(LocalDate.now());
+
+    if (logoView != null) {
+      Image logoImage = new Image(
+          getClass().getResourceAsStream("/org/example/onesteponestamp/images/teamlogo.png"));
+      logoView.setImage(logoImage);
+    }
 
     setupTableView();
     setupPagination();
@@ -142,7 +151,8 @@ public class ImmigrationListController {
     String inOut = selectedEntryExit.getText().equals("입국") ? "IN"
         : selectedEntryExit.getText().equals("출국") ? "OUT" : "";
 
-    List<ImmigrationDTO> results = immigrationDAO.ImmigrationListSearch(countryCode, selectedDate, inOut);
+    List<ImmigrationDTO> results = immigrationDAO.ImmigrationListSearch(countryCode, selectedDate,
+        inOut);
 
     data.setAll(results);
     pagination.setPageCount((results.size() / ROWS_PER_PAGE) + 1);
