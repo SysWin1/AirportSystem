@@ -1,14 +1,10 @@
-.menu-bar, .menu-item {
+.menu-bar, .menu-item, .user-main-button, .image-background, #top {
   -fx-background-color: #C68484;
 }
 
 .menu:hover, .menu:showing, .menu-item:hover, .user-main-button:hover {
   -fx-background-color: #9B4444;
   -fx-text-fill: white;
-}
-
-.user-main-button {
-  -fx-background-color: #C68484;
 }
 
 .admin-button {
@@ -20,8 +16,4 @@
 .admin-button:hover {
   -fx-background-color: #9B4444;
   -fx-text-fill: white;
-}
-
-.image-background {
-  -fx-background-color: #C68484;
 }
