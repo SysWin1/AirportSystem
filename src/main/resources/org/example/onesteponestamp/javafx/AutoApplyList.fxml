@@ -9,7 +9,6 @@
   xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
   fx:controller="org.example.onesteponestamp.javafx.AutoApplyListController">
 
-
   <center>
     <VBox>
       <children>
@@ -79,7 +78,7 @@
             </VBox>
             <VBox prefHeight="55.0" prefWidth="94.0">
               <children>
-                <Button fx:id="searchButton" text="조회">
+                <Button fx:id="searchButton" text="조회" onAction="#setItems">
                   <VBox.margin>
                     <Insets/>
                   </VBox.margin>
