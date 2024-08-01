@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+  xmlns:fx="http://javafx.com/fxml"
+  fx:controller="org.example.onesteponestamp.javafx.UserAutoApplyListController"
+  prefHeight="400.0" prefWidth="600.0">
+  <padding>
+    <Insets top="10" right="10" bottom="10" left="10"/>
+  </padding>
+
+  <!-- Form for Input -->
+  <GridPane fx:id="form" hgap="10" vgap="10">
+    <Label text="여권번호" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <TextField fx:id="passportNoInput" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+    <Label text="국적" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+    <ComboBox fx:id="countryNameInput" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+    <Button fx:id="searchButton" text="조회" onAction="#searchTableData" GridPane.columnIndex="4"
+      GridPane.rowIndex="0"/>
+  </GridPane>
+
+  <!-- TableView for Displaying Results -->
+  <TableView fx:id="tableView" VBox.vgrow="always">
+    <columns>
+      <TableColumn fx:id="applyNoColumn" text="신청번호"/>
+      <TableColumn fx:id="englishNameColumn" text="영문명"/>
+      <TableColumn fx:id="genderColumn" text="성별"/>
+      <TableColumn fx:id="visaTypeColumn" text="비자 종류"/>
+      <TableColumn fx:id="inoutColumn" text="입출국 구분"/>
+      <TableColumn fx:id="inoutCountryColumn" text="입출국 국가"/>
+      <TableColumn fx:id="expectedInOutDateColumn" text="입출국 예상 일자"/>
+      <TableColumn fx:id="approvalStatusColumn" text="승인 상태"/>
+      <TableColumn fx:id="rejectReasonColumn" text="거부 사유"/>
+      <TableColumn fx:id="createdAtColumn" text="신청일자"/>
+    </columns>
+  </TableView>
+</VBox>
