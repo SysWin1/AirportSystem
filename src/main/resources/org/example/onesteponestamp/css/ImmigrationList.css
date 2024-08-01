@@ -1,4 +1,4 @@
-.date-picker {
+date-picker {
   -fx-background-color: #C68484; /* 기본 배경색 */
   -fx-border-color: #CCCCCC; /* 기본 테두리 색 */
   -fx-border-width: 1px; /* 테두리 두께 */
@@ -8,8 +8,46 @@
   -fx-background-color: #9B4444;
 }
 
-.date-picker .text-field {
-  -fx-background-color: #EEEEEE;
-  -fx-border-color: #9B4444;
-  -fx-border-width: 1px;
+#view {
+  -fx-background-color: #A3C9AA;
+}
+
+#view:selected {
+  -fx-background-color: #C68484;
+}
+
+#view .column-header {
+  -fx-background-color: #C68484; /* 헤더 배경색 */
+}
+
+#view .column-header .label {
+  -fx-text-fill: white; /* 헤더 텍스트 색상 */
+  -fx-font-size: 14px;
+  -fx-font-weight: bold; /* 헤더 텍스트 굵기 */
+}
+
+#view .sort-arrow {
+  -fx-fill: #9B4444;
+}
+
+/* 선택된 셀 및 행 스타일 */
+.table-row-cell:selected {
+  -fx-background-color: #A3C9AA;
+  -fx-text-fill: white;
+}
+
+.table-cell:selected {
+  -fx-background-color: #d0e8f2;
+  -fx-text-fill: black;
+}
+
+.pagination .page-information {
+  -fx-text-fill: #A3C9AA; /* 텍스트 색상 */
+  -fx-font-size: 13px; /* 폰트 크기 */
+  -fx-font-weight: bold; /* 폰트 굵기 */
+}
+
+.pagination .page-button:hover {
+  -fx-background-color: #9B4444; /* Hover 시 배경색 */
+  -fx-text-fill: #A3C9AA; /* Hover 시 텍스트 색상 */
 }
