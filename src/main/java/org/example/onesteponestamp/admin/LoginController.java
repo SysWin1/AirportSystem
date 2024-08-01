@@ -3,8 +3,11 @@ package org.example.onesteponestamp.admin;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 public class LoginController {
@@ -46,6 +49,19 @@ public class LoginController {
     alert.setTitle(title);
     alert.setHeaderText(null);
     alert.setContentText(message);
+
+    ImageView icon = new ImageView(
+        new Image(
+            "file:src/main/resources/org/example/onesteponestamp/images/teamlogo.png")); //content부분 아이콘 셋팅
+    icon.setFitHeight(100); //아이콘 사이즈 조정
+    icon.setFitWidth(100);
+    alert.setGraphic(icon);
+
+    DialogPane dialogPane = alert.getDialogPane();
+    dialogPane.getStylesheets()
+        .add(getClass().getResource("/org/example/onesteponestamp/css/alert.css").toExternalForm());
+    dialogPane.getStyleClass().add("alert");
+
     alert.showAndWait();
   }
 
