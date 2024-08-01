@@ -54,8 +54,8 @@ public class UserMainViewController {
   }
 
   public void showImmigrationGateForm(ActionEvent event) {
-    EntryApplyForm entryApplyForm = new EntryApplyForm();
-    mainLayout.setCenter(entryApplyForm.getForm());
+    ImmigrationForm immigrationForm = new ImmigrationForm();
+    mainLayout.setCenter(immigrationForm.getForm());
   }
 
   public void showUserMainView(MouseEvent event) {
