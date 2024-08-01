@@ -1,0 +1,27 @@
+.menu-bar, .menu-item {
+  -fx-background-color: #C68484;
+}
+
+.menu:hover, .menu:showing, .menu-item:hover, .user-main-button:hover {
+  -fx-background-color: #9B4444;
+  -fx-text-fill: white;
+}
+
+.user-main-button {
+  -fx-background-color: #C68484;
+}
+
+.admin-button {
+  -fx-background-color: #C68484;
+  -fx-background-radius: 0;
+  -fx-border-radius: 0;
+}
+
+.admin-button:hover {
+  -fx-background-color: #9B4444;
+  -fx-text-fill: white;
+}
+
+.image-background {
+  -fx-background-color: #C68484;
+}
