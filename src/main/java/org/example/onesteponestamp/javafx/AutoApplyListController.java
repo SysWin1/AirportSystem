@@ -2,6 +2,11 @@ package org.example.onesteponestamp.javafx;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -148,4 +153,24 @@ public class AutoApplyListController {
     createdAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
   }
 
+  private String getPersonToggle(){
+    String personToggle = personGroup.getSelectedToggle().getUserData().toString();
+    return personToggle.equals("내국인") ? "LOCAL" :
+            personToggle.equals("외국인") ? "FOREIGNER" : null;
+  }
+
+  private String getInOutToggle(){
+    String inoutToggle = entryExitGroup.getSelectedToggle().getUserData().toString();
+    return inoutToggle.equals("출국") ? "OUT" :
+            inoutToggle.equals("입국") ? "IN" : null;
+  }
+
+  public void setItems(ActionEvent event){
+    List<AutoApply> autoApplyList = autoApplyService.getAutoApplicationsForAdmin(
+            getPersonToggle(), getInOutToggle(), datePicker.getValue(), searchField.getText()
+    );
+
+    ObservableList<AutoApply> data = FXCollections.observableArrayList(autoApplyList);
+    tableView.setItems(data);
+  }
 }
