@@ -28,7 +28,7 @@
   <Region prefHeight="244.0" prefWidth="46.0"/>
   <ImageView fitHeight="274.0" fitWidth="351.0" pickOnBounds="true" preserveRatio="true">
     <image>
-      <Image url="@images/gate.png"/>
+      <Image url="@../images/gate.png"/>
     </image>
   </ImageView>
 </HBox>
