@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <VBox prefHeight="400.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1"
-  xmlns="http://javafx.com/javafx/17"
+  xmlns="http://javafx.com/javafx/17" stylesheets="@../css/UserAutoApplyList.css"
   fx:controller="org.example.onesteponestamp.javafx.UserAutoApplyListController">
   <padding>
     <Insets bottom="10" left="10" right="10" top="10"/>
