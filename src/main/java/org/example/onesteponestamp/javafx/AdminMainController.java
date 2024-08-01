@@ -49,7 +49,13 @@ public class AdminMainController {
         throw new RuntimeException(ex);
       }
     });
-    immigrationButton.setOnAction(e -> showImmigrationList());
+    immigrationButton.setOnAction(e -> {
+      try {
+        showImmigrationList();
+      } catch (IOException ex) {
+        throw new RuntimeException(ex);
+      }
+    });
     foreignerButton.setOnAction(e -> showForeignerList());
     homeButton.setOnAction(e -> {
       try {
@@ -73,27 +79,30 @@ public class AdminMainController {
   private void showAutoApplyList() throws IOException {
     resetButtonStyles();
     autoApplyButton.setStyle("-fx-background-color: #9B4444;");
-//
-//    AutoApplyAdminView view = new AutoApplyAdminView();
-//    new AutoApplyAdminController(view);
-//    mainLayOut.setCenter(view.getMainGrid());
+    mainLayOut.setCenter(null);
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/org/example/onesteponestamp/javafx/autoApplyAdmin.fxml"));
+        getClass().getResource("/org/example/onesteponestamp/javafx/AutoApplyList.fxml"));
     BorderPane adminAutoApply = loader.load();
     mainLayOut.setCenter(adminAutoApply);
   }
 
-  private void showImmigrationList() {
+  private void showImmigrationList() throws IOException {
     resetButtonStyles();
     immigrationButton.setStyle("-fx-background-color: #9B4444;");
-    ImmigrationListForm immigrationForm = new ImmigrationListForm();
-    mainLayOut.setCenter(immigrationForm.getForm());
+    mainLayOut.setCenter(null);
+    FXMLLoader loader = new FXMLLoader(
+        getClass().getResource("/org/example/onesteponestamp/javafx/ImmigrationList.fxml"));
+    BorderPane immigrationList = loader.load();
+    ImmigrationListController controller = loader.getController();
+    controller.initialize();
+    mainLayOut.setCenter(immigrationList);
   }
 
   private void showForeignerList() {
     resetButtonStyles();
     foreignerButton.setStyle("-fx-background-color: #9B4444;");
     ForeignerForm foreignerForm = new ForeignerForm();
+    mainLayOut.setCenter(null);
     mainLayOut.setCenter(foreignerForm.getForm());
   }
 
