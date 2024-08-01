@@ -29,7 +29,7 @@ public class UserMainViewController {
 
     try {
       FXMLLoader loader = new FXMLLoader(
-          getClass().getResource("/org/example/onesteponestamp/AutoApplyFormView.fxml"));
+          getClass().getResource("/org/example/onesteponestamp/javafx/AutoApplyFormView.fxml"));
       Parent autoApplyForm = loader.load();
       loader.getController();
 
@@ -54,14 +54,14 @@ public class UserMainViewController {
   }
 
   public void showImmigrationGateForm(ActionEvent event) {
-    EntryApplyForm entryApplyForm = new EntryApplyForm();
-    mainLayout.setCenter(entryApplyForm.getForm());
+    ImmigrationForm immigrationForm = new ImmigrationForm();
+    mainLayout.setCenter(immigrationForm.getForm());
   }
 
   public void showUserMainView(MouseEvent event) {
     try {
       FXMLLoader loader = new FXMLLoader(
-          getClass().getResource("/org/example/onesteponestamp/UserMainContentView.fxml"));
+          getClass().getResource("/org/example/onesteponestamp/javafx/UserMainContentView.fxml"));
       Parent homeView = loader.load();
 
       UserMainViewController controller = loader.getController();
@@ -73,9 +73,11 @@ public class UserMainViewController {
     }
   }
 
-  public void showAdminLogin(ActionEvent event) {
-    AdminLoginPage adminLogin = new AdminLoginPage(mainLayout);
-    adminLogin.show();
+  public void showAdminLogin(ActionEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(
+        getClass().getResource("/org/example/onesteponestamp/javafx/adminLogIn.fxml"));
+    BorderPane adminLoginPain = loader.load();
+    mainLayout.getChildren().setAll(adminLoginPain);
   }
 
   public void gotoHyperlink(ActionEvent event) {
