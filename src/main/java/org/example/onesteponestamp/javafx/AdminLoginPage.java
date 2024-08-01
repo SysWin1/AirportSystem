@@ -1,5 +1,6 @@
 package org.example.onesteponestamp.javafx;
 
+import java.io.IOException;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -43,7 +44,13 @@ public class AdminLoginPage {
         "-fx-background-color: #00bfff; -fx-text-fill: white; -fx-font-size: 16px;");
 
     loginController.initialize(idField, passwordField);
-    loginButton.setOnAction(e -> loginController.handleLoginButtonAction());
+    loginButton.setOnAction(e -> {
+      try {
+        loginController.handleLoginButtonAction();
+      } catch (IOException ex) {
+        throw new RuntimeException(ex);
+      }
+    });
 
     // Home button - image
     Image homeButtonImage = new Image(
@@ -79,7 +86,6 @@ public class AdminLoginPage {
     vBox.setAlignment(Pos.CENTER);
     vBox.getChildren().addAll(topLayout, gridPane);
 
-    // Set up the BorderPane
     pane.setCenter(vBox);
     idField.requestFocus();
   }
