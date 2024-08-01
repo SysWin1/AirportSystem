@@ -14,7 +14,7 @@ import org.example.onesteponestamp.javafx.UserMainViewController;
 
 public class HelloApplication extends Application {
 
-  private static BorderPane mainLayout;
+  private BorderPane mainLayout;
   private static final ImmigrationDAO immigrationDAO = new ImmigrationDAO();
   private AuthManager authManager;
 
