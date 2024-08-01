@@ -1,5 +1,7 @@
 package org.example.onesteponestamp.javafx;
 
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -9,7 +11,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import org.example.onesteponestamp.admin.AuthManager;
 import org.example.onesteponestamp.autoapply.AutoApplyAdminController;
 
 public class AdminMain {
@@ -58,7 +59,13 @@ public class AdminMain {
     Button homeButton = new Button("홈으로");
     homeButton.setGraphic(homeIcon);
     homeButton.setMaxWidth(Double.MAX_VALUE);
-    homeButton.setOnAction(e -> showHomeForm(homeButton));
+    homeButton.setOnAction(e -> {
+      try {
+        showHomeForm(homeButton);
+      } catch (IOException ex) {
+        throw new RuntimeException(ex);
+      }
+    });
 
     menu.getChildren().addAll(space, homeButton);
     mainLayOut.setLeft(menu);
@@ -94,10 +101,10 @@ public class AdminMain {
     mainLayOut.setCenter(foreignerForm.getForm());
   }
 
-  private void showHomeForm(Button homeButton) {
-    mainLayOut.setLeft(null);
-    SelectionMain main = new SelectionMain(mainLayOut);
-    AuthManager.getInstance().logout();
-    main.show();
+  private void showHomeForm(Button homeButton) throws IOException {
+    FXMLLoader loader = new FXMLLoader(
+        getClass().getResource("/org/example/onesteponestamp/javafx/UserMainView.fxml"));
+    BorderPane adminLoginPain = loader.load();
+    mainLayOut.getChildren().setAll(adminLoginPain);
   }
 }

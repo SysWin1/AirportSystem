@@ -1,0 +1,4 @@
+#loginButton, #homeButton, #titleBox, #homeButtonBox, #topBox {
+  -fx-background-color: #C68484;
+  -fx-text-fill: white;
+}

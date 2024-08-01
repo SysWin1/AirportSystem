@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<GridPane fx:id="form" xmlns:fx="http://javafx.com/fxml/1"
+  fx:controller="org.example.onesteponestamp.javafx.AutoApplyFormViewController"
+  alignment="CENTER" hgap="10" vgap="10" stylesheets="@../css/AutoApplyForm.css">
+
+  <padding>
+    <Insets top="20" right="10" bottom="20" left="10"/>
+  </padding>
+
+  <Label text="자동 출입국 신청서" style="-fx-font-size: 18px; -fx-font-weight: bold;"
+    GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.columnIndex="0"
+    styleClass="form-common-margin"/>
+  <Label text="출국 / 입국" GridPane.rowIndex="1" GridPane.columnIndex="0"
+    styleClass="form-common-margin"/>
+
+  <HBox spacing="10" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="form-common-margin">
+    <RadioButton fx:id="outButton" text="출국" styleClass="form-common-margin"/>
+    <RadioButton fx:id="inButton" text="입국" styleClass="form-common-margin"/>
+  </HBox>
+
+  <Label text="영문명" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="form-common-margin"/>
+  <TextField fx:id="englishNameInput" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+  <Label text="여권번호" GridPane.rowIndex="2" GridPane.columnIndex="2"
+    styleClass="form-common-margin"/>
+  <TextField fx:id="passportNoInput" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+
+  <Label text="국적" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="form-common-margin"/>
+  <ComboBox fx:id="countryCodeInput" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+  <Label text="생년월일" GridPane.rowIndex="3" GridPane.columnIndex="2"
+    styleClass="form-common-margin"/>
+  <DatePicker fx:id="birthInput" GridPane.rowIndex="3" GridPane.columnIndex="3"/>
+
+  <Label text="여권 발급일" GridPane.rowIndex="4" GridPane.columnIndex="0"
+    styleClass="form-common-margin"/>
+  <DatePicker fx:id="issueDateInput" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+  <Label text="여권 만료일" GridPane.rowIndex="4" GridPane.columnIndex="2"
+    styleClass="form-common-margin"/>
+  <DatePicker fx:id="expiryDateInput" GridPane.rowIndex="4" GridPane.columnIndex="3"/>
+
+  <Label text="성별" GridPane.rowIndex="5" GridPane.columnIndex="0" styleClass="form-common-margin"/>
+  <ComboBox fx:id="genderInput" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+  <Label text="비자 선택" GridPane.rowIndex="5" GridPane.columnIndex="2"
+    styleClass="form-common-margin"/>
+  <ComboBox fx:id="visaTypeInput" GridPane.rowIndex="5" GridPane.columnIndex="3"/>
+
+  <Label text="입출국 예상 일자" GridPane.rowIndex="6" GridPane.columnIndex="0"
+    styleClass="form-common-margin"/>
+  <DatePicker fx:id="expectedInoutDateInput" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+  <Label text="입출국 국가" GridPane.rowIndex="6" GridPane.columnIndex="2"
+    styleClass="form-common-margin"/>
+  <ComboBox fx:id="inoutCountryInput" GridPane.rowIndex="6" GridPane.columnIndex="3"/>
+
+  <Button text="제출" fx:id="submitButton" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+</GridPane>

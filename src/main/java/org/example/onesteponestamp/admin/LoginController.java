@@ -1,5 +1,7 @@
 package org.example.onesteponestamp.admin;
 
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -27,7 +29,7 @@ public class LoginController {
     this.passwordField = passwordField;
   }
 
-  public void handleLoginButtonAction() {
+  public void handleLoginButtonAction() throws IOException {
     String id = idField.getText();
     String password = passwordField.getText();
 
@@ -48,8 +50,10 @@ public class LoginController {
     alert.showAndWait();
   }
 
-  private void showAdminMenu() {
-    AdminMain adminMenu = new AdminMain(pane);
-    adminMenu.show();
+  private void showAdminMenu() throws IOException {
+    FXMLLoader loader = new FXMLLoader(
+        getClass().getResource("/org/example/onesteponestamp/javafx/adminMain.fxml"));
+    BorderPane adminMainpain = loader.load();
+    pane.setTop(adminMainpain);
   }
 }
