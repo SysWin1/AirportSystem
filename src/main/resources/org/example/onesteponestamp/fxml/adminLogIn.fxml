@@ -9,12 +9,38 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="650.0"
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="650.0"
   prefWidth="950.0" stylesheets="@/org/example/onesteponestamp/css/adminLogin.css"
-  xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="org.example.onesteponestamp.javafx.AdminLogInController"
-  fx:id="pane">
+  xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+  fx:controller="org.example.onesteponestamp.javafx.AdminLogInController">
 
   <!--  top -->
+  <top>
+    <HBox fx:id="topBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0">
+      <children>
+        <HBox fx:id="titleBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="39.0" prefWidth="733.0">
+        </HBox>
+        <HBox fx:id="homeButtonBox">
+          <children>
+            <Button fx:id="homeButton" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="238.0"
+              text="홈으로">
+              <graphic>
+                <ImageView fx:id="homeIcon" fitHeight="30" fitWidth="30.0" pickOnBounds="true"
+                  preserveRatio="true"/>
+              </graphic>
+            </Button>
+          </children>
+        </HBox>
+      </children>
+      <padding>
+        <Insets bottom="20.0"/>
+      </padding>
+    </HBox>
+  </top>
+
+  <!--  center-->
   <center>
     <VBox fx:id="center">
       <!-- center logo img -->
@@ -29,26 +55,26 @@
       </HBox>
 
       <!-- ID, PASS -->
-      <HBox BorderPane.alignment="CENTER" alignment="CENTER_LEFT" prefHeight="193.0"
-        prefWidth="950.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="193.0" prefWidth="950.0"
+        BorderPane.alignment="CENTER">
         <children>
           <HBox alignment="CENTER" prefHeight="181.0" prefWidth="972.0">
             <children>
               <VBox alignment="CENTER_RIGHT" prefHeight="183.0" prefWidth="227.0">
                 <children>
-                  <PasswordField prefHeight="31.0" prefWidth="221.0" promptText="비밀번호"
-                    fx:id="passwordField"/>
-                  <TextField prefHeight="31.0" prefWidth="227.0" promptText="아이디" fx:id="idField">
+                  <TextField fx:id="idField" prefHeight="31.0" prefWidth="227.0" promptText="아이디">
                     <VBox.margin>
                       <Insets bottom="10.0"/>
                     </VBox.margin>
                   </TextField>
+                  <PasswordField fx:id="passwordField" prefHeight="31.0" prefWidth="221.0"
+                    promptText="비밀번호"/>
                 </children>
               </VBox>
               <VBox alignment="CENTER" prefHeight="587.0" prefWidth="76.0">
                 <children>
-                  <Button contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity"
-                    prefHeight="38.0" prefWidth="99.0" text="Log In" fx:id="loginButton">
+                  <Button fx:id="loginButton" contentDisplay="TOP" minHeight="-Infinity"
+                    minWidth="-Infinity" prefHeight="38.0" prefWidth="99.0" text="Log In">
                     <VBox.margin>
                       <Insets left="10.0"/>
                     </VBox.margin>
@@ -62,31 +88,5 @@
     </VBox>
 
   </center>
-
-  <!--  center-->
-  <top>
-    <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" fx:id="topBox">
-      <children>
-        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-          prefHeight="39.0" prefWidth="733.0" fx:id="titleBox">
-        </HBox>
-        <HBox fx:id="homeButtonBox">
-          <children>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-              minWidth="-Infinity" prefHeight="38.0" prefWidth="238.0" text="홈으로"
-              fx:id="homeButton">
-              <graphic>
-                <ImageView fitHeight="30" fitWidth="30.0" pickOnBounds="true" preserveRatio="true"
-                  fx:id="homeIcon"/>
-              </graphic>
-            </Button>
-          </children>
-        </HBox>
-      </children>
-      <padding>
-        <Insets bottom="20.0"/>
-      </padding>
-    </HBox>
-  </top>
 
 </BorderPane>

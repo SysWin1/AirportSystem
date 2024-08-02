@@ -113,7 +113,7 @@
   -fx-text-fill: black;
 }
 
-#totalLabel {
+#totalLabel{
   -fx-font-family: 'Do Hyeon', sans-serif;
   -fx-text-fill: white;
   -fx-font-size: 15px;

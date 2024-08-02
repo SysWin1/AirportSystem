@@ -4,27 +4,27 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="650.0" prefWidth="950.0"
+<BorderPane fx:id="mainLayOut" prefHeight="650.0" prefWidth="950.0"
   stylesheets="@/org/example/onesteponestamp/css/adminMain.css"
-  xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="org.example.onesteponestamp.javafx.AdminMainController"
-  fx:id="mainLayOut">
+  xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+  fx:controller="org.example.onesteponestamp.javafx.AdminMainController">
   <top>
-    <HBox alignment="CENTER_LEFT" prefHeight="39.0" fx:id="menu">
+    <HBox fx:id="menu" alignment="CENTER_LEFT" prefHeight="39.0">
       <children>
         <HBox>
           <children>
-            <Button minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0"
-              prefWidth="237.5" text="자동 입출국 심사 목록 조회" fx:id="autoApplyButton"/>
-            <Button minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0"
-              prefWidth="237.5" text="입출국 목록 조회" fx:id="immigrationButton"/>
-            <Button minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0"
-              prefWidth="237.5" text="외국인 목록 조회" fx:id="foreignerButton"/>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-              minWidth="-Infinity" prefHeight="38.0" prefWidth="237.5" text="홈으로"
-              fx:id="homeButton">
+            <Button fx:id="autoApplyButton" minHeight="-Infinity" minWidth="-Infinity"
+              prefHeight="38.0" prefWidth="237.5" text="자동 입출국 심사 목록 조회"/>
+            <Button fx:id="immigrationButton" minHeight="-Infinity" minWidth="-Infinity"
+              prefHeight="38.0" prefWidth="237.5" text="입출국 목록 조회"/>
+            <Button fx:id="foreignerButton" minHeight="-Infinity" minWidth="-Infinity"
+              prefHeight="38.0" prefWidth="237.5" text="외국인 목록 조회"/>
+            <Button fx:id="homeButton" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="237.5"
+              text="홈으로">
               <graphic>
-                <ImageView fitHeight="30" fitWidth="30.0" pickOnBounds="true" preserveRatio="true"
-                  fx:id="homeIcon"/>
+                <ImageView fx:id="homeIcon" fitHeight="30" fitWidth="30.0" pickOnBounds="true"
+                  preserveRatio="true"/>
               </graphic>
             </Button>
           </children>
