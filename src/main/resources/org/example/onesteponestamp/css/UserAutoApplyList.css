@@ -1,5 +1,23 @@
-#tableView .column-header {
+@font-face {
+  font-family: 'Do Hyeon';
+  src: url('../fonts/DoHyeon-Regular.ttf');
+}
+
+* {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-font-size: 14px;
+}
+
+.combo-box {
+  -fx-background-color: #ebd2d2;
+}
+
+#tableView .column-header, #searchButton {
   -fx-background-color: #C68484; /* 헤더 배경 색상 */
+}
+
+#searchButton:hover {
+  -fx-background-color: #9B4444;
 }
 
 #tableView .column-header .label {
@@ -18,14 +36,12 @@
 }
 
 .text-field:focused {
-  -fx-border-width: 2;
-  -fx-border-color: #A3C9AA;
+  -fx-border-width: 3;
+  -fx-border-radius: 2;
+  -fx-border-color: #C68484;
 }
 
-.arrow-button:hover,
 .combo-box-popup .list-cell:hover,
-.combo-box-popup .list-cell:selected,
-.date-picker-popup .day-cell:hover,
-.date-picker-popup .day-cell:selected {
-  -fx-background-color: #A3C9AA;
+.combo-box-popup .list-cell:selected {
+  -fx-background-color: #C68484;
 }

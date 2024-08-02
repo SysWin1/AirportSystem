@@ -1,9 +1,18 @@
+@font-face {
+  font-family: 'Do Hyeon';
+  src: url('../fonts/DoHyeon-Regular.ttf');
+}
+
+* {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+}
+
 .form-common-margin {
   -fx-end-margin: 10px;
 }
 
 #form {
-  -fx-background-color: #EEEEEE;
+  -fx-background-color: #e0e8e2;
 }
 
 .text-field:focused {
@@ -24,11 +33,18 @@
 .combo-box-popup .list-cell:hover,
 .combo-box-popup .list-cell:selected,
 .date-picker-popup .day-cell:hover,
-.date-picker-popup .day-cell:selected {
+.date-picker-popup .day-cell:selected,
+.date-picker-popup .day-cell:focused {
   -fx-background-color: #A3C9AA;
+  -fx-text-fill: white;
+}
+
+.date-picker-popup .day-name-cell {
+
 }
 
 #submitButton {
+  -fx-font-size: 15px;
   -fx-background-color: #A3C9AA;
   -fx-border-width: 2;
   -fx-border-radius: 2;
@@ -37,4 +53,8 @@
 #submitButton:hover {
   -fx-background-color: #799C7A;
   -fx-text-fill: white;
+}
+
+.menu, .menu-item {
+  -fx-font-size: 15px;
 }

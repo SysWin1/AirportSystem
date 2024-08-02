@@ -52,9 +52,19 @@ public class UserMainViewController {
     }
   }
 
-  public void showImmigrationGateForm(ActionEvent event) {
-    ImmigrationForm immigrationForm = new ImmigrationForm();
-    mainLayout.setCenter(immigrationForm.getForm());
+  public void showImmigrationForm(ActionEvent event) {
+
+    try {
+      FXMLLoader loader = new FXMLLoader(
+          getClass().getResource("/org/example/onesteponestamp/fxml/ImmigrationFormView.fxml")
+      );
+      Parent immigrationForm = loader.load();
+      loader.getController();
+
+      this.mainLayout.setCenter(immigrationForm);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public void showUserMainView(MouseEvent event) {

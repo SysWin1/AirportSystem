@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'Do Hyeon';
+  src: url('../fonts/DoHyeon-Regular.ttf');
+}
+
+* {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-font-size: 20px;
+}
+
+#centerPane {
+  -fx-background-image: url('../images/gate10.png');
+  -fx-background-size: cover;
+}
+
+.label {
+  -fx-text-fill: #9B4444;
+}
+
+#applyNoField {
+  -fx-text-fill: #333333;
+}
+
+#applyNoField:focused {
+  -fx-border-color: #C68484;
+  -fx-border-radius: 2;
+  -fx-border-width: 3;
+}
+
+.button {
+  -fx-background-color: #C68484;
+}
+
+
+
+.button:hover {
+  -fx-background-color: #9B4444;
+}
+

@@ -32,10 +32,16 @@
               <Label prefHeight="37.0" prefWidth="352.0"
                 style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-font-family: 'MangoByeolbyeol'"
                 text="One Step - Walk Through" textAlignment="CENTER"/>
-              <Label prefHeight="195.0" prefWidth="355.0" style="-fx-font-size: 18px;"
-                text="자동 출입국 시스템 신청을 통해      대면검사 없이 바로 여행하세요" textAlignment="CENTER"
-                wrapText="true"/>
-              <HBox alignment="CENTER" spacing="20">
+              <VBox prefHeight="179.0" prefWidth="349.0">
+                <children>
+                  <Pane prefHeight="47.0" prefWidth="349.0"/>
+                  <Label prefHeight="29.0" prefWidth="349.0" style="-fx-font-size: 18px;"
+                    text="  자동 출입국 시스템 신청을 통해" textAlignment="CENTER" wrapText="true"/>
+                  <Label prefHeight="29.0" prefWidth="349.0" style="-fx-font-size: 18px;"
+                    text="  대면검사 없이 바로 여행하세요"/>
+                </children>
+              </VBox>
+              <HBox alignment="CENTER" prefHeight="41.0" prefWidth="349.0" spacing="20">
                 <Button onAction="#showAutoApplyForm" style="-fx-pref-width: 150;"
                   styleClass="user-main-button" text="바로 등록하러 가기"/>
                 <Button style="-fx-pref-width: 150;" styleClass="user-main-button"
@@ -73,14 +79,14 @@
                 <MenuItem onAction="#showAutoApplyList" styleClass="menu-item" text="신청 결과 조회"/>
               </Menu>
               <Menu text="공항 서비스">
-                <MenuItem onAction="#showImmigrationGateForm" styleClass="menu-item"
+                <MenuItem onAction="#showImmigrationForm" styleClass="menu-item"
                   text="출입국(게이트 통과)"/>
               </Menu>
             </MenuBar>
-            <HBox prefHeight="45.0" prefWidth="200.0">
+            <HBox prefHeight="44.0" prefWidth="200.0">
               <children>
-                <Button fx:id="adminButton" onAction="#showAdminLogin" prefHeight="44"
-                  prefWidth="175.0" styleClass="admin-button" text="관리자로 로그인"/>
+                <Button fx:id="adminButton" onAction="#showAdminLogin" prefHeight="51.0"
+                  prefWidth="167.0" styleClass="admin-button" text="관리자로 로그인"/>
               </children>
             </HBox>
           </children>
