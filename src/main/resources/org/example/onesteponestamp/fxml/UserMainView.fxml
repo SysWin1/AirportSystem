@@ -73,7 +73,7 @@
                 <MenuItem onAction="#showAutoApplyList" styleClass="menu-item" text="신청 결과 조회"/>
               </Menu>
               <Menu text="공항 서비스">
-                <MenuItem onAction="#showImmigrationGateForm" styleClass="menu-item"
+                <MenuItem onAction="#showImmigrationForm" styleClass="menu-item"
                   text="출입국(게이트 통과)"/>
               </Menu>
             </MenuBar>
