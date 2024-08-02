@@ -41,7 +41,6 @@ public class AdminLogInController {
     if (pane == null) {
       throw new IllegalStateException("Pane is not initialized.");
     }
-    System.out.println(pane.getStylesheets());
     loginController = new LoginController(pane);
     loginController.initialize(idField, passwordField);
 
