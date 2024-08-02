@@ -20,12 +20,12 @@
                       <children>
                         <RadioButton fx:id="allNational" mnemonicParsing="false" selected="true" text="전체">
                           <padding>
-                            <Insets left="10.0" top="10.0" />
+                            <Insets left="10.0" top="7.0" />
                           </padding>
                         </RadioButton>
                         <RadioButton fx:id="all" mnemonicParsing="false" selected="true" text="전체">
                           <padding>
-                            <Insets left="10.0" top="10.0" />
+                            <Insets left="10.0" top="7.0" />
                           </padding>
                         </RadioButton>
                       </children>
@@ -34,12 +34,12 @@
                       <children>
                         <RadioButton fx:id="korean" mnemonicParsing="false" text="내국인">
                           <padding>
-                            <Insets left="10.0" top="10.0" />
+                            <Insets left="10.0" top="7.0" />
                           </padding>
                         </RadioButton>
                         <RadioButton fx:id="in" mnemonicParsing="false" text="입국">
                           <padding>
-                            <Insets left="10.0" top="10.0" />
+                            <Insets left="10.0" top="7.0" />
                           </padding>
                         </RadioButton>
                       </children>
@@ -48,12 +48,12 @@
                       <children>
                         <RadioButton fx:id="foreign" mnemonicParsing="false" text="외국인">
                           <padding>
-                            <Insets left="10.0" top="10.0" />
+                            <Insets left="10.0" top="7.0" />
                           </padding>
                         </RadioButton>
                         <RadioButton fx:id="out" mnemonicParsing="false" text="출국">
                           <padding>
-                            <Insets left="10.0" top="10.0" />
+                            <Insets left="10.0" top="7.0" />
                           </padding>
                         </RadioButton>
                       </children>
@@ -85,7 +85,7 @@
                 </HBox>
                 <VBox prefHeight="566.0" prefWidth="650.0">
                   <children>
-                    <TableView fx:id="view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="648.0">
+                    <TableView fx:id="view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="650.0">
                       <columns>
                         <TableColumn fx:id="idx" prefWidth="40" text="Idx" />
                         <TableColumn fx:id="applyNo" prefWidth="80" text="신청 번호" />
@@ -101,7 +101,7 @@
                     <Pagination fx:id="pagination" prefHeight="60.0" prefWidth="648.0" />
                   </children>
                   <padding>
-                    <Insets left="10.0" top="5.0" />
+                    <Insets left="10.0" top="3.0" />
                   </padding>
                 </VBox>
               </children>
