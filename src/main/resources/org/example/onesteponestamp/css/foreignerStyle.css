@@ -1,5 +1,5 @@
 #background {
-  -fx-background-color: #C68484, radial-gradient(center 75% 50%, radius 80%, #EEEEEE, #C68484, transparent);
+  -fx-background-color: white, radial-gradient(center 83% 50%, radius 60%, #C68484, white, transparent);
   /*-fx-background-color: #9B4444, linear-gradient(to left top , #A3C9AA, #EEEE);*/
   -fx-background-repeat: no-repeat;
 }

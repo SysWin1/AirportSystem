@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gasoek+One&display=swap');
 
 #backgroud {
-  -fx-background-color: #C68484, radial-gradient(center 75% 50%, radius 80%, #EEEEEE, #C68484, transparent);
+  -fx-background-color: white, radial-gradient(center 83% 50%, radius 60%, #C68484, white, transparent);
   -fx-background-repeat: no-repeat;
 }
 
@@ -77,8 +77,8 @@
 
 .radio-button {
   -fx-font-family: 'Do Hyeon', sans-serif;
-  -fx-background-color: #C68484;
-  -fx-text-fill: white;
+  -fx-background-color: white;
+  -fx-text-fill: black;
   -fx-font-size: 14px;
   -fx-font-weight: bold;
 }
@@ -113,7 +113,7 @@
   -fx-text-fill: black;
 }
 
-#totalLabel{
+#totalLabel {
   -fx-font-family: 'Do Hyeon', sans-serif;
   -fx-text-fill: white;
   -fx-font-size: 15px;
