@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -105,7 +106,7 @@ public class AutoApplyFormViewController {
 
       } catch (Exception ex) {
         // DB 작업 중 오류 발생 시 팝업 표시
-        showPopup("신청 실패", ex.getMessage());
+        showErrorPopup("신청 실패", ex.getMessage());
       }
     });
   }
@@ -161,6 +162,14 @@ public class AutoApplyFormViewController {
 
   private void showPopup(String title, String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle(title);
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+    alert.showAndWait();
+  }
+
+  private void showErrorPopup(String title, String message) {
+    Alert alert = new Alert(AlertType.ERROR);
     alert.setTitle(title);
     alert.setHeaderText(null);
     alert.setContentText(message);

@@ -67,7 +67,7 @@ public class LoginController {
 
   private void showAdminMenu() throws IOException {
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/org/example/onesteponestamp/javafx/AdminMain.fxml"));
+        getClass().getResource("/org/example/onesteponestamp/fxml/AdminMain.fxml"));
     BorderPane adminMainpain = loader.load();
     pane.setTop(adminMainpain);
     pane.setCenter(null);

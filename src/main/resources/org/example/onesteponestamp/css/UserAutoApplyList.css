@@ -1,0 +1,31 @@
+#tableView .column-header {
+  -fx-background-color: #C68484; /* 헤더 배경 색상 */
+}
+
+#tableView .column-header .label {
+  -fx-text-fill: white; /* 헤더 텍스트 색상 */
+  -fx-font-weight: bold; /* 텍스트 굵게 */
+}
+
+.table-row-cell:even {
+  -fx-background-color: rgba(249, 235, 235, 0.89); /* 짝수 행 배경 색상 */
+}
+
+#tableView .table-row-cell:selected {
+  -fx-background-color: #A3C9AA;
+  -fx-text-fill: black;
+  -fx-font-weight: bold;
+}
+
+.text-field:focused {
+  -fx-border-width: 2;
+  -fx-border-color: #A3C9AA;
+}
+
+.arrow-button:hover,
+.combo-box-popup .list-cell:hover,
+.combo-box-popup .list-cell:selected,
+.date-picker-popup .day-cell:hover,
+.date-picker-popup .day-cell:selected {
+  -fx-background-color: #A3C9AA;
+}
