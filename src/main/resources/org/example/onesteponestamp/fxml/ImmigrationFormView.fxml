@@ -8,27 +8,23 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<BorderPane fx:id="centerPane" xmlns:fx="http://javafx.com/fxml/1" prefHeight="438.0"
-  prefWidth="934.0" stylesheets="@../css/ImmigrationForm.css"
-  xmlns="http://javafx.com/javafx/17.0.2-ea"
-  fx:controller="org.example.onesteponestamp.javafx.ImmigrationFormController">
+
+<BorderPane fx:id="centerPane" prefHeight="438.0" prefWidth="934.0" stylesheets="@../css/ImmigrationForm.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.onesteponestamp.javafx.ImmigrationFormController">
   <center>
-    <GridPane alignment="CENTER" hgap="10" vgap="10" fx:id="form">
-      <Button GridPane.columnIndex="2" GridPane.rowIndex="0" onAction="#verificationForm"
-        text="제출"/>
-      <Label style="-fx-font-weight: bold; -fx-font-size: 16px;" GridPane.columnIndex="0"
-        GridPane.rowIndex="0" text="자동출입국신청번호"/>
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="applyNoField"/>
+    <GridPane fx:id="form" alignment="CENTER" hgap="10" vgap="10">
+      <Button onAction="#verificationForm" prefHeight="31.0" prefWidth="59.0" text="제출" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+      <Label style="-fx-font-weight: bold; -fx-font-size: 16px;" text="자동 출입국 신청번호" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      <TextField fx:id="applyNoField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
       <columnConstraints>
-        <ColumnConstraints/>
-        <ColumnConstraints/>
-        <ColumnConstraints/>
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
       </columnConstraints>
       <padding>
-        <Insets bottom="10" left="10" right="10" top="10"/>
+        <Insets bottom="10" left="10" right="10" top="10" />
       </padding>
       <rowConstraints>
-        <RowConstraints/>
+        <RowConstraints />
       </rowConstraints>
     </GridPane>
   </center>
