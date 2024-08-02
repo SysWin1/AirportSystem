@@ -65,17 +65,17 @@
                 <!-- Search Field and Button -->
                 <TextField fx:id="searchField" promptText="검색어">
                   <VBox.margin>
-                    <Insets top="5.0" />
+                    <Insets top="7.0" />
                   </VBox.margin>
                 </TextField>
               </children>
               <padding>
-                <Insets left="10.0" top="5.0" />
+                <Insets left="10.0" top="10.0" />
               </padding>
             </VBox>
             <VBox prefHeight="55.0" prefWidth="94.0">
               <children>
-                <Button fx:id="searchButton" onAction="#setItems" text="조회">
+                <Button fx:id="searchButton" onAction="#setItems" prefHeight="25.0" prefWidth="53.0" text="조회">
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>
