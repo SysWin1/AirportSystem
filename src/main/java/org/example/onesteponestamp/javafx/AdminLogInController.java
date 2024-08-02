@@ -73,7 +73,7 @@ public class AdminLogInController {
 
   private void goHome() throws IOException {
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/org/example/onesteponestamp/javafx/UserMainView.fxml"));
+        getClass().getResource("/org/example/onesteponestamp/fxml/UserMainView.fxml"));
     BorderPane mainView = loader.load();
 
     // 첫화면으로 돌아가기

@@ -27,7 +27,7 @@ public class HelloApplication extends Application {
     try {
       // FXML 파일 로드
       FXMLLoader loader = new FXMLLoader(
-          getClass().getResource("/org/example/onesteponestamp/javafx/UserMainView.fxml"));
+          getClass().getResource("/org/example/onesteponestamp/fxml/UserMainView.fxml"));
       Parent root = loader.load();
 
       // 컨트롤러 가져오기

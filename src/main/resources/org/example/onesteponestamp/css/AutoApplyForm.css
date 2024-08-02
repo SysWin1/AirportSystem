@@ -1,3 +1,40 @@
 .form-common-margin {
   -fx-end-margin: 10px;
 }
+
+#form {
+  -fx-background-color: #EEEEEE;
+}
+
+.text-field:focused {
+  -fx-border-width: 2;
+  -fx-border-color: #A3C9AA;
+}
+
+.combo-box:focused, .combo-box-base:focused {
+  -fx-border-width: 2;
+  -fx-border-color: #A3C9AA;
+}
+
+.date-picker:focused {
+  -fx-border-width: 1;
+  -fx-border-color: #A3C9AA;
+}
+
+.combo-box-popup .list-cell:hover,
+.combo-box-popup .list-cell:selected,
+.date-picker-popup .day-cell:hover,
+.date-picker-popup .day-cell:selected {
+  -fx-background-color: #A3C9AA;
+}
+
+#submitButton {
+  -fx-background-color: #A3C9AA;
+  -fx-border-width: 2;
+  -fx-border-radius: 2;
+}
+
+#submitButton:hover {
+  -fx-background-color: #799C7A;
+  -fx-text-fill: white;
+}

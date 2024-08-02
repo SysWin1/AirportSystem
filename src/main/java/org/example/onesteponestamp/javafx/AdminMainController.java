@@ -88,7 +88,7 @@ public class AdminMainController {
     autoApplyButton.setStyle("-fx-background-color: #9B4444;");
     mainLayOut.setCenter(null);
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/org/example/onesteponestamp/javafx/AutoApplyList.fxml"));
+        getClass().getResource("/org/example/onesteponestamp/fxml/AutoApplyList.fxml"));
     BorderPane adminAutoApply = loader.load();
     mainLayOut.setCenter(adminAutoApply);
   }
@@ -98,7 +98,7 @@ public class AdminMainController {
     immigrationButton.setStyle("-fx-background-color: #9B4444;");
     mainLayOut.setCenter(null);
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/org/example/onesteponestamp/javafx/ImmigrationList.fxml"));
+        getClass().getResource("/org/example/onesteponestamp/fxml/ImmigrationList.fxml"));
     BorderPane immigrationList = loader.load();
     ImmigrationListController controller = loader.getController();
     controller.initialize();
@@ -110,7 +110,7 @@ public class AdminMainController {
     foreignerButton.setStyle("-fx-background-color: #9B4444;");
     mainLayOut.setCenter(null);
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/org/example/onesteponestamp/javafx/foreignerView.fxml"));
+        getClass().getResource("/org/example/onesteponestamp/fxml/foreignerView.fxml"));
     AnchorPane foreignerForm = loader.load();
     ForeignerFormController controller = loader.getController();
     controller.initialize();
@@ -119,7 +119,7 @@ public class AdminMainController {
 
   private void showHome() throws IOException {
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/org/example/onesteponestamp/javafx/UserMainView.fxml"));
+        getClass().getResource("/org/example/onesteponestamp/fxml/UserMainView.fxml"));
     BorderPane mainView = loader.load();
     // 현재 씬의 루트 노드를 mainView로 변경합니다.
     mainLayOut.getScene().setRoot(mainView);

@@ -22,8 +22,6 @@ import org.example.onesteponestamp.autoapply.AutoApplyService;
 
 public class AutoApplyListController {
 
-  private AutoApplyFormViewController autoApplyFormViewController;
-
   private final AutoApplyService autoApplyService;
 
   @FXML

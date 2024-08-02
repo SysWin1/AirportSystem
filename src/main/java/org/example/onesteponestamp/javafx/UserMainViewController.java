@@ -4,12 +4,9 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import lombok.Setter;
 
 public class UserMainViewController {
@@ -26,10 +23,9 @@ public class UserMainViewController {
    * 자동 출입국 신청서 작성 form UI로 연결
    */
   public void showAutoApplyForm(ActionEvent event) {
-
     try {
       FXMLLoader loader = new FXMLLoader(
-          getClass().getResource("/org/example/onesteponestamp/javafx/AutoApplyFormView.fxml"));
+          getClass().getResource("/org/example/onesteponestamp/fxml/AutoApplyFormView.fxml"));
       Parent autoApplyForm = loader.load();
       loader.getController();
 
@@ -44,13 +40,16 @@ public class UserMainViewController {
    */
   public void showAutoApplyList(ActionEvent event) {
 
-    AutoApplyListView listView = new AutoApplyListView();
-    VBox container = new VBox(10);
-    container.setPadding(new Insets(10));
-    container.setAlignment(Pos.CENTER);
+    try {
+      FXMLLoader loader = new FXMLLoader(
+          getClass().getResource("/org/example/onesteponestamp/fxml/UserAutoApplyListView.fxml"));
+      Parent autoApplyList = loader.load();
+      loader.getController();
 
-    container.getChildren().addAll(listView.getForm(), listView.getTableView());
-    mainLayout.setCenter(container);
+      this.mainLayout.setCenter(autoApplyList);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public void showImmigrationGateForm(ActionEvent event) {
@@ -61,7 +60,7 @@ public class UserMainViewController {
   public void showUserMainView(MouseEvent event) {
     try {
       FXMLLoader loader = new FXMLLoader(
-          getClass().getResource("/org/example/onesteponestamp/javafx/UserMainContentView.fxml"));
+          getClass().getResource("/org/example/onesteponestamp/fxml/UserMainContentView.fxml"));
       Parent homeView = loader.load();
 
       UserMainViewController controller = loader.getController();
@@ -75,7 +74,7 @@ public class UserMainViewController {
 
   public void showAdminLogin(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/org/example/onesteponestamp/javafx/AdminLogIn.fxml"));
+        getClass().getResource("/org/example/onesteponestamp/fxml/AdminLogIn.fxml"));
     BorderPane adminLoginPain = loader.load();
     mainLayout.getChildren().setAll(adminLoginPain);
   }
