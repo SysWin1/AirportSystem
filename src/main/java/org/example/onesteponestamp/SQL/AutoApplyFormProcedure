@@ -1,0 +1,22 @@
+create or replace procedure autoapplyinsert(
+    apply_no in varchar2,
+    passport_no in varchar2,
+    country_code in varchar2,
+    english_name in varchar2,
+    gender in char,
+    issue_date in date,
+    expiry_date in date,
+    birth in date,
+    visa_type in varchar2,
+    inout in varchar2,
+    inout_country in varchar2,
+    expected_inout_date in date,
+    created_at in date
+)is
+begin
+    insert into autoapply
+    (apply_no, passport_no, country_code, english_name, gender, issue_date, expiry_date, birth, visa_type, inout, inout_country, expected_inout_date, created_at)
+    values
+    (apply_no, passport_no, country_code, english_name, gender, issue_date, expiry_date, birth, visa_type, inout, inout_country, expected_inout_date, created_at);
+
+end;

@@ -1,0 +1,494 @@
+/*함수1. 내국인 입국함수*/
+create or replace PROCEDURE korean_entry_inspection (
+    p_apply_no            IN VARCHAR2,
+    p_passport_no         IN VARCHAR2,
+    p_country_code        IN VARCHAR2,
+    p_english_name        IN VARCHAR2,
+    p_gender              IN CHAR,
+    p_issue_date          IN DATE,
+    p_expiry_date         IN DATE,
+    p_birth               IN DATE,
+    p_visa_type           IN VARCHAR2,
+    p_inout               IN VARCHAR2,
+    p_inout_country       IN VARCHAR2,
+    p_expected_inout_date IN DATE,
+    p_approval_status     IN OUT VARCHAR2,
+    p_reject_reason       IN OUT VARCHAR2
+) IS
+    v_mismatch     BOOLEAN := FALSE;     --비교 결과가 일치하는지 않는지 여부 저장
+    v_record_count INTEGER := 0; -- 여권 존재 여부 파악
+BEGIN
+
+    SELECT COUNT(*)
+        INTO v_record_count
+    FROM
+        passportinfo
+    WHERE
+        passport_no = p_passport_no
+        AND country_code = p_country_code;
+
+    -- 1-0. 여권 자체가 존재하는지 확인
+    -- 오류 Documents expired
+    IF v_record_count = 0 THEN
+        v_mismatch := TRUE;
+        p_approval_status := 'DENIED';
+        p_reject_reason := 'Documents expired';
+    ELSE
+        -- 존재한다면, PassportInfo 테이블과 비교
+        FOR r IN (
+            SELECT *
+            FROM passportinfo
+            WHERE passport_no = p_passport_no
+        ) LOOP
+            -- 1-1. 여권정보 동일한지 여부 판단
+            -- 오류 Documents expired
+            IF r.country_code != p_country_code OR r.english_name != p_english_name OR r.gender != p_gender OR r.issue_date != p_issue_date
+            OR r.expiry_date != p_expiry_date OR r.birth != p_birth THEN
+                v_mismatch := TRUE;
+                p_approval_status := 'DENIED';
+                p_reject_reason := 'Documents expired';
+                EXIT;
+            END IF;
+        END LOOP;
+    END IF;
+
+    -- 2. 여권정보가 동일 & '안전한 국가' 경우
+    -- else 사유 2. 위험국가 불가
+    IF NOT v_mismatch THEN
+        IF p_inout_country IN ( 'USA', 'GBR', 'JPN', 'FRA', 'VNM',
+                                'KOR' ) THEN
+            p_approval_status := 'APPROVED';
+            p_reject_reason := NULL;
+        ELSE
+            p_approval_status := 'DENIED';
+            p_reject_reason := 'No Dangerous Country';
+        END IF;
+    END IF;
+--
+--EXCEPTION
+--    -- 데이터가 존재하지 않을 경우 예외 처리
+--    WHEN NO_DATA_FOUND THEN
+--        p_approval_status := 'DENIED';
+--        p_reject_reason := 'Documents expired';
+END;
+/
+
+
+
+/*2. 내국인 출국 함수
+2-1. 정보가 같은지 일일히 확인
+2-2. 비자가 NO_VISA 인가
+2-3. 출국일 + 비자허용일 <= 만료일 (통과)
+2-4. '입출국 대상국'이 안전국에 속하는가 (통과)-> 승인
+*/
+CREATE OR REPLACE PROCEDURE korean_exit_inspection (
+    p_apply_no            IN VARCHAR2, --신청번호
+    p_passport_no         IN VARCHAR2, -- 여권번호
+    p_country_code        IN VARCHAR2, -- 국가코드(국적)
+    p_english_name        IN VARCHAR2, -- 영어이름
+    p_gender              IN CHAR,  -- 성별
+    p_issue_date          IN DATE,  -- 발급일(여권)
+    p_expiry_date         IN DATE,  -- 만료일(여권)
+    p_birth               IN DATE,  -- 생년월일
+    p_visa_type           IN VARCHAR2,  -- 비자타입(ex NO_VISA)
+    p_inout               IN VARCHAR2,  -- 입출국 여부(IN/OUT)
+    p_inout_country       IN VARCHAR2,  -- 입출국할 나라
+    p_expected_inout_date IN DATE,  --예상 입출국할 날짜
+    p_approval_status     IN OUT VARCHAR2,  --승인여부
+    p_reject_reason       IN OUT VARCHAR2   --거절사유
+) IS
+    v_allow_days      NUMBER; --허가일수(비자)
+    v_max_travel_days DATE; -- 만료일과 비교
+    v_mismatch        BOOLEAN := FALSE;
+    v_record_count INTEGER := 0; -- 여권 존재 여부 파악
+BEGIN
+
+    -- 1-0. 여권 정보가 존재하는지 확인
+    -- 사유 1. 여권정보 불일치
+    SELECT COUNT(*)
+        INTO v_record_count
+    FROM passportinfo
+    WHERE
+        passport_no = p_passport_no
+        AND country_code = p_country_code;
+
+    -- 여권 정보가 존재하지 않는 경우
+    IF v_record_count = 0 THEN
+        v_mismatch := TRUE;
+        p_approval_status := 'DENIED';
+        p_reject_reason := 'Documents expired';
+    ELSE
+        -- PassportInfo 테이블과 비교
+        FOR r IN (
+            SELECT *
+            FROM passportinfo
+            WHERE
+                passport_no = p_passport_no
+        ) LOOP
+            IF r.country_code != p_country_code OR r.english_name != p_english_name OR r.gender != p_gender OR r.issue_date != p_issue_date
+            OR r.expiry_date != p_expiry_date OR r.birth != p_birth THEN
+                v_mismatch := TRUE;
+                p_approval_status := 'DENIED';
+                p_reject_reason := 'Documents expired';
+                EXIT;
+            END IF;
+        END LOOP;
+    END IF;
+
+
+     -- 2-2. visa_type이 'NO_VISA'인 경우
+     --사유 4. 비자누락
+    IF NOT v_mismatch THEN
+        IF p_visa_type = 'NO_VISA' THEN
+            v_mismatch := TRUE;
+            p_approval_status := 'DENIED';
+            p_reject_reason := 'Missing visa';
+        END IF;
+
+    END IF;
+
+    -- 2-3. 여권 유효기간 부족 판단
+    -- 사유 5. 여권 유효기간 부족
+    -- v_mismatch가 FALSE일 경우 Visa 테이블의 allow_days 값을 이용한 검사
+    IF NOT v_mismatch THEN
+        -- Visa 테이블에서 allow_days(허가일수)값을 가져옴
+        SELECT allow_days INTO v_allow_days
+        FROM Visa
+        WHERE visa_type = p_visa_type;
+
+        -- allow_days를 expected_inout_date에 더함
+        v_max_travel_days := p_expected_inout_date + v_allow_days;
+
+        --  기존 expiry_date보다 크면 v_mismatch를 TRUE로 설정
+        IF v_max_travel_days > p_expiry_date THEN
+            v_mismatch := TRUE;
+            p_approval_status := 'DENIED';
+            p_reject_reason := 'Passport validity insufficient';
+        END IF;
+    END IF;
+
+
+    -- 2-4. '입출국대상국'에 대해 안전국 여부 판단
+    -- 사유 2. 위험국가 불가
+    IF NOT v_mismatch THEN
+        -- 2. 여권정보가 동일 & '안전한 국가' 경우
+        IF p_inout_country IN ( 'USA', 'GBR', 'JPN', 'FRA', 'VNM',
+                                'KOR' ) THEN
+            p_approval_status := 'APPROVED'; --승인
+            p_reject_reason := NULL;
+        ELSE
+            v_mismatch := TRUE;
+            p_approval_status := 'DENIED';
+            p_reject_reason := 'No Dangerous Country';
+        END IF;
+    END IF;
+
+END;
+/
+
+
+/*
+3. 외국인/출국 심사
+3-1.여권 정보가 같은지 일일히 확인
+*/
+CREATE OR REPLACE PROCEDURE foreign_exit_inspection (
+    p_apply_no            IN VARCHAR2, --신청번호
+    p_passport_no         IN VARCHAR2, -- 여권번호
+    p_country_code        IN VARCHAR2, -- 국가코드(국적)
+    p_english_name        IN VARCHAR2, -- 영어이름
+    p_gender              IN CHAR,  -- 성별
+    p_issue_date          IN DATE,  -- 발급일(여권)
+    p_expiry_date         IN DATE,  -- 만료일(여권)
+    p_birth               IN DATE,  -- 생년월일
+    p_visa_type           IN VARCHAR2,  -- 비자타입(ex NO_VISA)
+    p_inout               IN VARCHAR2,  -- 입출국 여부(IN/OUT)
+    p_inout_country       IN VARCHAR2,  -- 입출국할 나라
+    p_expected_inout_date IN DATE,  --예상 입출국할 날짜
+    p_approval_status     IN OUT VARCHAR2,  --승인여부
+    p_reject_reason       IN OUT VARCHAR2   --거절사유
+) IS
+    v_mismatch        BOOLEAN := FALSE;
+    v_record_count INTEGER := 0; -- 여권 존재 여부 파악
+BEGIN
+
+    -- 1-0. 여권 정보가 존재하는지 확인
+    -- 사유 1. 여권정보 불일치
+    SELECT COUNT(*)
+        INTO v_record_count
+    FROM passportinfo
+        WHERE
+            passport_no = p_passport_no
+            AND country_code = p_country_code;
+
+    -- 여권 정보가 존재하지 않는 경우
+    IF v_record_count = 0 THEN
+        v_mismatch := TRUE;
+        p_approval_status := 'DENIED';
+        p_reject_reason := 'Documents expired';
+    ELSE
+        -- PassportInfo 테이블과 비교
+        FOR r IN (
+            SELECT *
+            FROM passportinfo
+            WHERE
+                passport_no = p_passport_no
+        ) LOOP
+            IF r.country_code != p_country_code OR r.english_name != p_english_name OR r.gender != p_gender OR r.issue_date != p_issue_date
+                OR r.expiry_date != p_expiry_date OR r.birth != p_birth THEN
+                v_mismatch := TRUE;
+                p_approval_status := 'DENIED';
+                p_reject_reason := 'Documents expired';
+                EXIT;
+            END IF;
+        END LOOP;
+
+        -- 여권 정보가 모두 일치하는 경우
+        IF NOT v_mismatch THEN
+            p_approval_status := 'APPROVED';
+            p_reject_reason := NULL;
+        END IF;
+
+
+    END IF;
+END;
+/
+
+
+
+/*4. 외국인/입국
+4-0. 여권정보 자체가 존재하는가
+4-1. 정보가 같은지 일일히 확인(여권정보 세부내역 확인)
+4-2. 비자가 NO_VISA 인가
+4-3. 출국일 + 비자허용일 <= 만료일 (통과)
+    4-4. '입출국 대상국'이 안전국에 속하는가 (통과)
+    4-5. '국가코드'가 안전국(ㅇ)/위험국(x)
+4-6. 체류외국인t '불법 체류'(ㅇ) -> '승인'
+*/
+create or replace PROCEDURE foreign_entry_inspection (
+    p_apply_no            IN VARCHAR2, --신청번호
+    p_passport_no         IN VARCHAR2, -- 여권번호
+    p_country_code        IN VARCHAR2, -- 국가코드(국적)
+    p_english_name        IN VARCHAR2, -- 영어이름
+    p_gender              IN CHAR,  -- 성별
+    p_issue_date          IN DATE,  -- 발급일(여권)
+    p_expiry_date         IN DATE,  -- 만료일(여권)
+    p_birth               IN DATE,  -- 생년월일
+    p_visa_type           IN VARCHAR2,  -- 비자타입(ex NO_VISA)
+    p_inout               IN VARCHAR2,  -- 입출국 여부(IN/OUT)
+    p_inout_country       IN VARCHAR2,  -- 입출국할 나라
+    p_expected_inout_date IN DATE,  --예상 입출국할 날짜
+    p_approval_status     IN OUT VARCHAR2,  --승인여부
+    p_reject_reason       IN OUT VARCHAR2   --거절사유
+) IS
+    v_allow_days      NUMBER; --허가일수(비자)
+    v_max_travel_days DATE; -- 만료일과 비교
+    v_mismatch        BOOLEAN := FALSE;
+    v_record_count INTEGER := 0; -- 여권 존재 여부 파악
+    v_immigration_count  INTEGER := 0;  -- 과거 입국 여부 조회
+    v_is_illegal VARCHAR2(10); --불체자 여부 파악
+
+BEGIN
+
+    -- 4-0. 여권 정보가 존재하는지 확인
+    -- 사유 1. 여권정보 불일치
+    SELECT COUNT(*)
+        INTO v_record_count
+    FROM passportinfo
+    WHERE
+        passport_no = p_passport_no
+        AND country_code = p_country_code;
+
+    -- 여권 정보가 존재하지 않는 경우
+    IF v_record_count = 0 THEN
+        v_mismatch := TRUE;
+        p_approval_status := 'DENIED';
+        p_reject_reason := 'Documents expired';
+    ELSE
+        -- PassportInfo 테이블과 비교
+        FOR r IN (
+            SELECT *
+            FROM passportinfo
+            WHERE
+                passport_no = p_passport_no
+        ) LOOP
+            IF r.country_code != p_country_code OR r.english_name != p_english_name
+            OR r.gender != p_gender OR r.issue_date != p_issue_date
+            OR r.expiry_date != p_expiry_date OR r.birth != p_birth THEN
+                v_mismatch := TRUE;
+                p_approval_status := 'DENIED';
+                p_reject_reason := 'Documents expired';
+                EXIT;
+            END IF;
+        END LOOP;
+    END IF;
+
+
+     -- 2-2. visa_type이 'NO_VISA'인 경우
+     --사유 4. 비자누락
+    IF NOT v_mismatch THEN
+        IF p_visa_type = 'NO_VISA' THEN
+            v_mismatch := TRUE;
+            p_approval_status := 'DENIED';
+            p_reject_reason := 'Visa type is NO_VISA';
+        END IF;
+
+    END IF;
+
+    -- 4-3. 여권 유효기간 부족 판단
+    -- 사유 5. 여권 유효기간 부족
+    -- v_mismatch가 FALSE일 경우 Visa 테이블의 allow_days 값을 이용한 검사
+    IF NOT v_mismatch THEN
+        -- Visa 테이블에서 allow_days(허가일수)값을 가져옴
+        SELECT allow_days INTO v_allow_days
+        FROM Visa
+        WHERE visa_type = p_visa_type;
+
+        -- allow_days를 expected_inout_date에 더함
+        v_max_travel_days := p_expected_inout_date + v_allow_days;
+
+        --  기존 expiry_date보다 크면 v_mismatch를 TRUE로 설정
+        IF v_max_travel_days > p_expiry_date THEN
+            v_mismatch := TRUE;
+            p_approval_status := 'DENIED';
+            p_reject_reason := 'Passport validity insufficient';
+        END IF;
+    END IF;
+
+
+    -- 4-(4,5). '입출국대상국'과 '국적코드' 대해 안전국 여부 판단
+    -- 사유 2. 위험국가 불가
+    IF NOT v_mismatch THEN
+        -- '위험한 국가' 경우 + 국적이 '위험한' -> 2번 사유
+        IF p_inout_country IN ( 'IRC', 'PRK','RUS' )
+                or p_country_code IN ( 'IRC', 'PRK','RUS' ) THEN
+            v_mismatch := TRUE;
+            p_approval_status := 'DENIED';
+            p_reject_reason := 'No Dangerous Country';
+        END IF;
+    END IF;
+
+
+    -- 4-6. foreignvisitor 테이블의 illegal_stay 값을 확인하여 승인 여부 결정
+    -- 오류 3. An illegal stay
+    IF NOT v_mismatch THEN
+        SELECT COUNT(*)
+            INTO v_immigration_count
+        FROM immigrationhistory
+            WHERE passport_no = p_passport_no
+            AND country_code = p_country_code;
+
+        if v_immigration_count > 0 THEN
+            SELECT illegal_stay
+                INTO v_is_illegal
+            FROM foreignvisitor
+                WHERE passport_no = p_passport_no;
+
+            IF v_is_illegal = 'LEGAL' THEN
+                p_approval_status := 'APPROVED';
+                p_reject_reason := NULL;
+            ELSIF v_is_illegal = 'ILLEGAL' THEN
+                v_mismatch := TRUE;
+                p_approval_status := 'DENIED';
+                p_reject_reason := 'Illegal stay detected';
+            END IF;
+        ELSE
+            p_approval_status := 'APPROVED';
+            p_reject_reason := NULL;
+        END IF;
+    END IF;
+END;
+/
+
+
+
+
+
+
+
+
+/*트리거*/
+CREATE OR REPLACE TRIGGER entry_inspection_mgmt BEFORE
+    INSERT ON autoapply
+    FOR EACH ROW
+BEGIN
+    -- 1.자국민/입국하는 경우
+    IF :new.inout = 'IN' AND :new.country_code = 'KOR' THEN
+        korean_entry_inspection(
+         :new.apply_no,            -- 새로 삽입되는 레코드의 apply_no
+         :new.passport_no,         -- 새로 삽입되는 레코드의 passport_no
+         :new.country_code,        -- 새로 삽입되는 레코드의 country_code
+         :new.english_name,        -- 새로 삽입되는 레코드의 english_name
+         :new.gender,              -- 새로 삽입되는 레코드의 gender
+         :new.issue_date,          -- 새로 삽입되는 레코드의 issue_date
+         :new.expiry_date,         -- 새로 삽입되는 레코드의 expiry_date
+         :new.birth,               -- 새로 삽입되는 레코드의 birth
+         :new.visa_type,           -- 새로 삽입되는 레코드의 visa_type
+         :new.inout,               -- 새로 삽입되는 레코드의 inout
+         :new.inout_country,       -- 새로 삽입되는 레코드의 inout_country
+         :new.expected_inout_date, -- 새로 삽입되는 레코드의 expected_inout_date
+         :new.approval_status,     -- 새로 삽입되는 레코드의 approval_status
+         :new.reject_reason       -- 새로 삽입되는 레코드의 reject_reason
+         );
+
+
+    -- 2.자국민/출국하는 경우
+    ELSIF :new.inout = 'OUT'   AND :new.country_code = 'KOR' THEN
+        korean_exit_inspection(
+            :new.apply_no,            -- 새로 삽입되는 레코드의 apply_no
+            :new.passport_no,         -- 새로 삽입되는 레코드의 passport_no
+            :new.country_code,        -- 새로 삽입되는 레코드의 country_code
+            :new.english_name,        -- 새로 삽입되는 레코드의 english_name
+            :new.gender,              -- 새로 삽입되는 레코드의 gender
+            :new.issue_date,          -- 새로 삽입되는 레코드의 issue_date
+            :new.expiry_date,         -- 새로 삽입되는 레코드의 expiry_date
+            :new.birth,               -- 새로 삽입되는 레코드의 birth
+            :new.visa_type,           -- 새로 삽입되는 레코드의 visa_type
+            :new.inout,               -- 새로 삽입되는 레코드의 inout
+            :new.inout_country,       -- 새로 삽입되는 레코드의 inout_country
+            :new.expected_inout_date, -- 새로 삽입되는 레코드의 expected_inout_date
+            :new.approval_status,     -- 새로 삽입되는 레코드의 approval_status
+            :new.reject_reason       -- 새로 삽입되는 레코드의 reject_reason
+          );
+
+
+    -- 3.외국인 / 출국하는 경우
+    ELSIF :new.inout = 'OUT' AND :new.country_code != 'KOR' then
+        foreign_exit_inspection(
+            :new.apply_no,            -- 새로 삽입되는 레코드의 apply_no
+            :new.passport_no,         -- 새로 삽입되는 레코드의 passport_no
+            :new.country_code,        -- 새로 삽입되는 레코드의 country_code
+            :new.english_name,        -- 새로 삽입되는 레코드의 english_name
+            :new.gender,              -- 새로 삽입되는 레코드의 gender
+            :new.issue_date,          -- 새로 삽입되는 레코드의 issue_date
+            :new.expiry_date,         -- 새로 삽입되는 레코드의 expiry_date
+            :new.birth,               -- 새로 삽입되는 레코드의 birth
+            :new.visa_type,           -- 새로 삽입되는 레코드의 visa_type
+            :new.inout,               -- 새로 삽입되는 레코드의 inout
+            :new.inout_country,       -- 새로 삽입되는 레코드의 inout_country
+            :new.expected_inout_date, -- 새로 삽입되는 레코드의 expected_inout_date
+            :new.approval_status,     -- 새로 삽입되는 레코드의 approval_status
+            :new.reject_reason       -- 새로 삽입되는 레코드의 reject_reason
+            );
+
+         -- 4.외국인 / 입국하는 경우
+    ELSIF :new.inout = 'IN' AND :new.country_code != 'KOR' then
+        foreign_entry_inspection(
+            :new.apply_no,            -- 새로 삽입되는 레코드의 apply_no
+            :new.passport_no,         -- 새로 삽입되는 레코드의 passport_no
+            :new.country_code,        -- 새로 삽입되는 레코드의 country_code
+            :new.english_name,        -- 새로 삽입되는 레코드의 english_name
+            :new.gender,              -- 새로 삽입되는 레코드의 gender
+            :new.issue_date,          -- 새로 삽입되는 레코드의 issue_date
+            :new.expiry_date,         -- 새로 삽입되는 레코드의 expiry_date
+            :new.birth,               -- 새로 삽입되는 레코드의 birth
+            :new.visa_type,           -- 새로 삽입되는 레코드의 visa_type
+            :new.inout,               -- 새로 삽입되는 레코드의 inout
+            :new.inout_country,       -- 새로 삽입되는 레코드의 inout_country
+            :new.expected_inout_date, -- 새로 삽입되는 레코드의 expected_inout_date
+            :new.approval_status,     -- 새로 삽입되는 레코드의 approval_status
+            :new.reject_reason       -- 새로 삽입되는 레코드의 reject_reason
+        );
+
+    END IF;
+END;
+/
