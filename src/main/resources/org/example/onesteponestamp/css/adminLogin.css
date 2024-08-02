@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gasoek+One&display=swap');
+@font-face {
+  font-family: 'Do Hyeon';
+  src: url('../fonts/DoHyeon-Regular.ttf');
+}
 
 #loginButton, #homeButton, #titleBox, #homeButtonBox, #topBox {
   -fx-font-family: 'Do Hyeon', sans-serif;
@@ -10,4 +13,15 @@
 #idField, #passwordField {
   -fx-font-family: 'Do Hyeon', sans-serif;
   -fx-prompt-text-fill: #6e6e6e;
+  -fx-border-color: #A3C9AA;
+}
+
+#idField:focused, #passwordField:focused {
+  -fx-border-color: #A3C9AA;
+  -fx-border-width: 2px;
+}
+
+#loginButton:hover,
+#loginButton:selected {
+  -fx-background-color: #9B4444;
 }
