@@ -1,3 +1,17 @@
+@font-face {
+  font-family: 'Do Hyeon';
+  src: url('../fonts/DoHyeon-Regular.ttf');
+}
+
+* {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  /*-fx-font-size: 13px;*/
+}
+
+.menu, .menu-item, .button {
+  -fx-font-size: 15px;
+}
+
 .menu-bar, .menu-item, .user-main-button, .image-background, #top {
   -fx-background-color: #C68484;
 }

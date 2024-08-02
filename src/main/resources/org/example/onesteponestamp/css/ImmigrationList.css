@@ -1,6 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gasoek+One&display=swap');
 
-#backgroud {
+.pagination .control-button {
+  -fx-background-color: pink;
+  -fx-text-fill: black;
+  -fx-font-size: 16px;
+}
+
+.pagination > .control-button:selected {
+  -fx-background-color: pink;
+  -fx-text-fill: white;
+}
+
+.pagination .control-box {
+  -fx-background-color: pink;
+}
+
+.page-button, .page-button:selected {
+  -fx-background-color: pink;
+}
+
+#background {
   -fx-background-color: #C68484, radial-gradient(center 75% 50%, radius 80%, #EEEEEE, #C68484, transparent);
   -fx-background-repeat: no-repeat;
 }
@@ -113,7 +132,7 @@
   -fx-text-fill: black;
 }
 
-#totalLabel{
+#totalLabel {
   -fx-font-family: 'Do Hyeon', sans-serif;
   -fx-text-fill: white;
   -fx-font-size: 15px;

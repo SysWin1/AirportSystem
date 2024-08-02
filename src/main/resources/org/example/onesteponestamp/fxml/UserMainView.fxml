@@ -17,40 +17,37 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<BorderPane fx:id="mainLayout" prefHeight="650.0" prefWidth="950.0"
-  stylesheets="@../css/UserMain.css" xmlns="http://javafx.com/javafx/17"
-  xmlns:fx="http://javafx.com/fxml/1"
-  fx:controller="org.example.onesteponestamp.javafx.UserMainViewController">
+
+<BorderPane fx:id="mainLayout" prefHeight="650.0" prefWidth="950.0" stylesheets="@../css/UserMain.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.onesteponestamp.javafx.UserMainViewController">
   <center>
     <VBox prefHeight="435.0" prefWidth="950.0">
       <children>
-        <Pane prefHeight="138.0" prefWidth="950.0"/>
-        <HBox alignment="CENTER" prefHeight="351.0" prefWidth="950.0" spacing="20"
-          style="-fx-padding: 40;">
+        <Pane prefHeight="138.0" prefWidth="950.0" />
+        <HBox alignment="CENTER" prefHeight="351.0" prefWidth="950.0" spacing="20" style="-fx-padding: 40;">
           <VBox prefHeight="244.0" prefWidth="349.0">
             <children>
-              <Label prefHeight="37.0" prefWidth="352.0"
-                style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-font-family: 'MangoByeolbyeol'"
-                text="One Step - Walk Through" textAlignment="CENTER"/>
-              <Label prefHeight="195.0" prefWidth="355.0" style="-fx-font-size: 18px;"
-                text="자동 출입국 시스템 신청을 통해      대면검사 없이 바로 여행하세요" textAlignment="CENTER"
-                wrapText="true"/>
-              <HBox alignment="CENTER" spacing="20">
-                <Button onAction="#showAutoApplyForm" style="-fx-pref-width: 150;"
-                  styleClass="user-main-button" text="바로 등록하러 가기"/>
-                <Button style="-fx-pref-width: 150;" styleClass="user-main-button"
-                  text="신청 가이드 문서"/>
+              <Label prefHeight="37.0" prefWidth="352.0" style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-font-family: 'MangoByeolbyeol'" text="One Step - Walk Through" textAlignment="CENTER" />
+              <VBox prefHeight="179.0" prefWidth="349.0">
+                <children>
+                           <Pane prefHeight="47.0" prefWidth="349.0" />
+                  <Label prefHeight="29.0" prefWidth="349.0" style="-fx-font-size: 18px;" text="  자동 출입국 시스템 신청을 통해" textAlignment="CENTER" wrapText="true" />
+                  <Label prefHeight="29.0" prefWidth="349.0" style="-fx-font-size: 18px;" text="  대면검사 없이 바로 여행하세요" />
+                </children>
+              </VBox>
+              <HBox alignment="CENTER" prefHeight="41.0" prefWidth="349.0" spacing="20">
+                <Button onAction="#showAutoApplyForm" style="-fx-pref-width: 150;" styleClass="user-main-button" text="바로 등록하러 가기" />
+                <Button style="-fx-pref-width: 150;" styleClass="user-main-button" text="신청 가이드 문서" />
               </HBox>
             </children>
           </VBox>
-          <Region prefHeight="244.0" prefWidth="46.0"/>
+          <Region prefHeight="244.0" prefWidth="46.0" />
           <ImageView fitHeight="274.0" fitWidth="351.0" pickOnBounds="true" preserveRatio="true">
             <image>
-              <Image url="@../images/gate.png"/>
+              <Image url="@../images/gate.png" />
             </image>
           </ImageView>
         </HBox>
-        <Pane prefHeight="59.0" prefWidth="950.0"/>
+        <Pane prefHeight="59.0" prefWidth="950.0" />
       </children>
     </VBox>
   </center>
@@ -60,27 +57,22 @@
         <HBox fx:id="top" prefHeight="44.1" prefWidth="950.0">
           <children>
             <StackPane prefHeight="45" prefWidth="90" styleClass="image-background">
-              <ImageView fitHeight="45" fitWidth="90" onMouseClicked="#showUserMainView"
-                pickOnBounds="true" preserveRatio="true" styleClass="menu-bar">
-                <Image url="@../images/logo.png"/>
+              <ImageView fitHeight="45" fitWidth="90" onMouseClicked="#showUserMainView" pickOnBounds="true" preserveRatio="true" styleClass="menu-bar">
+                <Image url="@../images/logo.png" />
               </ImageView>
             </StackPane>
-            <MenuBar prefHeight="45.0" prefWidth="759.0" style="-fx-padding: 10;"
-              styleClass="menu-bar">
+            <MenuBar prefHeight="45.0" prefWidth="759.0" style="-fx-padding: 10;" styleClass="menu-bar">
               <Menu text="자동 출입국 등록">
-                <MenuItem onAction="#showAutoApplyForm" styleClass="menu-item"
-                  text="자동 출입국 신청서 작성"/>
-                <MenuItem onAction="#showAutoApplyList" styleClass="menu-item" text="신청 결과 조회"/>
+                <MenuItem onAction="#showAutoApplyForm" styleClass="menu-item" text="자동 출입국 신청서 작성" />
+                <MenuItem onAction="#showAutoApplyList" styleClass="menu-item" text="신청 결과 조회" />
               </Menu>
               <Menu text="공항 서비스">
-                <MenuItem onAction="#showImmigrationForm" styleClass="menu-item"
-                  text="출입국(게이트 통과)"/>
+                <MenuItem onAction="#showImmigrationForm" styleClass="menu-item" text="출입국(게이트 통과)" />
               </Menu>
             </MenuBar>
-            <HBox prefHeight="45.0" prefWidth="200.0">
+            <HBox prefHeight="44.0" prefWidth="200.0">
               <children>
-                <Button fx:id="adminButton" onAction="#showAdminLogin" prefHeight="44"
-                  prefWidth="175.0" styleClass="admin-button" text="관리자로 로그인"/>
+                <Button fx:id="adminButton" onAction="#showAdminLogin" prefHeight="52.0" prefWidth="167.0" styleClass="admin-button" text="관리자로 로그인" />
               </children>
             </HBox>
           </children>
@@ -91,34 +83,29 @@
   <bottom>
     <GridPane prefHeight="70.0" prefWidth="806.0" BorderPane.alignment="CENTER">
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.33331298828125" minWidth="0.0"
-          prefWidth="71.00003051757812"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="657.0" minWidth="10.0"
-          prefWidth="71.00000762939452"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="676.000005086263" minWidth="10.0"
-          prefWidth="610.9999923706055"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.33331298828125" minWidth="0.0" prefWidth="71.00003051757812" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="657.0" minWidth="10.0" prefWidth="71.00000762939452" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="676.000005086263" minWidth="10.0" prefWidth="610.9999923706055" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
 
       <ImageView fitHeight="20.0" fitWidth="20.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
         <image>
-          <Image url="@../images/github.png"/>
+          <Image url="@../images/github.png" />
         </image>
       </ImageView>
 
       <!-- Controller에서 하이퍼링크 넣기 -->
-      <Hyperlink fx:id="footerlink" onAction="#gotoHyperlink"
-        text="https://github.com/SysWin1/OneStepOneStamp" GridPane.columnIndex="2"
-        GridPane.rowIndex="2"/>
-      <Label text="Team" GridPane.columnIndex="1"/>
-      <Label text="마곡행" GridPane.columnIndex="2"/>
-      <Label text="Members" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-      <Label text="정다빈 김수지 이서호 임현정" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+      <Hyperlink fx:id="footerlink" onAction="#gotoHyperlink" text="https://github.com/SysWin1/OneStepOneStamp" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Label text="Team" GridPane.columnIndex="1" />
+      <Label text="마곡행" GridPane.columnIndex="2" />
+      <Label text="Members" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label text="정다빈 김수지 이서호 임현정" GridPane.columnIndex="2" GridPane.rowIndex="1" />
     </GridPane>
   </bottom>
 </BorderPane>

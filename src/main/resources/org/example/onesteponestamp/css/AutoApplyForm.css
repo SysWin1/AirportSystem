@@ -1,3 +1,17 @@
+@font-face {
+  font-family: 'Do Hyeon';
+  src: url('../fonts/DoHyeon-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Mango-B';
+  src: url('../fonts/MangoByeolbyeol.ttf');
+}
+
+* {
+  -fx-font-family: 'Mango-B', 'Do Hyeon', sans-serif;
+}
+
 .form-common-margin {
   -fx-end-margin: 10px;
 }
@@ -29,6 +43,7 @@
 }
 
 #submitButton {
+  -fx-font-size: 15px;
   -fx-background-color: #A3C9AA;
   -fx-border-width: 2;
   -fx-border-radius: 2;
@@ -37,4 +52,8 @@
 #submitButton:hover {
   -fx-background-color: #799C7A;
   -fx-text-fill: white;
+}
+
+.menu, .menu-item {
+  -fx-font-size: 15px;
 }
