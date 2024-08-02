@@ -100,7 +100,9 @@ public class AutoApplyDAO {
                 .inout(rs.getString("INOUT"))
                 .inoutCountry(Country.valueOf(rs.getString("INOUT_COUNTRY")))
                 .expectedInOutDate(rs.getDate("EXPECTED_INOUT_DATE").toLocalDate())
-                .approvalStatus(rs.getString("APPROVAL_STATUS"))
+                .approvalStatus(
+                    rs.getString("APPROVAL_STATUS").equals("APPROVED") ? "O" : "X"
+                )
                 .rejectReason(rs.getString("REJECT_REASON"))
                 .createdAt(rs.getTimestamp("CREATED_AT").toLocalDateTime())
                 .build()
