@@ -10,7 +10,7 @@
   -fx-font-family: 'Do Hyeon', sans-serif;
   -fx-background-color: white;
   -fx-text-fill: #333333;
-  -fx-font-size: 14px;
+  -fx-font-size: 13px;
   -fx-font-weight: bold;
 }
 
@@ -117,7 +117,7 @@
 
 .table-view .column-header .label {
   -fx-text-fill: white; /* 헤더 텍스트 색상 */
-  -fx-font-size: 14px;
+  -fx-font-size: 13px;
   -fx-font-weight: bold; /* 헤더 텍스트 굵기 */
 }
 

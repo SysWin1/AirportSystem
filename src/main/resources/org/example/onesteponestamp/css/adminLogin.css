@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gasoek+One&display=swap');
+@font-face {
+  font-family: 'Do Hyeon';
+  src: url('../fonts/DoHyeon-Regular.ttf');
+}
 
 #loginButton, #homeButton, #titleBox, #homeButtonBox, #topBox {
   -fx-font-family: 'Do Hyeon', sans-serif;
