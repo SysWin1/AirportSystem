@@ -4,15 +4,32 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<GridPane fx:id="form" alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17"
-  xmlns:fx="http://javafx.com/fxml/1"
+<?import javafx.scene.layout.RowConstraints?>
+<BorderPane fx:id="centerPane" xmlns:fx="http://javafx.com/fxml/1" prefHeight="438.0"
+  prefWidth="934.0" stylesheets="@../css/ImmigrationForm.css"
+  xmlns="http://javafx.com/javafx/17.0.2-ea"
   fx:controller="org.example.onesteponestamp.javafx.ImmigrationFormController">
-  <padding>
-    <Insets top="10" right="10" bottom="10" left="10"/>
-  </padding>
-  <Label text="자동출입국신청번호" GridPane.columnIndex="0" GridPane.rowIndex="0"
-    style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
-  <TextField fx:id="applyNoField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-  <Button text="제출" onAction="#verificationForm" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-</GridPane>
+  <center>
+    <GridPane alignment="CENTER" hgap="10" vgap="10" fx:id="form">
+      <Button GridPane.columnIndex="2" GridPane.rowIndex="0" onAction="#verificationForm"
+        text="제출"/>
+      <Label style="-fx-font-weight: bold; -fx-font-size: 16px;" GridPane.columnIndex="0"
+        GridPane.rowIndex="0" text="자동출입국신청번호"/>
+      <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" fx:id="applyNoField"/>
+      <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+      </columnConstraints>
+      <padding>
+        <Insets bottom="10" left="10" right="10" top="10"/>
+      </padding>
+      <rowConstraints>
+        <RowConstraints/>
+      </rowConstraints>
+    </GridPane>
+  </center>
+</BorderPane>
