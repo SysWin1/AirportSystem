@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -56,7 +57,13 @@ public class AdminMainController {
         throw new RuntimeException(ex);
       }
     });
-    foreignerButton.setOnAction(e -> showForeignerList());
+    foreignerButton.setOnAction(e -> {
+      try {
+        showForeignerList();
+      } catch (IOException ex) {
+        throw new RuntimeException(ex);
+      }
+    });
     homeButton.setOnAction(e -> {
       try {
         showHome();
@@ -98,12 +105,16 @@ public class AdminMainController {
     mainLayOut.setCenter(immigrationList);
   }
 
-  private void showForeignerList() {
+  private void showForeignerList() throws IOException {
     resetButtonStyles();
     foreignerButton.setStyle("-fx-background-color: #9B4444;");
-    ForeignerForm foreignerForm = new ForeignerForm();
     mainLayOut.setCenter(null);
-    mainLayOut.setCenter(foreignerForm.getForm());
+    FXMLLoader loader = new FXMLLoader(
+        getClass().getResource("/org/example/onesteponestamp/javafx/foreignerView.fxml"));
+    AnchorPane foreignerForm = loader.load();
+    ForeignerFormController controller = loader.getController();
+    controller.initialize();
+    mainLayOut.setCenter(foreignerForm);
   }
 
   private void showHome() throws IOException {

@@ -1,0 +1,64 @@
+.anchor-pane {
+  -fx-background-color: #e8615a;
+  -fx-background-image: radial-gradient(center 33% 10%, radius 75%, #461616, transparent);
+  -fx-background-repeat: no-repeat;
+  color: #e8615a;
+  /*font-family: var(--fonts-primary);*/
+  font-size: 100%;
+  line-height: 1.4;
+  margin: 0;
+  min-height: 100vh;
+}
+
+
+.v-box {
+  -fx-background-color: transparent;
+  /*-fx-background-color: #191a1e;*/
+  -fx-background-radius: 5;
+  -fx-border-color: #e8615a;
+  -fx-border-width: 2;
+  -fx-border-radius: 5;
+}
+
+.button {
+  -fx-background-color: transparent 50%;
+  -fx-border-color: #e8615a;
+  -fx-border-width: 2;
+  -fx-border-radius: 5;
+  -fx-text-fill: #2be4ea;
+  -fx-font-family: "Rajdhani", sans-serif;
+  /*-fx-font-size: 14px;*/
+}
+
+.button:hover {
+  -fx-background-color: #451717;
+}
+
+.radio-button {
+  -fx-background-color: transparent;
+  -fx-text-fill: #2be4ea;
+  -fx-font-family: "Rajdhani", sans-serif;
+  -fx-font-size: 14px;
+}
+
+.table-view {
+  -fx-background-color: #191a1e;
+  -fx-border-color: #e8615a;
+  -fx-border-width: 2;
+  -fx-border-radius: 5;
+}
+
+.table-column-header {
+  -fx-background-color: #1e181e;
+  -fx-text-fill: #2be4ea;
+}
+
+.table-row-cell {
+  -fx-background-color: #1e181e;
+  -fx-text-fill: #2be4ea;
+}
+
+.text {
+  -fx-fill: #fed33f;
+  -fx-font-family: "D2Coding Bold";
+}
