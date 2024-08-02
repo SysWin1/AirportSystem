@@ -78,7 +78,6 @@ public class ImmigrationDAO implements ImmigrationService {
       sql.append(" AND INOUT = 'OUT'");
     }
 
-    System.out.println(date.toString());
     Integer idx = 1;
     try {
       PreparedStatement ps = conn.prepareStatement(sql.toString());

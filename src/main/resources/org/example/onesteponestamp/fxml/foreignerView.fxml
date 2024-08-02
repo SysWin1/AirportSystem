@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="background" maxHeight="-Infinity" maxWidth="-Infinity"
+  minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="950.0"
+  styleClass="anchor-pane" stylesheets="@../css/foreignerStyle.css"
+  xmlns="http://javafx.com/javafx/22"
+  fx:controller="org.example.onesteponestamp.javafx.ForeignerFormController">
+  <ImageView fitHeight="481.0" fitWidth="466.0" layoutX="524.0" layoutY="69.0" pickOnBounds="true"
+    preserveRatio="true">
+    <image>
+      <Image url="@../images/teamlogo.png"/>
+    </image>
+  </ImageView>
+  <RadioButton layoutX="146.0" layoutY="30.0" mnemonicParsing="false"
+    styleClass="radio-button" text="불법 체류자 조회" fx:id="illegalForeignersButton"/>
+  <RadioButton layoutX="30.0" layoutY="30.0" mnemonicParsing="false" styleClass="radio-button"
+    text="외국인 조회" fx:id="allForeignersButton"/>
+  <TableView AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="426.0" AnchorPane.topAnchor="69.0" layoutX="30.0" layoutY="69.0"
+    prefHeight="465.0" prefWidth="494.0" styleClass="table-view"
+    fx:id="tableView">
+    <columns>
+      <TableColumn prefWidth="75.0" styleClass="applicationIdColumn" text="신청번호"
+        fx:id="applicationIdColumn"/>
+      <TableColumn prefWidth="75" styleClass="passportNoColumn" text="여권번호"
+        fx:id="passportNoColumn"/>
+      <TableColumn prefWidth="75" styleClass="countryCodeColumn" text="국가코드"
+        fx:id="countryCodeColumn"/>
+      <TableColumn prefWidth="81.3333740234375" styleClass="visaExpiryColumn"
+        text="비자 만료일" fx:id="visaExpiryColumn"/>
+      <TableColumn prefWidth="67.99996948242188" styleClass="departureStatusColumn"
+        text="출국 상태" fx:id="departureStatusColumn"/>
+      <TableColumn prefWidth="113.33331298828125" styleClass="illegalStayColumn"
+        text="불법 체류 여부" fx:id="illegalStayColumn"/>
+    </columns>
+  </TableView>
+</AnchorPane>

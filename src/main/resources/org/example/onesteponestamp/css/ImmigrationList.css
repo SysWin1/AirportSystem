@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gasoek+One&display=swap');
+
+#backgroud {
+  -fx-background-color: #C68484, radial-gradient(center 75% 50%, radius 80%, #EEEEEE, #C68484, transparent);
+  -fx-background-repeat: no-repeat;
+}
+
+#datePicker {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: #C68484; /* 기본 배경색 */
+  -fx-border-color: #CCCCCC; /* 기본 테두리 색 */
+  -fx-border-width: 1px; /* 테두리 두께 */
+}
+
+#datePicker .text-field {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: #A3C9AA;
+  -fx-text-fill: #000000;
+  -fx-font-size: 11px;
+}
+
+#datePicker .arrow {
+  -fx-background-color: #9B4444;
+}
+
+#datePicker .calendar-popup {
+  -fx-background-color: #A3C9AA;
+  -fx-border-color: #aaaaaa;
+  -fx-border-width: 1px;
+  -fx-padding: 10px;
+}
+
+#datePicker .calendar-popup .month-year-view {
+  -fx-background-color: #A3C9AA;
+  -fx-text-fill: #333333;
+  -fx-font-size: 16px;
+}
+
+#datePicker .calendar-popup .day-cell:selected {
+  -fx-background-color: #C68484;
+  -fx-text-fill: #ffffff;
+}
+
+#view {
+  -fx-background-color: #CCCCCC;
+}
+
+#view:selected {
+  -fx-background-color: #C68484;
+}
+
+#view .column-header {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: #C68484; /* 헤더 배경색 */
+}
+
+#view .column-header .label {
+  -fx-text-fill: white; /* 헤더 텍스트 색상 */
+  -fx-font-size: 14px;
+  -fx-font-weight: bold; /* 헤더 텍스트 굵기 */
+}
+
+#view .sort-arrow {
+  -fx-fill: #9B4444;
+}
+
+/* 선택된 셀 및 행 스타일 */
+.table-row-cell:selected {
+  -fx-background-color: #A3C9AA;
+  -fx-text-fill: white;
+}
+
+.table-cell:selected {
+  -fx-background-color: #d0e8f2;
+  -fx-text-fill: black;
+}
+
+.radio-button {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: #C68484;
+  -fx-text-fill: white;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+}
+
+.radio-button .radio {
+  /*래디오 버튼 원 내부 설정*/
+  -fx-background-color: white;
+}
+
+.button {
+  -fx-background-color: white;
+}
+
+#view .column-header .label {
+  -fx-text-fill: white; /* 헤더 텍스트 색상 */
+  -fx-font-size: 14px;
+  -fx-font-weight: bold; /* 헤더 텍스트 굵기 */
+}
+
+#view .sort-arrow {
+  -fx-fill: #9B4444;
+}
+
+/* 선택된 셀 및 행 스타일 */
+.table-row-cell:selected {
+  -fx-background-color: #A3C9AA;
+  -fx-text-fill: white;
+}
+
+.table-cell:selected {
+  -fx-background-color: #d0e8f2;
+  -fx-text-fill: black;
+}
+
+#totalLabel {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-text-fill: white;
+  -fx-font-size: 15px;
+}
+
+.pagination {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+}
+
+.pagination .page-information {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-text-fill: white; /* 텍스트 색상 */
+  -fx-font-size: 11px; /* 폰트 크기 */
+  -fx-font-weight: bold; /* 폰트 굵기 */
+}
+
+.pagination .control-box .page-information .number-button {
+  -fx-background-color: #A3C9AA;
+  -fx-text-fill: #FFFFFF;
+  -fx-font-family: 'Do Hyeon', sans-serif;
+}
+
+.pagination .page-button:hover {
+  -fx-background-color: #9B4444; /* Hover 시 배경색 */
+  -fx-text-fill: #A3C9AA; /* Hover 시 텍스트 색상 */
+}

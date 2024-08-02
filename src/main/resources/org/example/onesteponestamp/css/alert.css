@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gasoek+One&display=swap');
+
+.dialog-pane .header-panel {
+  -fx-background-color: #C68484; /* 헤더 배경색 */
+}
+
+.dialog-pane .content.label {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-text-fill: #000000; /* 내용 텍스트 색상 */
+  -fx-font-size: 15px;
+}
+
+.dialog-pane .button-bar .button {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: #C68484; /* 버튼 배경색 */
+  -fx-text-fill: #FFFFFF; /* 버튼 텍스트 색상 */
+}
+
+.dialog-pane .button-bar .button:hover {
+  -fx-background-color: #9B4444; /* 버튼에 마우스가 올라간 상태의 배경색 */
+}

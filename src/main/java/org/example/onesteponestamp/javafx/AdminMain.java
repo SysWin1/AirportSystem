@@ -102,15 +102,15 @@ public class AdminMain {
   private void showImmigrationList(Button immigrationButton) {
     resetButton();
     immigrationButton.setStyle("-fx-background-color: #808080;");
-    ImmigrationListForm immigrationForm = new ImmigrationListForm();
+    ImmigrationForm immigrationForm = new ImmigrationForm();
     mainLayOut.setCenter(immigrationForm.getForm());
   }
 
   private void showForeignerList(Button foreignerButton) {
     resetButton();
     foreignerButton.setStyle("-fx-background-color: #808080;");
-    ForeignerForm foreignerForm = new ForeignerForm();
-    mainLayOut.setCenter(foreignerForm.getForm());
+//    ForeignerForm foreignerForm = new ForeignerForm();
+//    mainLayOut.setCenter(foreignerForm.getForm());
   }
 
   private void showHomeForm(Button homeButton) throws IOException {

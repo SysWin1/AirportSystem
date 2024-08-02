@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -49,8 +50,20 @@ public class AdminMainController {
         throw new RuntimeException(ex);
       }
     });
-    immigrationButton.setOnAction(e -> showImmigrationList());
-    foreignerButton.setOnAction(e -> showForeignerList());
+    immigrationButton.setOnAction(e -> {
+      try {
+        showImmigrationList();
+      } catch (IOException ex) {
+        throw new RuntimeException(ex);
+      }
+    });
+    foreignerButton.setOnAction(e -> {
+      try {
+        showForeignerList();
+      } catch (IOException ex) {
+        throw new RuntimeException(ex);
+      }
+    });
     homeButton.setOnAction(e -> {
       try {
         showHome();
@@ -73,28 +86,35 @@ public class AdminMainController {
   private void showAutoApplyList() throws IOException {
     resetButtonStyles();
     autoApplyButton.setStyle("-fx-background-color: #9B4444;");
-//
-//    AutoApplyAdminView view = new AutoApplyAdminView();
-//    new AutoApplyAdminController(view);
-//    mainLayOut.setCenter(view.getMainGrid());
+    mainLayOut.setCenter(null);
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/org/example/onesteponestamp/javafx/autoApplyAdmin.fxml"));
+        getClass().getResource("/org/example/onesteponestamp/fxml/AutoApplyList.fxml"));
     BorderPane adminAutoApply = loader.load();
     mainLayOut.setCenter(adminAutoApply);
   }
 
-  private void showImmigrationList() {
+  private void showImmigrationList() throws IOException {
     resetButtonStyles();
     immigrationButton.setStyle("-fx-background-color: #9B4444;");
-    ImmigrationListForm immigrationForm = new ImmigrationListForm();
-    mainLayOut.setCenter(immigrationForm.getForm());
+    mainLayOut.setCenter(null);
+    FXMLLoader loader = new FXMLLoader(
+        getClass().getResource("/org/example/onesteponestamp/fxml/ImmigrationList.fxml"));
+    BorderPane immigrationList = loader.load();
+    ImmigrationListController controller = loader.getController();
+    controller.initialize();
+    mainLayOut.setCenter(immigrationList);
   }
 
-  private void showForeignerList() {
+  private void showForeignerList() throws IOException {
     resetButtonStyles();
     foreignerButton.setStyle("-fx-background-color: #9B4444;");
-    ForeignerForm foreignerForm = new ForeignerForm();
-    mainLayOut.setCenter(foreignerForm.getForm());
+    mainLayOut.setCenter(null);
+    FXMLLoader loader = new FXMLLoader(
+        getClass().getResource("/org/example/onesteponestamp/fxml/foreignerView.fxml"));
+    AnchorPane foreignerForm = loader.load();
+    ForeignerFormController controller = loader.getController();
+    controller.initialize();
+    mainLayOut.setCenter(foreignerForm);
   }
 
   private void showHome() throws IOException {
