@@ -128,7 +128,6 @@ public class AutoApplyListController {
     locals.setToggleGroup(personGroup);
     foreigners.setToggleGroup(personGroup);
 
-
     allEntries.setToggleGroup(entryExitGroup);
     exits.setToggleGroup(entryExitGroup);
     entries.setToggleGroup(entryExitGroup);
@@ -156,7 +155,6 @@ public class AutoApplyListController {
   private String getPersonToggle() {
     RadioButton selectedPerson = (RadioButton) personGroup.getSelectedToggle();
     String personToggle = selectedPerson.getText();
-    System.out.println(personToggle);
     return personToggle.equals("내국인") ? "LOCAL" :
         personToggle.equals("외국인") ? "FOREIGNER" : null;
   }
@@ -164,7 +162,6 @@ public class AutoApplyListController {
   private String getInOutToggle() {
     RadioButton selectedEntry = (RadioButton) entryExitGroup.getSelectedToggle();
     String entryToggle = selectedEntry.getText();
-    System.out.println(entryToggle);
     return entryToggle.equals("출국") ? "OUT" :
         entryToggle.equals("입국") ? "IN" : null;
   }

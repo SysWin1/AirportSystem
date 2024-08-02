@@ -1,49 +1,52 @@
+@font-face {
+  font-family: 'Do Hyeon';
+  src: url('../fonts/DoHyeon-Regular.ttf');
+}
+
 #background {
-  -fx-background-color: #C68484, radial-gradient(center 75% 50%, radius 80%, #EEEEEE, #C68484, transparent);
-  /*-fx-background-color: #9B4444, linear-gradient(to left top , #A3C9AA, #EEEE);*/
+  -fx-background-color: white, radial-gradient(center 83% 50%, radius 60%, #C68484, white, transparent);
   -fx-background-repeat: no-repeat;
 }
 
-#title-foreigner {
-  -fx-font-family: "D2Coding Bold";
-  -fx-text-fill: #EEEEEE;
-  -fx-font-weight: bold;
-  -fx-font-size: 32px;
-}
-
-/*.v-box {*/
-/*  -fx-background-color: transparent;*/
-/*  -fx-effect: drop-shadow(10px 10px 10px #191a1e);*/
-/*  -fx-background-radius: 5;*/
-/*}*/
-
-/*.button {*/
-/*  !*-fx-background-color: transparent 50%;*!*/
-/*  -fx-background-color: #9B4444;*/
-/*  -fx-border-color: #e8615a;*/
-/*  -fx-border-width: 2;*/
-/*  -fx-border-radius: 5;*/
-/*  -fx-text-fill: #2be4ea;*/
-/*  -fx-font-family: "Rajdhani", sans-serif;*/
-/*  !*-fx-font-size: 14px;*!*/
-/*}*/
-
-/*.button:hover {*/
-/*  -fx-background-color: #451717;*/
-/*}*/
-
+/*radio버튼*/
 .radio-button {
-  -fx-border-width: 1;
-  -fx-border-radius: 5;
-  -fx-text-fill: #EEEEEE;;
-  -fx-font-family: "Rajdhani", sans-serif;
-  -fx-font-size: 14px;
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: white;
+  -fx-text-fill: #333333;
+  -fx-font-size: 13px;
+  -fx-font-weight: bold;
 }
 
-/*.table-view {*/
-/*  !*-fx-background-color: #191a1e;*!*/
-/*  -fx-border-color: #e8615a transparent;*/
-/*  -fx-border-width: 2;*/
-/*  -fx-border-radius: 5;*/
-/*}*/
+.radio-button .radio {
+  /*래디오 버튼 원 내부 설정*/
+  -fx-background-color: rgba(249, 235, 235, 0.89);
+}
 
+
+/*테이블*/
+.table-view {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: rgba(249, 235, 235, 0.89);
+  -fx-border-color: #C68484;
+}
+
+/*테이블 헤더*/
+.table-view .column-header {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: #C68484; /* 헤더 배경색 */
+}
+
+.table-view .column-header .label {
+  -fx-text-fill: white; /* 헤더 텍스트 색상 */
+  -fx-font-size: 14px;
+  -fx-font-weight: bold; /* 헤더 텍스트 굵기 */
+}
+
+/*테이블 내부*/
+.table-row-cell:even {
+  -fx-background-color: rgba(249, 235, 235, 0.89);
+}
+
+.table-view :selected {
+  -fx-background-color: #C68484;
+}
