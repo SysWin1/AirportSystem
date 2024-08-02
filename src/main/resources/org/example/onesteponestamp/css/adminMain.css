@@ -1,8 +1,15 @@
+@font-face {
+  font-family: 'Do Hyeon';
+  src: url('../fonts/DoHyeon-Regular.ttf');
+}
+
 #space {
   -fx-fill: #EEEEEE;
 }
 
 #autoApplyButton, #immigrationButton, #foreignerButton, #homeButton, #menu {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-font-size: 15px;
   -fx-background-color: #C68484;
   -fx-text-fill: white;
 }

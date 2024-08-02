@@ -42,7 +42,7 @@ public class AutoApplyListController {
   private ToggleGroup entryExitGroup;
 
   @FXML
-  private TableView<AutoApply> tableView;
+  private TableView<AutoApply> view;
 
   @FXML
   private Button searchButton;
@@ -124,16 +124,18 @@ public class AutoApplyListController {
   public void initialize() {
     // Initialize ToggleGroups
     personGroup = new ToggleGroup();
+    entryExitGroup = new ToggleGroup();
+
     allPersons.setToggleGroup(personGroup);
     locals.setToggleGroup(personGroup);
     foreigners.setToggleGroup(personGroup);
-    allPersons.setSelected(true);
 
-    entryExitGroup = new ToggleGroup();
+
     allEntries.setToggleGroup(entryExitGroup);
     exits.setToggleGroup(entryExitGroup);
     entries.setToggleGroup(entryExitGroup);
-    allEntries.setSelected(true);
+
+    datePicker.setValue(LocalDate.now());
 
     // Initialize Table Columns
     applyNo.setCellValueFactory(new PropertyValueFactory<>("applyNo"));
@@ -153,24 +155,28 @@ public class AutoApplyListController {
     createdAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
   }
 
-  private String getPersonToggle(){
-    String personToggle = personGroup.getSelectedToggle().getUserData().toString();
+  private String getPersonToggle() {
+    RadioButton selectedPerson = (RadioButton) personGroup.getSelectedToggle();
+    String personToggle = selectedPerson.getText();
+    System.out.println(personToggle);
     return personToggle.equals("내국인") ? "LOCAL" :
-            personToggle.equals("외국인") ? "FOREIGNER" : null;
+        personToggle.equals("외국인") ? "FOREIGNER" : null;
   }
 
-  private String getInOutToggle(){
-    String inoutToggle = entryExitGroup.getSelectedToggle().getUserData().toString();
-    return inoutToggle.equals("출국") ? "OUT" :
-            inoutToggle.equals("입국") ? "IN" : null;
+  private String getInOutToggle() {
+    RadioButton selectedEntry = (RadioButton) entryExitGroup.getSelectedToggle();
+    String entryToggle = selectedEntry.getText();
+    System.out.println(entryToggle);
+    return entryToggle.equals("출국") ? "OUT" :
+        entryToggle.equals("입국") ? "IN" : null;
   }
 
-  public void setItems(ActionEvent event){
+  public void setItems(ActionEvent event) {
     List<AutoApply> autoApplyList = autoApplyService.getAutoApplicationsForAdmin(
-            getPersonToggle(), getInOutToggle(), datePicker.getValue(), searchField.getText()
+        getPersonToggle(), getInOutToggle(), datePicker.getValue(), searchField.getText()
     );
 
     ObservableList<AutoApply> data = FXCollections.observableArrayList(autoApplyList);
-    tableView.setItems(data);
+    view.setItems(data);
   }
 }

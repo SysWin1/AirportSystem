@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gasoek+One&display=swap');
+
+#pane {
+  -fx-background-color: #C68484
+}
+
+#searchField {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: #A3C9AA;
+  -fx-text-fill: #000000;
+  -fx-prompt-text-fill: #6e6e6e;
+}
+
+.VBox {
+  -fx-background-color: #C68484
+}
+
+.HBox {
+  fx-background-color: #C68484
+}
+
+#datePicker {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: #C68484; /* 기본 배경색 */
+  -fx-border-color: #CCCCCC; /* 기본 테두리 색 */
+  -fx-border-width: 1px; /* 테두리 두께 */
+}
+
+#datePicker .text-field {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: #A3C9AA;
+  -fx-text-fill: #000000;
+  -fx-font-size: 11px;
+}
+
+#datePicker .arrow {
+  -fx-background-color: #9B4444;
+}
+
+#datePicker .calendar-popup {
+  -fx-background-color: #A3C9AA;
+  -fx-border-color: #aaaaaa;
+  -fx-border-width: 1px;
+  -fx-padding: 10px;
+}
+
+#datePicker .calendar-popup .month-year-view {
+  -fx-background-color: #A3C9AA;
+  -fx-text-fill: #333333;
+  -fx-font-size: 16px;
+}
+
+#datePicker .calendar-popup .day-cell:selected {
+  -fx-background-color: #C68484;
+  -fx-text-fill: #ffffff;
+}
+
+#view {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: #CCCCCC;
+}
+
+#view:selected {
+  -fx-background-color: #C68484;
+}
+
+#view .column-header {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: #C68484; /* 헤더 배경색 */
+}
+
+#view .column-header .label {
+  -fx-text-fill: white; /* 헤더 텍스트 색상 */
+  -fx-font-size: 14px;
+  -fx-font-weight: bold; /* 헤더 텍스트 굵기 */
+}
+
+#view .sort-arrow {
+  -fx-fill: #9B4444;
+}
+
+/* 선택된 셀 및 행 스타일 */
+.table-row-cell:selected {
+  -fx-background-color: #A3C9AA;
+  -fx-text-fill: white;
+}
+
+.table-cell:selected {
+  -fx-background-color: #d0e8f2;
+  -fx-text-fill: black;
+}
+
+.radio-button {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: #C68484;
+  -fx-text-fill: white;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+}
+
+.radio-button .radio {
+  /*래디오 버튼 원 내부 설정*/
+  -fx-background-color: white;
+}
+
+.button {
+  -fx-background-color: white;
+}
+
+#view .column-header .label {
+  -fx-text-fill: white; /* 헤더 텍스트 색상 */
+  -fx-font-size: 14px;
+  -fx-font-weight: bold; /* 헤더 텍스트 굵기 */
+}
+
+#view .sort-arrow {
+  -fx-fill: #9B4444;
+}
+
+/* 선택된 셀 및 행 스타일 */
+.table-row-cell:selected {
+  -fx-background-color: #A3C9AA;
+  -fx-text-fill: white;
+}
+
+.table-cell:selected {
+  -fx-background-color: #d0e8f2;
+  -fx-text-fill: black;
+}
+
+.button {
+  -fx-font-family: 'Do Hyeon', sans-serif;
+  -fx-background-color: white;
+}
