@@ -4,12 +4,9 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import lombok.Setter;
 
 public class UserMainViewController {
@@ -53,13 +50,6 @@ public class UserMainViewController {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    AutoApplyListView listView = new AutoApplyListView();
-    VBox container = new VBox(10);
-    container.setPadding(new Insets(10));
-    container.setAlignment(Pos.CENTER);
-
-    container.getChildren().addAll(listView.getForm(), listView.getTableView());
-    mainLayout.setCenter(container);
   }
 
   public void showImmigrationGateForm(ActionEvent event) {
