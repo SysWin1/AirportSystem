@@ -34,6 +34,36 @@ public class UserAutoApplyListController {
   @FXML
   private GridPane form;
 
+  @FXML
+  private TableColumn<UserAutoApplyDTO, String> applyNo;
+
+  @FXML
+  private TableColumn<UserAutoApplyDTO, String> englishName;
+
+  @FXML
+  private TableColumn<UserAutoApplyDTO, String> gender;
+
+  @FXML
+  private TableColumn<UserAutoApplyDTO, String> visaType;
+
+  @FXML
+  private TableColumn<UserAutoApplyDTO, String> inout;
+
+  @FXML
+  private TableColumn<UserAutoApplyDTO, String> inoutCountry;
+
+  @FXML
+  private TableColumn<UserAutoApplyDTO, LocalDate> expectedInOutDate;
+
+  @FXML
+  private TableColumn<UserAutoApplyDTO, String> approvalStatus;
+
+  @FXML
+  private TableColumn<UserAutoApplyDTO, String> rejectReason;
+
+  @FXML
+  private TableColumn<UserAutoApplyDTO, LocalDateTime> createdAt;
+
   private AutoApplyService autoApplyService;
 
   @FXML
@@ -47,43 +77,22 @@ public class UserAutoApplyListController {
   public void initialize() {
     createTableView();
     populateCountryComboBox();
+
+    // Set the searchButton's action to call searchTableData when clicked
+    searchButton.setOnAction(this::searchTableData);
   }
 
   private void createTableView() {
-    TableColumn<UserAutoApplyDTO, String> applyNoColumn = new TableColumn<>("신청번호");
-    applyNoColumn.setCellValueFactory(new PropertyValueFactory<>("applyNo"));
-
-    TableColumn<UserAutoApplyDTO, String> englishNameColumn = new TableColumn<>("영문명");
-    englishNameColumn.setCellValueFactory(new PropertyValueFactory<>("englishName"));
-
-    TableColumn<UserAutoApplyDTO, String> genderColumn = new TableColumn<>("성별");
-    genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
-
-    TableColumn<UserAutoApplyDTO, String> visaTypeColumn = new TableColumn<>("비자 종류");
-    visaTypeColumn.setCellValueFactory(new PropertyValueFactory<>("visaType"));
-
-    TableColumn<UserAutoApplyDTO, String> inoutColumn = new TableColumn<>("입출국");
-    inoutColumn.setCellValueFactory(new PropertyValueFactory<>("inout"));
-
-    TableColumn<UserAutoApplyDTO, String> inoutCountryColumn = new TableColumn<>("입출국 국가");
-    inoutCountryColumn.setCellValueFactory(new PropertyValueFactory<>("inoutCountry"));
-
-    TableColumn<UserAutoApplyDTO, LocalDate> expectedInOutDateColumn = new TableColumn<>(
-        "입출국 예상 일자");
-    expectedInOutDateColumn.setCellValueFactory(new PropertyValueFactory<>("expectedInOutDate"));
-
-    TableColumn<UserAutoApplyDTO, String> approvalStatusColumn = new TableColumn<>("승인 상태");
-    approvalStatusColumn.setCellValueFactory(new PropertyValueFactory<>("approvalStatus"));
-
-    TableColumn<UserAutoApplyDTO, String> rejectReasonColumn = new TableColumn<>("거부 사유");
-    rejectReasonColumn.setCellValueFactory(new PropertyValueFactory<>("rejectReason"));
-
-    TableColumn<UserAutoApplyDTO, LocalDateTime> createdAtColumn = new TableColumn<>("신청일자");
-    createdAtColumn.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
-
-    tableView.getColumns().addAll(applyNoColumn, englishNameColumn, genderColumn, visaTypeColumn,
-        inoutColumn, inoutCountryColumn, expectedInOutDateColumn, approvalStatusColumn,
-        rejectReasonColumn, createdAtColumn);
+    applyNo.setCellValueFactory(new PropertyValueFactory<>("applyNo"));
+    englishName.setCellValueFactory(new PropertyValueFactory<>("englishName"));
+    gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+    visaType.setCellValueFactory(new PropertyValueFactory<>("visaType"));
+    inout.setCellValueFactory(new PropertyValueFactory<>("inout"));
+    inoutCountry.setCellValueFactory(new PropertyValueFactory<>("inoutCountry"));
+    expectedInOutDate.setCellValueFactory(new PropertyValueFactory<>("expectedInOutDate"));
+    approvalStatus.setCellValueFactory(new PropertyValueFactory<>("approvalStatus"));
+    rejectReason.setCellValueFactory(new PropertyValueFactory<>("rejectReason"));
+    createdAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
   }
 
   private void populateCountryComboBox() {
