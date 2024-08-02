@@ -6,85 +6,100 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.onesteponestamp.javafx.AutoApplyFormViewController">
   <center>
-    <GridPane fx:id="form" alignment="CENTER" hgap="10" prefHeight="484.0" prefWidth="693.0" stylesheets="@../css/AutoApplyForm.css" vgap="10">
+    <GridPane fx:id="form" alignment="CENTER" hgap="10" prefHeight="484.0" prefWidth="693.0"
+      stylesheets="@../css/AutoApplyForm.css" vgap="10">
 
       <padding>
-        <Insets bottom="20" left="10" right="10" top="20" />
+        <Insets bottom="20" left="10" right="10" top="20"/>
       </padding>
 
-      <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" styleClass="form-common-margin" text="자동 출입국 신청서" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
-      <Label styleClass="form-common-margin" text="출국 / 입국" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" styleClass="form-common-margin"
+        text="자동 출입국 신청서" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0"/>
+      <Label styleClass="form-common-margin" text="출국 / 입국" GridPane.columnIndex="0"
+        GridPane.rowIndex="1"/>
 
-      <HBox spacing="10" styleClass="form-common-margin" GridPane.columnIndex="1" GridPane.rowIndex="1">
-        <RadioButton fx:id="outButton" styleClass="form-common-margin" text="출국" />
-        <RadioButton fx:id="inButton" styleClass="form-common-margin" text="입국" />
+      <HBox spacing="10" styleClass="form-common-margin" GridPane.columnIndex="1"
+        GridPane.rowIndex="1">
+        <RadioButton fx:id="outButton" styleClass="form-common-margin" text="출국"/>
+        <RadioButton fx:id="inButton" styleClass="form-common-margin" text="입국"/>
         <padding>
-          <Insets top="5.0" />
+          <Insets top="5.0"/>
         </padding>
       </HBox>
 
-      <Label styleClass="form-common-margin" text="영문명" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-      <TextField fx:id="englishNameInput" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label styleClass="form-common-margin" text="영문명" GridPane.columnIndex="0"
+        GridPane.rowIndex="2"/>
+      <TextField fx:id="englishNameInput" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-      <Label styleClass="form-common-margin" text="여권번호" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <TextField fx:id="passportNoInput" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <Label styleClass="form-common-margin" text="여권번호" GridPane.columnIndex="2"
+        GridPane.rowIndex="2"/>
+      <TextField fx:id="passportNoInput" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
 
-      <Label styleClass="form-common-margin" text="국적" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-      <ComboBox fx:id="countryCodeInput" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Label styleClass="form-common-margin" text="국적" GridPane.columnIndex="0"
+        GridPane.rowIndex="3"/>
+      <ComboBox fx:id="countryCodeInput" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
-      <Label styleClass="form-common-margin" text="생년월일" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <DatePicker fx:id="birthInput" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+      <Label styleClass="form-common-margin" text="생년월일" GridPane.columnIndex="2"
+        GridPane.rowIndex="3"/>
+      <DatePicker fx:id="birthInput" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
 
-      <Label styleClass="form-common-margin" text="여권 발급일" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-      <DatePicker fx:id="issueDateInput" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Label styleClass="form-common-margin" text="여권 발급일" GridPane.columnIndex="0"
+        GridPane.rowIndex="4"/>
+      <DatePicker fx:id="issueDateInput" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
-      <Label styleClass="form-common-margin" text="여권 만료일" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      <DatePicker fx:id="expiryDateInput" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+      <Label styleClass="form-common-margin" text="여권 만료일" GridPane.columnIndex="2"
+        GridPane.rowIndex="4"/>
+      <DatePicker fx:id="expiryDateInput" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
 
-      <Label styleClass="form-common-margin" text="성별" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-      <ComboBox fx:id="genderInput" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Label styleClass="form-common-margin" text="성별" GridPane.columnIndex="0"
+        GridPane.rowIndex="5"/>
+      <ComboBox fx:id="genderInput" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
-      <Label styleClass="form-common-margin" text="비자 선택" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-      <ComboBox fx:id="visaTypeInput" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+      <Label styleClass="form-common-margin" text="비자 선택" GridPane.columnIndex="2"
+        GridPane.rowIndex="5"/>
+      <ComboBox fx:id="visaTypeInput" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
 
-      <Label styleClass="form-common-margin" text="입출국 예상 일자" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-      <DatePicker fx:id="expectedInoutDateInput" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Label styleClass="form-common-margin" text="입출국 예상 일자" GridPane.columnIndex="0"
+        GridPane.rowIndex="6"/>
+      <DatePicker fx:id="expectedInoutDateInput" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 
-      <Label styleClass="form-common-margin" text="입출국 국가" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-      <ComboBox fx:id="inoutCountryInput" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+      <Label styleClass="form-common-margin" text="입출국 국가" GridPane.columnIndex="2"
+        GridPane.rowIndex="6"/>
+      <ComboBox fx:id="inoutCountryInput" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
 
-      <Button fx:id="submitButton" prefHeight="24.0" prefWidth="63.0" text="제출" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      <Button fx:id="submitButton" prefHeight="24.0" prefWidth="63.0" text="제출"
+        GridPane.columnIndex="1" GridPane.rowIndex="7"/>
       <columnConstraints>
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
-        <ColumnConstraints />
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints prefHeight="40.0" />
-        <RowConstraints prefHeight="30.0" />
-        <RowConstraints prefHeight="40.0" />
-        <RowConstraints prefHeight="40.0" />
-        <RowConstraints prefHeight="40.0" />
-        <RowConstraints prefHeight="40.0" />
-        <RowConstraints prefHeight="40.0" />
-        <RowConstraints prefHeight="40.0" />
+        <RowConstraints prefHeight="40.0"/>
+        <RowConstraints prefHeight="30.0"/>
+        <RowConstraints prefHeight="40.0"/>
+        <RowConstraints prefHeight="40.0"/>
+        <RowConstraints prefHeight="40.0"/>
+        <RowConstraints prefHeight="40.0"/>
+        <RowConstraints prefHeight="40.0"/>
+        <RowConstraints prefHeight="40.0"/>
       </rowConstraints>
       <opaqueInsets>
-        <Insets />
+        <Insets/>
       </opaqueInsets>
     </GridPane>
   </center>
   <top>
-    <Pane prefHeight="60.0" prefWidth="1093.0" BorderPane.alignment="CENTER" />
+    <Pane prefHeight="60.0" prefWidth="1093.0" BorderPane.alignment="CENTER"/>
   </top>
   <bottom>
-    <Pane prefHeight="60.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+    <Pane prefHeight="60.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
   </bottom>
   <left>
-    <Pane prefHeight="120.0" prefWidth="120.0" BorderPane.alignment="CENTER" />
+    <Pane prefHeight="120.0" prefWidth="120.0" BorderPane.alignment="CENTER"/>
   </left>
   <right>
-    <Pane prefHeight="120.0" prefWidth="120.0" BorderPane.alignment="CENTER" />
+    <Pane prefHeight="120.0" prefWidth="120.0" BorderPane.alignment="CENTER"/>
   </right>
 </BorderPane>
