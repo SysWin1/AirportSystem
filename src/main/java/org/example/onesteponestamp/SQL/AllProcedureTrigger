@@ -1,3 +1,27 @@
+create or replace procedure autoapplyinsert(
+    apply_no in varchar2,
+    passport_no in varchar2,
+    country_code in varchar2,
+    english_name in varchar2,
+    gender in char,
+    issue_date in date,
+    expiry_date in date,
+    birth in date,
+    visa_type in varchar2,
+    inout in varchar2,
+    inout_country in varchar2,
+    expected_inout_date in date,
+    created_at in date
+)is
+begin
+    insert into autoapply
+    (apply_no, passport_no, country_code, english_name, gender, issue_date, expiry_date, birth, visa_type, inout, inout_country, expected_inout_date, created_at)
+    values
+    (apply_no, passport_no, country_code, english_name, gender, issue_date, expiry_date, birth, visa_type, inout, inout_country, expected_inout_date, created_at);
+
+end;
+/
+
 /*함수1. 내국인 입국함수*/
 create or replace PROCEDURE korean_entry_inspection (
     p_apply_no            IN VARCHAR2,
@@ -493,3 +517,108 @@ BEGIN
 END;
 /
 commit;
+
+
+
+
+
+
+
+-- 스케줄 지정
+
+-- 스케줄 DROP
+BEGIN
+  DBMS_SCHEDULER.drop_job('INVESTIGATE_ILLEGAL_FOREIGNER');
+  DBMS_SCHEDULER.drop_schedule('GET_ILLEGAL_FOREIGNER');
+END;
+/
+
+-- 자정에 실행되는 스케줄 생성
+BEGIN
+  DBMS_SCHEDULER.create_schedule (
+    schedule_name   => 'GET_ILLEGAL_FOREIGNER',
+    repeat_interval => 'FREQ=DAILY; BYHOUR=0; BYMINUTE=0; BYSECOND=0',
+    start_date      => SYSTIMESTAMP,
+    comments        => '매일 자정에 실행되는 불법 체류자 확인스케줄'
+  );
+END;
+/
+
+
+-- 불법 체류자를 조사하는 JOB을 생성.
+BEGIN
+  DBMS_SCHEDULER.create_job (
+    job_name        => 'INVESTIGATE_ILLEGAL_FOREIGNER',
+--    program_name    => NULL,
+    schedule_name   => 'GET_ILLEGAL_FOREIGNER',
+    job_type        => 'PLSQL_BLOCK',
+    job_action      => Q'[DECLARE
+    CURSOR c_visitor IS
+        SELECT ROWID, VISA_EXPIRY_DATE
+        FROM FOREIGNVISITOR
+        WHERE DEPARTURE_STATUS = ''STAY''
+          AND TRUNC(VISA_EXPIRY_DATE) < TRUNC(SYSDATE);
+
+    TYPE t_visitor IS TABLE OF c_visitor%ROWTYPE;
+    l_visitor t_visitor;
+BEGIN
+    OPEN c_visitor;
+    LOOP
+        FETCH c_visitor BULK COLLECT INTO l_visitor;
+
+        FOR i IN 1 .. l_visitor.COUNT LOOP
+            UPDATE FOREIGNVISITOR
+            SET ILLEGAL_STAY = ''ILLEGAL''
+            WHERE ROWID = l_visitor(i).ROWID;
+        END LOOP;
+
+        EXIT WHEN c_visitor%NOTFOUND;
+    END LOOP;
+    CLOSE c_visitor;
+
+    COMMIT;
+END;]',
+    enabled         => TRUE,
+    comments        => '매일 자정 실행되는 불법 체류자 조사'
+  );
+END;
+/
+
+
+-- 불법 체류자를 조사하는 프로시저
+CREATE OR REPLACE PROCEDURE UpdateIllegalStay AS
+    CURSOR c_visitor IS
+        SELECT ROWID, VISA_EXPIRY_DATE
+        FROM FOREIGNVISITOR
+        WHERE DEPARTURE_STATUS = 'STAY'
+          AND trunc(VISA_EXPIRY_DATE) < TRUNC(SYSDATE);
+
+    TYPE t_visitor IS TABLE OF c_visitor%ROWTYPE;
+    l_visitor t_visitor;
+BEGIN
+    OPEN c_visitor;
+    LOOP
+        FETCH c_visitor BULK COLLECT INTO l_visitor;
+
+        FOR i IN 1 .. l_visitor.COUNT LOOP
+            UPDATE FOREIGNVISITOR
+            SET ILLEGAL_STAY = 'ILLEGAL'
+            WHERE ROWID = l_visitor(i).ROWID;
+        END LOOP;
+
+        EXIT WHEN c_visitor%NOTFOUND;
+    END LOOP;
+    CLOSE c_visitor;
+
+    COMMIT;
+END UpdateIllegalStay;
+/
+
+-- JDBC에서 로그인으로 연결할때 불법체류자 관리 프로시저를 호출하는 SYSTEM 권한의 TRIGGER.
+CREATE OR REPLACE TRIGGER trg_after_LOGON
+AFTER LOGON ON DATABASE
+BEGIN
+    -- 프로시저 호출
+    UpdateIllegalStay;
+END;
+/
