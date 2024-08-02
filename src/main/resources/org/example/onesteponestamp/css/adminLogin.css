@@ -10,4 +10,15 @@
 #idField, #passwordField {
   -fx-font-family: 'Do Hyeon', sans-serif;
   -fx-prompt-text-fill: #6e6e6e;
+  -fx-border-color: #A3C9AA;
+}
+
+#idField:focused, #passwordField:focused {
+  -fx-border-color: #A3C9AA;
+  -fx-border-width: 2px;
+}
+
+#loginButton:hover,
+#loginButton:selected {
+  -fx-background-color: #9B4444;
 }
