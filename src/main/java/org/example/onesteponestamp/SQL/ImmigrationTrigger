@@ -1,0 +1,100 @@
+drop TRIGGER Foreigner;
+
+drop FUNCTION Immigration;
+
+drop PROCEDURE ImmigrationProcess;
+
+drop PROCEDURE ImmigrationList;
+
+SET SERVEROUTPUT ON
+--출입국 심사 함수 생성
+CREATE OR REPLACE FUNCTION Immigration(
+  p_applyNo IN VARCHAR2
+) RETURN AUTOAPPLY%ROWTYPE IS
+ v_passenger AUTOAPPLY%ROWTYPE;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('심사시작');
+  SELECT * INTO v_passenger
+  FROM AUTOAPPLY
+  WHERE APPLY_NO = p_applyNo
+    AND approval_status = 'APPROVED'
+    AND EXPECTED_INOUT_DATE = trunc(sysdate);
+
+  RETURN v_passenger;
+EXCEPTION
+  WHEN OTHERS THEN
+    RETURN NULL;
+END ;
+/
+
+--출입국 심사 프로시저 생성 (통과시 안내 멘트 추가 위해 out파람 생성)
+create or replace PROCEDURE ImmigrationProcess(
+  p_applyNo IN VARCHAR,
+  p_country_code OUT VARCHAR2,
+  p_inout OUT VARCHAR2
+) IS
+  v_passenger AUTOAPPLY%ROWTYPE;
+BEGIN
+  v_passenger := Immigration(p_applyNo);
+
+  IF v_passenger.apply_no IS NOT NULL THEN
+  DBMS_OUTPUT.PUT_LINE('존재');
+  p_country_code := v_passenger.country_code;
+  p_inout := v_passenger.inout;
+
+    INSERT INTO IMMIGRATIONHISTORY(
+      apply_no, passport_no, country_code, inout, inout_date, visa_type, inout_country
+    ) VALUES (
+      v_passenger.apply_no,
+      v_passenger.passport_no,
+      v_passenger.country_code,
+      v_passenger.inout,
+      v_passenger.expected_inout_date,
+      v_passenger.visa_type,
+      v_passenger.inout_country
+    );
+  ELSE
+    RAISE_APPLICATION_ERROR(-20004, '대면 심사로 이동해 주세요.');
+  END IF;
+EXCEPTION
+  WHEN OTHERS THEN
+    RAISE_APPLICATION_ERROR(-20004, '대면 심사로 이동해 주세요.');
+END;
+/
+
+-- 트리거 생성
+--출입국 게이트 통과 시 외국인일 경우 외국인 테이블에 삽입
+CREATE OR REPLACE TRIGGER Foreigner
+  AFTER INSERT ON IMMIGRATIONHISTORY
+  FOR EACH ROW
+BEGIN
+  IF :NEW.COUNTRY_CODE != 'KOR' AND :NEW.INOUT = 'IN' THEN
+    DBMS_OUTPUT.PUT_LINE('IN condition met');
+    INSERT INTO FOREIGNVISITOR(
+      apply_no, passport_no, country_code, visa_expiry_date, departure_status, illegal_stay
+    ) VALUES (
+      :NEW.APPLY_NO, :NEW.PASSPORT_NO, :NEW.COUNTRY_CODE,
+      TRUNC(:NEW.INOUT_DATE) + (SELECT ALLOW_DAYS FROM VISA WHERE VISA_TYPE = :NEW.VISA_TYPE),
+      'STAY', 'LEGAL'
+    );
+  ELSIF :NEW.COUNTRY_CODE != 'KOR' AND :NEW.INOUT = 'OUT' THEN
+    DBMS_OUTPUT.PUT_LINE('out condition met');
+    -- 현재 레코드 정보만을 사용하여 FOREIGNVISITOR 테이블을 업데이트
+    UPDATE foreignvisitor
+    SET DEPARTURE_STATUS = 'LEAVE'
+    WHERE apply_no = (
+      SELECT apply_no
+      FROM (
+        SELECT apply_no
+        FROM FOREIGNVISITOR
+        WHERE PASSPORT_NO = :NEW.PASSPORT_NO
+          AND COUNTRY_CODE = :NEW.COUNTRY_CODE
+          AND DEPARTURE_STATUS = 'STAY'
+      )
+      WHERE ROWNUM = 1
+    );
+  END IF;
+END;
+/
+
+commit;

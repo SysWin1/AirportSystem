@@ -1,0 +1,218 @@
+--visa 정보등록
+INSERT INTO VISA(VISA_TYPE,ALLOW_DAYS) VALUES('NO_VISA',NULL);
+INSERT INTO VISA(VISA_TYPE,ALLOW_DAYS) VALUES('TOURIST_VISA',3);
+INSERT INTO VISA(VISA_TYPE,ALLOW_DAYS) VALUES('WORK_VISA',6);
+INSERT INTO VISA(VISA_TYPE,ALLOW_DAYS) VALUES('STUDENT_VISA',9);
+
+--국가코드 삽입
+INSERT ALL
+    INTO country (country_code, country_name, is_danger) VALUES ('USA', 'United States', 'safety')
+    INTO country (country_code, country_name, is_danger) VALUES ('GBR', 'United Kingdom', 'safety')
+    INTO country (country_code, country_name, is_danger) VALUES ('JPN', 'Japan', 'safety')
+    INTO country (country_code, country_name, is_danger) VALUES ('FRA', 'France', 'safety')
+    INTO country (country_code, country_name, is_danger) VALUES ('VNM', 'Vietnam', 'safety')
+    INTO country (country_code, country_name, is_danger) VALUES ('KOR', 'South Korea', 'safety')
+
+    INTO country (country_code, country_name, is_danger) VALUES ('PRK', 'North Korea', 'danger')
+    INTO country (country_code, country_name, is_danger) VALUES ('IRQ', 'Iraq', 'danger')
+    INTO country (country_code, country_name, is_danger) VALUES ('RUS', 'Russia', 'danger')
+SELECT * FROM dual;
+
+-- 관리자 정보 삽입
+insert into admin (master_id, password) values ('admin', '1234');
+
+-- 데이터 삽입 스크립트
+BEGIN
+    -- 여권 만료일이 5년 이상 남은 190개 레코드
+    FOR i IN 1..190 LOOP
+        INSERT INTO PassportInfo (
+            passport_no,
+            country_code,
+            english_name,
+            gender,
+            issue_date,
+            expiry_date,
+            birth
+        ) VALUES (
+            'P'||TO_CHAR(i, 'FM0000'),
+            CASE MOD(i, 9)
+                WHEN 0 THEN 'USA'
+                WHEN 1 THEN 'GBR'
+                WHEN 2 THEN 'JPN'
+                WHEN 3 THEN 'FRA'
+                WHEN 4 THEN 'VNM'
+                WHEN 5 THEN 'KOR'
+                WHEN 6 THEN 'PRK'
+                WHEN 7 THEN 'IRQ'
+                WHEN 8 THEN 'RUS'
+            END,
+            CASE MOD(i, 10)
+                WHEN 0 THEN 'Brad Pit'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 1 THEN 'Emma Watso'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 2 THEN 'Tom Cruis'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 3 THEN 'Scarlett Johansso'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 4 THEN 'Chris Hemswort'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 5 THEN 'Natalie Portma'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 6 THEN 'Leonardo DiCapri'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 7 THEN 'Angelina Joli'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 8 THEN 'Robert Downey Jr'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 9 THEN 'Jennifer Lawrenc'||CHR(97 + MOD(i, 26)) -- a-z
+            END,
+            CASE MOD(i, 2)
+                WHEN 0 THEN 'M'
+                ELSE 'F'
+            END,
+            TO_DATE('2020-01-01', 'YYYY-MM-DD') + MOD(i, 365),
+            ADD_MONTHS(SYSDATE, 60),  -- 5년 이상 만료일
+            TO_DATE('1980-01-01', 'YYYY-MM-DD') + MOD(i, 365 * 40)
+        );
+    END LOOP;
+
+    -- 여권 만료일이 오늘인 10개 레코드
+    FOR i IN 191..200 LOOP
+        INSERT INTO PassportInfo (
+            passport_no,
+            country_code,
+            english_name,
+            gender,
+            issue_date,
+            expiry_date,
+            birth
+        ) VALUES (
+            'P'||TO_CHAR(i, 'FM0000'),
+            CASE MOD(i, 9)
+                WHEN 0 THEN 'USA'
+                WHEN 1 THEN 'GBR'
+                WHEN 2 THEN 'JPN'
+                WHEN 3 THEN 'FRA'
+                WHEN 4 THEN 'VNM'
+                WHEN 5 THEN 'KOR'
+                WHEN 6 THEN 'PRK'
+                WHEN 7 THEN 'IRQ'
+                WHEN 8 THEN 'RUS'
+            END,
+            CASE MOD(i, 10)
+                WHEN 0 THEN 'Brad Pit'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 1 THEN 'Emma Watso'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 2 THEN 'Tom Cruis'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 3 THEN 'Scarlett Johansso'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 4 THEN 'Chris Hemswort'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 5 THEN 'Natalie Portma'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 6 THEN 'Leonardo DiCapri'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 7 THEN 'Angelina Joli'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 8 THEN 'Robert Downey Jr'||CHR(97 + MOD(i, 26)) -- a-z
+                WHEN 9 THEN 'Jennifer Lawrenc'||CHR(97 + MOD(i, 26)) -- a-z
+            END,
+            CASE MOD(i, 2)
+                WHEN 0 THEN 'M'
+                ELSE 'F'
+            END,
+            TO_DATE('2020-01-01', 'YYYY-MM-DD') + MOD(i, 365),
+            SYSDATE,  -- 오늘 만료일
+            TO_DATE('1980-01-01', 'YYYY-MM-DD') + MOD(i, 365 * 40)
+        );
+    END LOOP;
+
+    COMMIT;
+END;
+/
+
+--select * from country;
+
+-- AUTOAPPLY 테이블 더미 데이터
+CREATE OR REPLACE PROCEDURE InsertDummyDataAutoApply IS
+BEGIN
+    -- 첫 번째 5개 레코드: passportinfo에 들어간 값
+    FOR i IN 1..5 LOOP
+        INSERT INTO AutoApply (
+            apply_no, passport_no, country_code, english_name, gender, issue_date, expiry_date, birth, visa_type, inout, inout_country, expected_inout_date, approval_status, reject_reason
+        )
+        SELECT
+            'A00' || i, passport_no, country_code, english_name, gender, issue_date, expiry_date, birth, 'TOURIST_VISA', 'IN', country_code, SYSDATE + 10,
+            'DENIED',
+            NULL
+        FROM
+            (SELECT passport_no, country_code, english_name, gender, issue_date, expiry_date, birth, ROW_NUMBER() OVER (ORDER BY passport_no) AS rn FROM PassportInfo)
+        WHERE rn = i;
+    END LOOP;
+
+    -- 두 번째 5개 레코드: 유사한 값
+    INSERT INTO AutoApply (
+        apply_no, passport_no, country_code, english_name, gender, issue_date, expiry_date, birth, visa_type, inout, inout_country, expected_inout_date, approval_status, reject_reason
+    ) VALUES (
+        'A006', 'P0006', 'USA', 'John Doe', 'M', TO_DATE('2023-01-20', 'YYYY-MM-DD'), TO_DATE('2024-01-20', 'YYYY-MM-DD'), TO_DATE('1985-06-25', 'YYYY-MM-DD'), 'TOURIST_VISA', 'IN', 'CAN', SYSDATE + 10, 'APPROVED', NULL
+    );
+
+    INSERT INTO AutoApply (
+        apply_no, passport_no, country_code, english_name, gender, issue_date, expiry_date, birth, visa_type, inout, inout_country, expected_inout_date, approval_status, reject_reason
+    ) VALUES (
+        'A007', 'P0007', 'GBR', 'Jane Doe', 'F', TO_DATE('2022-11-30', 'YYYY-MM-DD'), TO_DATE('2024-11-30', 'YYYY-MM-DD'), TO_DATE('1990-09-16', 'YYYY-MM-DD'), 'STUDENT_VISA', 'OUT', 'AUS', SYSDATE + 15, 'DENIED', 'Documents expired'
+    );
+
+    INSERT INTO AutoApply (
+        apply_no, passport_no, country_code, english_name, gender, issue_date, expiry_date, birth, visa_type, inout, inout_country, expected_inout_date, approval_status, reject_reason
+    ) VALUES (
+        'A008', 'P0008', 'JPN', 'Taro Tanaka', 'M', TO_DATE('2023-03-01', 'YYYY-MM-DD'), TO_DATE('2025-03-01', 'YYYY-MM-DD'), TO_DATE('1988-12-12', 'YYYY-MM-DD'), 'STUDENT_VISA', 'OUT', 'KOR', SYSDATE + 20, 'APPROVED', NULL
+    );
+
+    INSERT INTO AutoApply (
+        apply_no, passport_no, country_code, english_name, gender, issue_date, expiry_date, birth, visa_type, inout, inout_country, expected_inout_date, approval_status, reject_reason
+    ) VALUES (
+        'A009', 'P0009', 'FRA', 'Pierre Martin', 'M', TO_DATE('2023-04-05', 'YYYY-MM-DD'), TO_DATE('2025-04-05', 'YYYY-MM-DD'), TO_DATE('1982-04-30', 'YYYY-MM-DD'), 'TOURIST_VISA', 'IN', 'USA', SYSDATE + 25, 'APPROVED', NULL
+    );
+
+    INSERT INTO AutoApply (
+        apply_no, passport_no, country_code, english_name, gender, issue_date, expiry_date, birth, visa_type, inout, inout_country, expected_inout_date , approval_status, reject_reason
+    ) VALUES (
+        'A010', 'P0010', 'VNM', 'Nguyen B Van', 'M', TO_DATE('2023-05-10', 'YYYY-MM-DD'), TO_DATE('2025-05-10', 'YYYY-MM-DD'), TO_DATE('1995-08-22', 'YYYY-MM-DD'), 'WORK_VISA', 'OUT', 'KOR', SYSDATE + 30, 'DENIED', 'Visa type invalid'
+    );
+
+    COMMIT;
+END;
+/
+
+exec InsertDummyDataAutoApply;
+
+-- 불법체류자 확인용 데이터 - 건들 ㄴㄴ
+INSERT INTO PassportInfo(
+		passport_no, country_code, english_name, gender, issue_date, expiry_date, birth
+) VALUES (
+		'PP999999', 'JPN', 'John Doe', 'M',
+    TO_DATE('2022-01-01', 'YYYY-MM-DD'),
+    TO_DATE('2025-12-31', 'YYYY-MM-DD'),   -- 여권 만료일 많이 남음
+    TO_DATE('1990-01-01', 'YYYY-MM-DD')
+);
+
+INSERT INTO AutoApply (
+    apply_no, passport_no, country_code, english_name, gender, issue_date, expiry_date, birth, visa_type, inout, inout_country, expected_inout_date, approval_status, reject_reason, created_at
+) VALUES (
+    'TESTESTEST', 'PP999999', 'JPN', 'John Doe', 'M',
+    TO_DATE('2022-01-01', 'YYYY-MM-DD'),
+    TO_DATE('2025-12-31', 'YYYY-MM-DD'),   -- 여권 만료일 많이 남음
+    TO_DATE('1990-01-01', 'YYYY-MM-DD'),
+    'TOURIST_VISA', 'IN', 'KOR',
+    TO_DATE('2023-01-01', 'YYYY-MM-DD'),
+    'APPROVED', NULL, SYSDATE
+);
+
+INSERT INTO ImmigrationHistory (
+    apply_no, passport_no, country_code, inout, inout_date, visa_type, inout_country
+) VALUES (
+    'TESTESTEST', 'PP999999', 'JPN', 'IN',
+    TO_DATE('2023-01-01', 'YYYY-MM-DD'),  -- 입국일 : 옛날 (불체자)
+    'TOURIST_VISA', 'KOR'
+);
+
+INSERT INTO ForeignVisitor (
+    apply_no, passport_no, country_code, visa_expiry_date, departure_status, illegal_stay
+) VALUES (
+    'TESTESTEST', 'PP999999', 'JPN',
+    TO_DATE('2023-01-04', 'YYYY-MM-DD'),  -- 비자 만료일 설정
+    'LEAVE',
+    'ILLEGAL'      -- 불법 체류자
+);
+COMMIT;
+
+--select * from passportinfo;
+--select * from visa;
+select * from autoapply;

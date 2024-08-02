@@ -1,0 +1,108 @@
+-- 1. db 스키마
+-- 테이블 삭제
+DROP TABLE AutoApply CASCADE CONSTRAINTS;
+DROP TABLE ForeignVisitor CASCADE CONSTRAINTS;
+DROP TABLE ImmigrationHistory CASCADE CONSTRAINTS;
+DROP TABLE Country CASCADE CONSTRAINTS;
+DROP TABLE PassportInfo CASCADE CONSTRAINTS;
+DROP TABLE Visa CASCADE CONSTRAINTS;
+DROP TABLE Admin CASCADE CONSTRAINTS;
+
+-- 테이블 생성
+CREATE TABLE AutoApply (
+    apply_no VARCHAR2(20) NOT NULL,
+    passport_no VARCHAR2(20) NOT NULL,
+    country_code VARCHAR2(5) NOT NULL,
+    english_name VARCHAR2(30) NOT NULL,
+    gender CHAR(1) NOT NULL,
+    issue_date DATE NOT NULL,
+    expiry_date DATE NOT NULL,
+    birth DATE NOT NULL,
+    visa_type VARCHAR2(20) DEFAULT 'NO_VISA' NOT NULL,
+    inout VARCHAR2(10) NOT NULL,
+    inout_country VARCHAR2(5) NOT NULL,
+    expected_inout_date DATE NOT NULL,
+    approval_status VARCHAR2(10) DEFAULT 'DENIED' NOT NULL, -- 0 = 거부, 1 = 승인
+    reject_reason VARCHAR2(30) NULL,
+    created_at DATE DEFAULT SYSDATE NOT NULL,
+    CONSTRAINT PK_AUTOAPPLY PRIMARY KEY (apply_no)
+);
+
+COMMENT ON COLUMN AutoApply.apply_no IS 'uuid 8자, 신청시 생성됨';
+COMMENT ON COLUMN AutoApply.inout IS '입국';
+COMMENT ON COLUMN AutoApply.inout_country IS '여행 국가';
+COMMENT ON COLUMN AutoApply.reject_reason IS '반환값';
+
+CREATE TABLE ForeignVisitor (
+    apply_no VARCHAR2(20) NOT NULL,
+    passport_no VARCHAR2(20) NOT NULL,
+    country_code VARCHAR2(5) NOT NULL,
+    visa_expiry_date DATE NOT NULL,
+    departure_status VARCHAR2(10) DEFAULT 'STAY' NOT NULL, -- 출국: LEAVE,STAY:체류중
+    illegal_stay VARCHAR2(10) DEFAULT 'LEGAL' NOT NULL, -- LEGAL:합법, ILLEGAL:불법
+    CONSTRAINT PK_FOREIGNVISITOR PRIMARY KEY (apply_no)
+);
+
+COMMENT ON COLUMN ForeignVisitor.passport_no IS '여권번호';
+COMMENT ON COLUMN ForeignVisitor.country_code IS '국적';
+COMMENT ON COLUMN ForeignVisitor.visa_expiry_date IS '입출국기록t 에서 (비자) + (입국일자)';
+COMMENT ON COLUMN ForeignVisitor.departure_status IS 'LEAVE/STAY  출국/체류중';
+COMMENT ON COLUMN ForeignVisitor.illegal_stay IS 'LEGAL/ILLEGAL  합법/불법';
+
+CREATE TABLE ImmigrationHistory (
+    apply_no VARCHAR2(20) NOT NULL,
+    passport_no VARCHAR2(20) NOT NULL,
+    country_code VARCHAR2(5) NOT NULL,
+    inout varchar2(10) NOT NULL,
+    inout_date DATE NOT NULL,
+    visa_type VARCHAR2(20) NOT NULL,
+    inout_country VARCHAR2(5) NOT NULL,
+    CONSTRAINT PK_ImmigrationHistory PRIMARY KEY (apply_no)
+);
+
+COMMENT ON COLUMN ImmigrationHistory.apply_no IS 'uuid 처럼 들어옴';
+COMMENT ON COLUMN ImmigrationHistory.passport_no IS '여권번호';
+COMMENT ON COLUMN ImmigrationHistory.inout IS '입국';
+COMMENT ON COLUMN ImmigrationHistory.inout_country IS '여행국가';
+
+CREATE TABLE Country (
+    country_code VARCHAR2(5) NOT NULL,
+    country_name VARCHAR2(50) NOT NULL,
+    is_danger VARCHAR2(10) NOT NULL, -- 'safety' 안전, 'danger' 위험
+    CONSTRAINT PK_COUNTRY PRIMARY KEY (country_code)
+);
+
+CREATE TABLE PassportInfo (
+    passport_no VARCHAR2(20) NOT NULL,
+    country_code VARCHAR2(5) NOT NULL,
+    english_name VARCHAR2(30) NOT NULL,
+    gender CHAR(1) NOT NULL,
+    issue_date DATE NOT NULL,
+    expiry_date DATE NOT NULL,
+    birth DATE NOT NULL,
+    CONSTRAINT PK_PASSPORTINFO PRIMARY KEY (passport_no, country_code)
+);
+
+CREATE TABLE Visa (
+    visa_type VARCHAR2(20) NOT NULL,
+    allow_days INTEGER,
+    CONSTRAINT PK_VISA PRIMARY KEY (visa_type)
+);
+
+CREATE TABLE Admin (
+    master_id VARCHAR2(15) NOT NULL,
+    password VARCHAR2(20) NOT NULL,
+    CONSTRAINT PK_ADMIN PRIMARY KEY (master_id)
+);
+
+COMMENT ON COLUMN Admin.master_id IS '관리자의 아이디';
+COMMENT ON COLUMN Admin.password IS '비밀번호';
+
+-- 외래 키 제약 조건 추가
+ALTER TABLE AutoApply ADD CONSTRAINT FK_Visa_AutoApply FOREIGN KEY (visa_type) REFERENCES Visa (visa_type);
+
+ALTER TABLE ForeignVisitor ADD CONSTRAINT FK_TH_FV FOREIGN KEY (apply_no) REFERENCES ImmigrationHistory(apply_no);
+
+ALTER TABLE ImmigrationHistory ADD CONSTRAINT FK_AutoApply_TH FOREIGN KEY (apply_no) REFERENCES AutoApply (apply_no);
+
+ALTER TABLE ImmigrationHistory ADD CONSTRAINT FK_Visa_TH FOREIGN KEY (visa_type) REFERENCES Visa (visa_type);
