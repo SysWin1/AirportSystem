@@ -3,13 +3,8 @@
   src: url('../fonts/DoHyeon-Regular.ttf');
 }
 
-@font-face {
-  font-family: 'Mango-B';
-  src: url('../fonts/MangoByeolbyeol.ttf');
-}
-
 * {
-  -fx-font-family: 'Mango-B', 'Do Hyeon', sans-serif;
+  -fx-font-family: 'Do Hyeon', sans-serif;
 }
 
 .form-common-margin {
@@ -17,7 +12,7 @@
 }
 
 #form {
-  -fx-background-color: #EEEEEE;
+  -fx-background-color: #e0e8e2;
 }
 
 .text-field:focused {
@@ -38,8 +33,14 @@
 .combo-box-popup .list-cell:hover,
 .combo-box-popup .list-cell:selected,
 .date-picker-popup .day-cell:hover,
-.date-picker-popup .day-cell:selected {
+.date-picker-popup .day-cell:selected,
+.date-picker-popup .day-cell:focused {
   -fx-background-color: #A3C9AA;
+  -fx-text-fill: white;
+}
+
+.date-picker-popup .day-name-cell {
+
 }
 
 #submitButton {

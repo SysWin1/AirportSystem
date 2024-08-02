@@ -83,7 +83,7 @@
                   text="출입국(게이트 통과)"/>
               </Menu>
             </MenuBar>
-            <HBox prefHeight="44.0" prefWidth="200.0">
+            <HBox prefHeight="43.0" prefWidth="200.0">
               <children>
                 <Button fx:id="adminButton" onAction="#showAdminLogin" prefHeight="52.0"
                   prefWidth="167.0" styleClass="admin-button" text="관리자로 로그인"/>

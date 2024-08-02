@@ -53,11 +53,11 @@
           <TableColumn fx:id="visaType" prefWidth="98.6666259765625" text="비자 종류"/>
           <TableColumn fx:id="inout" prefWidth="42.0" text="입출국"/>
           <TableColumn fx:id="inoutCountry" prefWidth="68.66668701171875" text="입출국 국가"/>
-          <TableColumn fx:id="expectedInOutDate" prefWidth="86.6666259765625" text="입출국 예상일"/>
+          <TableColumn fx:id="expectedInOutDate" prefWidth="81.33331298828125" text="입출국 예상일"/>
           <TableColumn fx:id="approvalStatus" minWidth="9.33331298828125"
-            prefWidth="31.33331298828125" text="승인"/>
-          <TableColumn fx:id="rejectReason" prefWidth="122.66656494140625" text="거부 사유"/>
-          <TableColumn fx:id="createdAt" prefWidth="81.333251953125" text="신청일자"/>
+            prefWidth="29.99993896484375" text="승인"/>
+          <TableColumn fx:id="rejectReason" prefWidth="130.00006103515625" text="거부 사유"/>
+          <TableColumn fx:id="createdAt" prefWidth="77.333251953125" text="신청일자"/>
         </columns>
       </TableView>
 

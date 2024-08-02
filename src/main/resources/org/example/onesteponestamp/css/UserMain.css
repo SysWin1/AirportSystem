@@ -8,8 +8,9 @@
   /*-fx-font-size: 13px;*/
 }
 
-.menu, .menu-item, .button {
+.menu .label, .menu-bar, .menu-item, .button {
   -fx-font-size: 15px;
+  -fx-text-fill: white;
 }
 
 .menu-bar, .menu-item, .user-main-button, .image-background, #top {
